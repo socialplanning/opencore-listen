@@ -8,6 +8,7 @@ from Products.CMFCore.utils import getToolByName
 
 from plone.mail import encode_header
 
+from email import message_from_string
 from email.Message import Message
 from email.MIMEText import MIMEText
 from email.MIMEMultipart import MIMEMultipart
@@ -170,6 +171,9 @@ class MailingListMessageExporter(object):
 
     def export_messages(self):
         sa = getUtility(ISearchableArchive, context=self.context)
+        # for some reason utility comes back w/ no RequestContainer at the
+        # acq root, which breaks getObject; wedge it in there by force
+        sa.REQUEST = self.context.REQUEST
         msgs = sa(sort_on='modification_date')
         file_data = [self._convert_to_mbox_msg(msg.getObject()) for msg in msgs]
 
@@ -203,13 +207,26 @@ class MailingListMessageExporter(object):
 
         for file_id in file_ids:
             file = msg._getOb(file_id)
-            attachment = Message()
-            attachment.add_header('Content-Disposition', 'attachment', filename=file.title)
-            attachment.add_header('Content-Type', file.getContentType())
-            attachment.set_payload(file.data)
+            data = file.data
+            if not isinstance(data, basestring):
+                data = str(data)
+            content_type = file.getContentType()
+            if content_type == 'message/rfc822':
+                attachment = message_from_string(data)
+            else:
+                attachment = Message()
+                attachment.add_header('Content-Disposition', 'attachment', filename=file.title)
+                attachment.add_header('Content-Type', content_type)
+                print '  ' + content_type 
+                attachment.set_payload(data)
             enc_msg.attach(attachment)
-            
-        return enc_msg.as_string(unixfrom=True)
+
+        try:
+            retval = enc_msg.as_string(unixfrom=True)
+        except TypeError, e:
+            raise
+
+        return retval
         
 
 class MailingListSubscriberExporter(object):

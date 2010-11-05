@@ -47,6 +47,10 @@ class ImportExportView(BrowserView):
             # both export actions result in a file to download
             self.request.response.setHeader("Content-type", "text/plain")
             self.request.response.setHeader("Content-disposition", "attachment; filename=%s" % filename)
+            
+            # XXX don't know why i have to do this
+            import transaction
+            transaction.abort()
 
             return file_data
 
