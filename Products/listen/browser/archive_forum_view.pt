@@ -1,0 +1,158 @@
+<metal:archive-view define-macro="archive">
+<tal:comment condition="nothing">
+	We set the template_id to ensure correct highlighting, and we use the
+	actions defined for the parent mailing list
+</tal:comment>
+<tal:defines define="dummy python:options.setdefault('template_id', 'archive');
+                     dummy python:options.setdefault('actions', here.portal_actions.listFilteredActionsFor(view.getMailingList()))" />
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en" lang="en"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+    <metal:fillbase fill-slot="base">
+      <metal:baseslot define-slot="base">
+        <base href="" tal:attributes="href here/renderBase" />
+      </metal:baseslot>
+    </metal:fillbase>
+
+<body>
+<div class="documentEditable"
+     metal:fill-slot="content">
+
+  <div tal:replace="structure provider:plone.contentviews" />
+
+    <div class="documentContent" id="region-content">
+
+      <a name="documentContent"></a>
+
+      <script type="text/javascript" src="++resource++obfuscation.js"></script>
+
+      <div metal:use-macro="here/global_statusmessage/macros/portal_message">
+        Portal status message
+      </div>
+
+      <metal:header metal:define-slot="header" tal:content="nothing" i18n:translate="">
+        Visual Header
+      </metal:header>
+
+      <div metal:use-macro="here/document_actions/macros/document_actions|nothing">
+        Document actions (print, sendto etc)
+      </div>
+      
+      <div metal:define-slot="body"
+           i18n:domain="listen">
+        <tal:threads define="batch view/getTopics;
+                             threads python:batch.topic_list;">
+
+          <div metal:define-slot="extra_info" tal:replace="nothing">
+          </div>
+
+          <div class="row"
+               metal:define-slot="extra_top" tal:replace="nothing">
+            <div i18n:translate="" class="label">Extra top</div>
+          </div>
+
+          <h1 i18n:translate="" tal:content="view/Title" class="documentFirstHeading">
+            Title or Id
+          </h1>
+
+          <p id="listaddress"
+             tal:content="structure view/listAddress"
+             tal:condition="view/listAddress">
+            Description
+          </p>
+
+          <p class="documentDescription"
+             tal:content="view/listDescription"
+             tal:condition="view/listDescription">
+            Description
+          </p>
+
+          <table cellpadding="20">
+            <tr>
+              <td>
+                <a i18n:translate="" tal:attributes="href string:${here_url}/date_view;" href="#">Switch to date view</a>
+              </td>
+              <td>
+                <a href="#"
+                   tal:condition="view/canPost"
+                   tal:attributes="href string:${here_url}/new_topic;"
+                   i18n:translate="label_forum_new_message_button">
+                  post new message
+                </a>
+              </td>
+            </tr>
+          </table>
+
+          <div metal:use-macro="here/batch_macros/macros/navigation" />
+
+          <table class="listing"
+                 id="forum-topics"
+                 tal:condition="threads"
+                 summary="Forum view"
+                 i18n:attributes="summary">
+            <thead>
+              <tr>
+                <th class="nosort">&nbsp;<tal:title i18n:translate="list_archive_thread_subject"
+                >Subject</tal:title>&nbsp;</th>
+                <th class="nosort">&nbsp;<tal:title i18n:translate="list_archive_thread_originator"
+                >Opened By</tal:title>&nbsp;</th>
+                <th class="nosort">&nbsp;<tal:title i18n:translate="list_archive_thread_replies"
+                >Replies</tal:title>&nbsp;</th>
+                <th class="nosort">&nbsp;<tal:title i18n:translate="list_archive_thread_recent_post_date"
+                >Last Updated</tal:title>&nbsp;</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tal:items repeat="item threads">
+                <tr tal:define="oddrow repeat/item/odd;"
+                    tal:attributes="class python:oddrow and 'even' or 'odd'">
+
+                  <td>
+                    <a href="#"
+                       i18n:translate=""
+		       tal:content="structure item/brief_subject"
+                       tal:attributes="href item/url">
+                    Subject</a>
+                  </td>
+                  <td>
+                    <a href="."
+                       tal:omit-tag="not:item/from_id"
+                       tal:attributes="href string:${portal_url}/author/${item/from_id}"
+                       class="author-link">
+                      <span tal:replace="structure item/mail_from">test@example.com</span>
+                    </a>
+                  </td>
+                  <td tal:content="item/responses"
+                      >10</td>
+                  <td tal:content="item/last_post" i18n:translate=""
+                      >12/1/2005 3:54 pm</td>
+                </tr>
+              </tal:items>
+            </tbody>
+          </table>
+
+          <div metal:use-macro="here/batch_macros/macros/navigation" />
+
+          <p class="discreet"
+             tal:condition="not: threads"
+             i18n:translate="description_no_posts">
+            There are currently no posts in this archive.
+          </p>
+        </tal:threads>
+        
+      </div>
+
+      <metal:sub metal:define-slot="sub">
+        <metal:discussion use-macro="here/viewThreadsAtBottom/macros/discussionView" />
+      </metal:sub>
+    </div>
+  </div>
+</body>
+</html>
+</metal:archive-view>

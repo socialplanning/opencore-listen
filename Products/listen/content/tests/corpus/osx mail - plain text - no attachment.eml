@@ -1,0 +1,13 @@
+Message-Id: <9BC2876E-7790-43C4-A372-506911F5DE8E@openplans.org>
+From: Rob Miller <robm@openplans.org>
+To: test-list@lists.example.com
+Content-Type: text/plain;
+	charset=US-ASCII;
+	format=flowed
+Content-Transfer-Encoding: 7bit
+X-Smtp-Server: 127.0.0.1
+Mime-Version: 1.0 (Apple Message framework v929.2)
+Subject: osx mail - plain text - no attachment
+Date: Mon, 15 Dec 2008 18:16:34 -0800
+
+Email body.

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<object name="portal_skins" meta_type="Plone Skins Tool">
+
+  <object name="listen" meta_type="Filesystem Directory View"
+    directory="listen/skins/listen"/>
+  <object name="mailboxer" meta_type="Filesystem Directory View"
+    directory="MailBoxer/skins/MailBoxer"/>
+
+  <skin-path name="Plone Default">
+    <layer name="listen"/>
+    <layer name="mailboxer"/>
+  </skin-path>
+  <skin-path name="Plone Tableless">
+    <layer name="listen"/>
+    <layer name="mailboxer"/>
+  </skin-path>
+
+</object>
+

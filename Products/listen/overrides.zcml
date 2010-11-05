@@ -1,0 +1,14 @@
+<configure xmlns="http://namespaces.zope.org/zope">
+
+    <includeOverrides package="plone.app.form"
+                      file="overrides.zcml" />
+
+    <adapter
+        for="OFS.interfaces.IObjectManager"
+        factory=".utilities.rename.TitleBasedNameChooser"
+        provides="zope.app.container.interfaces.INameChooser"
+        />
+
+    <include package=".browser" file="overrides.zcml" />
+
+</configure>

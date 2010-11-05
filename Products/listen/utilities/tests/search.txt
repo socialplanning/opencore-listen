@@ -1,0 +1,224 @@
+-*- mode: doctest ;-*-
+
+Some more tests for the search interface implementation, including tests
+for bad mailer handling:
+
+Perform some basic test configuration:
+    >>> import Products.Five
+    >>> from Products.Five import zcml
+    >>> zcml.load_config('meta.zcml', Products.Five)
+    >>> zcml.load_config("permissions.zcml", Products.Five)
+    >>> zcml.load_config("configure.zcml", Products.Five.site)
+    >>> from Products.listen.utilities import tests
+    >>> zcml.load_config('configure.zcml', tests)
+
+Let's get ourselves something that looks like a Mailing List, and register
+our utility with it:
+    >>> ml = tests.FakeMailingList('ml')
+    >>> ignore = self.folder._setObject('ml', ml)
+    >>> ml = self.folder.ml
+    >>> tests.enable_local_site(ml)
+    >>> from zope.app.component.hooks import setSite
+    >>> setSite(ml)
+    >>> tests.install_searchable_archive(ml)
+    >>> from Products.listen.interfaces import ISearchableArchive
+    >>> from Products.listen.utilities.archive_search import ZCatalogSearchArchive
+    >>> from Products.listen.lib.common import get_utility_for_context
+    >>> search = get_utility_for_context(ISearchableArchive, context=ml)
+
+Make sure the object and class implement our interface:
+
+    >>> from zope.interface.verify import verifyObject
+    >>> from zope.interface.verify import verifyClass
+    >>> verifyObject(ISearchableArchive, search)
+    True
+    >>> verifyClass(ISearchableArchive, ZCatalogSearchArchive)
+    True
+
+Let's see what an empty catalog gives us:
+    >>> search.getMessageReplies('bogus@example.com')
+    []
+    >>> search.getMessageReferrers('bogus@example.com')
+    []
+    >>> search.resolveMessageId('bogus@example.com')
+    >>> search.getNextInThread('bogus@example.com')
+    >>> search.getParentMessage('bogus@example.com')
+    >>> search.getToplevelMessages()
+    []
+
+Construct a real thread to play with:
+--------------------------------------------------------------
+    >>> from Products.listen.utilities.tests.fake_messages import makeMailStructure
+    >>> messages = makeMailStructure()
+
+Store our messages in the archive and index them:
+    >>> message_ids = [ ml._setObject(m.id, m) for m in messages]
+    >>> messages = [ getattr(ml, m) for m in message_ids]
+    >>> for message in messages:
+    ...     search.indexNewMessage(message)
+    ...
+
+We should now have two top level messages:
+    >>> results = search.getToplevelMessages()
+    >>> len(results)
+    1
+    >>> results[0].message_id
+    '<thread1_message1@example.com>'
+
+Check that the result of getMessageReplies for a message gives the
+the actual children of that Message.
+    >>> [r.message_id for r in
+    ...        search.getMessageReplies('<thread1_message1@example.com>')]
+    ['<thread1_reply1@example.com>', '<thread1_reply2@example.com>']
+    >>> [r.message_id for r in
+    ...        search.getMessageReplies('<thread1_reply1@example.com>')]
+    ['<thread1_reply1-1@example.com>', '<thread1_reply1-2@example.com>', '<thread1_reply1-3@example.com>']
+    >>> [r.message_id for r in
+    ...        search.getMessageReplies('<thread1_reply2@example.com>')]
+    ['<thread1_reply2-1@example.com>']
+    >>> [r.message_id for r in
+    ...        search.getMessageReplies('<thread1_reply1-2@example.com>')]
+    []
+
+Test that a non-existant message returns no replies:
+    >>> search.getMessageReplies('<thread1_reply5-1@example.com>')
+    []
+
+The getMessageReferrers method should return every referring message
+--------------------------------------------------------------------
+The first message to should refer to every message:
+    >>> results = search.getMessageReferrers('<thread1_message1@example.com>')
+    >>> result_ids = [r.message_id for r in results]
+    >>> real_ids = [m.message_id for m in messages[1:]]
+    >>> result_ids == real_ids
+    True
+
+Other messages should display their thread in order of date:
+    >>> results = search.getMessageReferrers('<thread1_reply1@example.com>')
+    >>> [r.message_id for r in results]
+    ['<thread1_reply1-1@example.com>', '<thread1_reply1-2@example.com>', '<thread1_reply1-1-1@example.com>', '<thread1_reply1-3@example.com>', '<thread1_reply1-3-1@example.com>', '<thread1_reply1-1-2@example.com>', '<thread1_reply1-1-2-1@example.com>']
+    >>> results = search.getMessageReferrers('<thread1_reply1-1-1@example.com>')
+    >>> [r.message_id for r in results]
+    []
+    >>> results = search.getMessageReferrers('<thread1_reply1-1-2@example.com>')
+    >>> [r.message_id for r in results]
+    ['<thread1_reply1-1-2-1@example.com>']
+    >>> results = search.getMessageReferrers('<thread1_reply2@example.com>')
+    >>> [r.message_id for r in results]
+    ['<thread1_reply2-1@example.com>']
+
+Check that the next in thread functionality works as desired:
+-------------------------------------------------------------
+We should get the next reply, or the next message in the thread structure:
+    >>> result = search.resolveMessageId(messages[5].message_id)
+    >>> result.message_id == messages[5].message_id
+    True
+    >>> search.getNextInThread('<thread1_reply1-2@example.com>').message_id
+    '<thread1_reply1-3@example.com>'
+    >>> search.getNextInThread('<thread1_reply1-1-1@example.com>').message_id
+    '<thread1_reply1-1-2@example.com>'
+    >>> search.getNextInThread('<thread1_reply1-1-2@example.com>').message_id
+    '<thread1_reply1-1-2-1@example.com>'
+    >>> search.getNextInThread('<thread1_reply1-1-2-1@example.com>').message_id
+    '<thread1_reply1-2@example.com>'
+
+This is the end of the thread:
+    >>> print search.getNextInThread('<thread1_reply2-1@example.com>')
+    None
+
+Test a non-existant message:
+    >>> print search.getNextInThread('<thread1_reply5-1@example.com>')
+    None
+
+Check parent message method:
+    >>> search.getParentMessage('<thread1_reply1-1-2-1@example.com>').message_id
+    '<thread1_reply1-1-2@example.com>'
+    >>> search.getParentMessage('<thread1_reply1-3-1@example.com>').message_id
+    '<thread1_reply1-3@example.com>'
+    >>> search.getParentMessage('<thread1_reply1-3-1@example.com>').message_id
+    '<thread1_reply1-3@example.com>'
+
+This is the top of the thread:
+    >>> print search.getParentMessage('<thread1_message1@example.com>')
+    None
+
+Test a non-existant message:
+    >>> print search.getParentMessage('<thread1_reply5-1@example.com>')
+    None
+
+Test some anomalous situations:
+-------------------------------
+What if two sibling messages arrive at the same time?  Make sure we don't
+get a cyclical thread:
+
+Set the date of thread1_reply1-2 to be the same as thread1_reply1-1, and
+check if we get a reasonable thread.
+    >>> messages[5].date = messages[3].date
+    >>> search.indexNewMessage(messages[5])
+    >>> search.getNextInThread('<thread1_reply1-1@example.com>').message_id
+    '<thread1_reply1-1-1@example.com>'
+    >>> search.getNextInThread('<thread1_reply1-1-1@example.com>').message_id
+    '<thread1_reply1-1-2@example.com>'
+    >>> search.getNextInThread('<thread1_reply1-1-2@example.com>').message_id
+    '<thread1_reply1-1-2-1@example.com>'
+    >>> search.getNextInThread('<thread1_reply1-1-2-1@example.com>').message_id
+    '<thread1_reply1-2@example.com>'
+    >>> search.getNextInThread('<thread1_reply1-2@example.com>').message_id
+    '<thread1_reply1-3@example.com>'
+
+
+Test that a message with unknown ids in In-Reply-To, or References doesn't
+cause any issues (e.g. for when a message from one list was responded to
+on another:
+    >>> from Products.listen.interfaces import IMailFromString
+    >>> from zope.app.zapi import createObject
+    >>> mail_id = 'message1'
+    >>> from_addr = 'test@example.com'
+    >>> list_addr = 'list@example.com'
+    >>> subject = 'Test Message'
+    >>> date = 'Mon, 07 Nov 2005 15:30 +000'
+    >>> message_id = '<message_num1@example.com>'
+    >>> new_message = createObject('listen.MailFactory',
+    ...                            mail_id, from_addr, subject, date)
+    >>> new_message = new_message.__of__(ml)
+    >>> mail_string = '''From: %s
+    ... To: %s
+    ... Subject: %s
+    ... Date: %s
+    ... Message-ID: %s
+    ...
+    ... A new message.'''%(from_addr, list_addr, subject, date, message_id)
+    >>> IMailFromString(new_message).createMailFromMessage(mail_string)
+
+    >>> new_message.in_reply_to = '<bogus_id@example.com>'
+    >>> new_message.references = ('<bogus_id@example.com>', '<bogus_id2@example.com>')
+    >>> search.indexNewMessage(new_message)
+    >>> search.getNextInThread(new_message.message_id)
+    >>> search.getParentMessage(new_message.message_id)
+
+A message which has in-reply-to/references set, but which doesn't refer to
+an actual message in the thread should be counted as the start of a new
+thread (i.e. a top-level message):
+    >>> len(search.getToplevelMessages())
+    2
+
+Searchable text
+---------------
+
+We should be able to find messages based on their subject, body text
+and from address when using the `search` method:
+
+    >>> msgs1 = search.search(from_addr)
+    >>> msgs2 = search.search(subject)
+    >>> msgs3 = search.search('a new message')
+    >>> len(msgs1)
+    1
+    >>> for msgs in msgs1, msgs2, msgs3:
+    ...     msgs[0].message_id == '<message_num1@example.com>'
+    True
+    True
+    True
+
+    >>> msgs4 = search.search('an old message')
+    >>> len(msgs4)
+    0

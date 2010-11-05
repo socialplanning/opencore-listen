@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en" lang="en"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="listen">
+
+  <body>
+    <div metal:fill-slot="main"
+      tal:define="check nocall:context/portal_membership/checkPermission">
+      <div tal:condition="view/can_export">
+        <h1 i18n:translate="">Export mailing list data</h1>
+        <form tal:attributes="action request/ACTUAL_URL">
+          <fieldset tal:condition="python:view.can('Listen: Export mailing list archives')">
+            <legend i18n:translate="">Export messages</legend>
+            <tal:has_messages condition="view/has_messages">
+              <p class="formHelp" i18n:translate="">
+                Exports all messages from the mailing list archive as a single mbox file.
+              </p>
+              <div>
+                <input type="submit" name="export_messages" value="Export as mbox" i18n:attributes="value" />
+              </div>
+            </tal:has_messages>
+            <tal:no_messages condition="not:view/has_messages">
+              <p i18n:translate="">
+                There are no messages archived for this list.
+                <tal:not_archived condition="not:view/is_archived" i18n:name="is_archived">
+                  Archiving for this list is presently turned off. <a tal:attributes="href string:${context/absolute_url}/edit" title="List preferences" i18n:attributes="title">Click here</a> to turn archiving on.
+                </tal:not_archived>
+                <tal:archived condition="view/is_archived">
+                  <a tal:attributes="href string:${context/absolute_url}/archive/new_topic" title="Post to list" i18n:attributes="title" i18n:name="new_topic_to_list">Post</a> a message to the list.
+                </tal:archived>
+              </p>
+            </tal:no_messages>
+          </fieldset>
+
+          <fieldset tal:condition="python:view.can('Listen: Export mailing list subscribers')">
+            <legend i18n:translate="">Export subscriber list</legend>
+            <tal:has_subscribers condition="view/has_subscribers">
+              <p class="formHelp" i18n:translate="">
+                Exports the usernames, full names, and e-mail addresses of all subscribers as a CSV file.
+              </p>
+              <div>
+                <input type="submit" name="export_addresses" value="Export as CSV" i18n:attributes="value" />
+              </div>
+            </tal:has_subscribers>
+            <tal:no_subscribers condition="not:view/has_subscribers">
+              <p i18n:translate="">This list does not have any subscribers to export.</p>
+            </tal:no_subscribers>
+          </fieldset>
+        </form>
+      </div>
+      <div tal:condition="view/can_import">
+        <h1 i18n:translate="">Import mailing list data</h1>
+        <form tal:attributes="action request/ACTUAL_URL" enctype="multipart/form-data" method="POST">
+          <fieldset tal:condition="python:view.can('Listen: Import mailing list archives')">
+            <legend i18n:translate="">Import messages</legend>
+            <p class="formHelp" i18n:translate="">
+              Click 'Browse...' to select  an mbox file, and then click 'Import messages' to add the messages in the mbox file to the mailing list.
+            </p>
+            <div>
+              <p><input type="file" name="import_file" tal:attributes="value request/import_file/filename | nothing" /></p>
+              <input type="submit" name="import_messages" value="Import messages" i18n:attributes="value" />
+            </div>
+          </fieldset>
+          <fieldset tal:define="imports view/import_history"
+            tal:condition="python:imports and view.can('Listen: Import mailing list archives')">
+            <legend i18n:translate="">History</legend>
+            <p class="formHelp" i18n:translate="">
+              Click  'Undo'  to remove all of the messages in the archive imported from the corresponding file. 
+            </p>
+            <ul>
+              <li tal:repeat="import imports">
+                <strong><tal:import_time replace="import/import_time" /></strong>
+                <span i18n:translate="">Imported <tal:msg_count replace="import/msg_count" i18n:name="msg_count" /> message<tal:plural condition="import/plural" i18n:name="msg_count_plural">s</tal:plural> from <em><tal:import_file replace="import/filename" i18n:name="msg_import_filename" /></em></span>
+                - <input type="submit" value="Undo" tal:attributes="name string:${view/UNDO_SUBMIT}${import/import_id}" i18n:attributes="value" />
+              </li>
+            </ul>
+          </fieldset>
+          <fieldset tal:condition="python:view.can('Listen: Import mailing list subscribers')">
+            <legend i18n:translate="">Import subscribers</legend>
+            <p class="formHelp" i18n:translate="">
+              Click 'Browse...' to select  a csv file, and then click 'Import subscribers' to add the subscribers in the csv file to the mailing list.
+            </p>
+            <div>
+              <p><input type="file" name="import_subscribers_file" tal:attributes="value request/import_subscribers_file/filename | nothing" /></p>
+              <input type="submit" name="import_subscribers" value="Import subscribers" i18n:attributes="value" />
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

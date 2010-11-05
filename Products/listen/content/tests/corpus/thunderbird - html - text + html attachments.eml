@@ -1,0 +1,47 @@
+Message-ID: <4946FAD1.3000707@example.com>
+Date: Mon, 15 Dec 2008 16:48:17 -0800
+From: Sendy Sender <sendy@example.com>
+User-Agent: Thunderbird 2.0.0.18 (X11/20081125)
+MIME-Version: 1.0
+To: test-list@lists.livablestreets.com
+Subject: thunderbird - html - text + html attachments
+Content-Type: multipart/mixed;
+ boundary="------------040007070105050008010102"
+
+This is a multi-part message in MIME format.
+--------------040007070105050008010102
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+</head>
+<body bgcolor="#ffffff" text="#000000">
+<i><b>Email text<br>
+</b></i>
+</body>
+</html>
+
+--------------040007070105050008010102
+Content-Type: text/plain;
+ name="loremipsum.txt"
+Content-Transfer-Encoding: base64
+Content-Disposition: inline;
+ filename="loremipsum.txt"
+
+TG9yZW0gSXBzdW0KLS0tLS0tLS0tLS0KClRoaXMgaXMgd2hlcmUgdGhlcmUgd291bGQgYmUg
+Y29udGVudCwgaWYgaW4gZmFjdCB0aGVyZSB3ZXJlIGFueQpjb250ZW50Lgo=
+--------------040007070105050008010102
+Content-Type: text/html;
+ name="loremipsum.html"
+Content-Transfer-Encoding: base64
+Content-Disposition: inline;
+ filename="loremipsum.html"
+
+PGh0bWw+CiAgPGhlYWQ+CiAgICA8dGl0bGU+TG9yZW0gSXBzdW08L3RpdGxlPgogIDwvaGVh
+ZD4KICA8Ym9keT4KICAgIDxoMT5Mb3JlbSBJcHN1bTwvaDE+CiAgICA8cD5UaGlzIGlzIHdo
+ZXJlIHRoZXJlIHdvdWxkIGJlIGNvbnRlbnQsIGlmIGluIGZhY3QgdGhlcmUgd2VyZSBhbnkK
+ICAgICAgY29udGVudC48L3A+CiAgPC9ib2R5Pgo8L2h0bWw+Cg==
+--------------040007070105050008010102--
+

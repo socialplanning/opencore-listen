@@ -1,0 +1,47 @@
+Message-Id: <ECBA3580-3BF8-43FF-8676-B7C8623E05FE@openplans.org>
+From: Rob Miller <robm@openplans.org>
+To: test-list@lists.example.com
+Content-Type: multipart/mixed;
+	boundary=Apple-Mail-11--168753876
+X-Smtp-Server: 127.0.0.1
+Mime-Version: 1.0 (Apple Message framework v929.2)
+Subject: osx mail - plain text - html attachment ("windows friendly")
+Date: Mon, 15 Dec 2008 18:20:32 -0800
+
+
+--Apple-Mail-11--168753876
+Content-Type: text/plain;
+	charset=US-ASCII;
+	format=flowed
+Content-Transfer-Encoding: 7bit
+
+Email body.
+
+--Apple-Mail-11--168753876
+Content-Disposition: attachment;
+	filename=loremipsum.html
+Content-Type: text/html;
+	x-unix-mode=0644;
+	name="loremipsum.html"
+Content-Transfer-Encoding: 7bit
+
+<html>
+  <head>
+    <title>Lorem Ipsum</title>
+  </head>
+  <body>
+    <h1>Lorem Ipsum</h1>
+    <p>This is where there would be content, if in fact there were any
+      content.</p>
+  </body>
+</html>
+
+--Apple-Mail-11--168753876
+Content-Type: text/plain;
+	charset=US-ASCII;
+	format=flowed
+Content-Transfer-Encoding: 7bit
+
+
+
+--Apple-Mail-11--168753876--

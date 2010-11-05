@@ -1,0 +1,989 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Listen 0.6\n"
+"POT-Creation-Date: 2010-08-31 21:55+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: fr\n"
+"Language-Name: French\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: listen\n"
+"X-Is-Fallback-For: fr-be fr-ca fr-lu fr-mc fr-ch fr-fr\n"
+
+#: ../browser/import_export.py:105
+msgid "%s email addresses imported"
+msgstr ""
+
+#: ../browser/import_export.py:107
+msgid "1 email address imported"
+msgstr ""
+
+#: ../interfaces/mailinglist.py:137
+msgid "A description of the mailing list."
+msgstr ""
+
+#: ../browser/mailinglist_views.py:248
+msgid "Add Mailing List"
+msgstr ""
+
+#: ../browser/manage_membership.pt:56
+msgid "Add:"
+msgstr ""
+
+#: ../browser/manage_membership.pt:35
+msgid "Address / User ID"
+msgstr ""
+
+#: ../browser/mailinglist_view.pt:42
+msgid "Address:"
+msgstr ""
+
+#: ../browser/moderation.py:63
+msgid "All posts discarded."
+msgstr ""
+
+#: ../browser/mailinglist_views.py:81
+msgid "An email address is required"
+msgstr ""
+
+#: ../interfaces/list_types.py:64
+msgid "Announce List"
+msgstr ""
+
+#: ../interfaces/mail_message.py:51
+msgid "Any message ids that this mail refers to."
+msgstr ""
+
+#: ../interfaces/list_types.py:65
+msgid "Anyone can receive messages, but each posted message has to be approved by the list managers first."
+msgstr ""
+
+#: ../interfaces/list_types.py:53
+msgid "Anyone who confirms their email address is valid can post and receive messages."
+msgstr ""
+
+#: ../interfaces/mailinglist.py:168
+msgid "Archival method"
+msgstr ""
+
+#: ../browser/mailinglist_view.pt:63
+msgid "Archive:"
+msgstr ""
+
+#: ../browser/forum_message_view.pt:22
+msgid "Back to topic listing"
+msgstr ""
+
+#: ../interfaces/mail_message.py:32
+msgid "Body"
+msgstr ""
+
+#: ../browser/import_export.py:42
+msgid "Cannot export mailing list archives"
+msgstr ""
+
+#: ../browser/import_export.py:36
+msgid "Cannot export mailing list subscribers"
+msgstr ""
+
+#: ../browser/import_export.py:61
+msgid "Cannot import mailing list archives"
+msgstr ""
+
+#: ../browser/import_export.py:94
+msgid "Cannot import mailing list subscribers"
+msgstr ""
+
+#: ../browser/import_export.pt:84
+msgid "Click 'Browse...' to select a csv file, and then click 'Import subscribers' to add the subscribers in the csv file to the mailing list."
+msgstr ""
+
+#: ../browser/import_export.pt:60
+msgid "Click 'Browse...' to select an mbox file, and then click 'Import messages' to add the messages in the mbox file to the mailing list."
+msgstr ""
+
+#: ../browser/import_export.pt:71
+msgid "Click 'Undo' to remove all of the messages in the archive imported from the corresponding file."
+msgstr ""
+
+#: ../browser/moderation.py:59
+msgid "Could not moderate!"
+msgstr ""
+
+#: ../interfaces/mail_message.py:27
+msgid "Date"
+msgstr ""
+
+#: ../content/digest_template.pt:33
+msgid "Date:"
+msgstr ""
+
+#: ../interfaces/mailinglist.py:136
+msgid "Description"
+msgstr ""
+
+#: ../content/mailinglist.py:1586
+msgid "Do not archive messages"
+msgstr ""
+
+#: ../browser/mailinglist_views.py:293
+msgid "Edit Mailing List"
+msgstr ""
+
+#: ../browser/mailinglist_views.py:317
+msgid "Edit cancelled."
+msgstr ""
+
+#: ../browser/import_export.pt:46
+msgid "Export as CSV"
+msgstr ""
+
+#: ../browser/import_export.pt:23
+msgid "Export as mbox"
+msgstr ""
+
+#: ../browser/import_export.pt:14
+msgid "Export mailing list data"
+msgstr ""
+
+#: ../browser/import_export.pt:17
+msgid "Export messages"
+msgstr ""
+
+#: ../browser/import_export.pt:40
+msgid "Export subscriber list"
+msgstr ""
+
+#: ../browser/import_export.pt:19
+msgid "Exports all messages from the mailing list archive as a single mbox file."
+msgstr ""
+
+#: ../browser/import_export.pt:42
+msgid "Exports the usernames, full names, and e-mail addresses of all subscribers as a CSV file."
+msgstr ""
+
+#: ../browser/archive_thread_messages.pt:46
+msgid "Flat listing"
+msgstr ""
+
+#: ../browser/archive_date_messages.pt:52
+#: ../browser/archive_date_view.pt:38
+#: ../browser/archive_forum_view.pt:93
+msgid "Forum view"
+msgstr ""
+
+#: ../browser/moderation.pt:29
+#: ../interfaces/mail_message.py:15
+msgid "From"
+msgstr ""
+
+#: ../content/digest_template.pt:22
+msgid "From:"
+msgstr ""
+
+#: ../interfaces/mail_message.py:60
+msgid "Header"
+msgstr ""
+
+#: ../interfaces/mail_message.py:57
+msgid "Headers"
+msgstr ""
+
+#: ../browser/import_export.pt:70
+msgid "History"
+msgstr ""
+
+#: ../browser/import_export.pt:56
+msgid "Import mailing list data"
+msgstr ""
+
+#: ../browser/import_export.pt:59
+msgid "Import messages"
+msgstr ""
+
+#: ../browser/import_export.pt:83
+msgid "Import subscribers"
+msgstr ""
+
+#: ../browser/import_export.pt:77
+msgid "Imported ${msg_count} message${msg_count_plural} from <em>${msg_import_filename}</em>"
+msgstr ""
+
+#: ../browser/import_export.py:81
+msgid "Imported %s message%s from '%s'"
+msgstr ""
+
+#: ../browser/search_debug_view.pt:15
+msgid "Initial Message"
+msgstr ""
+
+#: ../browser/mail_archive_views.py:298
+msgid "Invalid Search: Search phrase cannot begin with 'and', 'or', or 'not'"
+msgstr ""
+
+#: ../browser/mail_archive_views.py:300
+msgid "Invalid Search: Search phrase cannot begin with 'not'"
+msgstr ""
+
+#: ../browser/mail_archive_views.py:296
+msgid "Invalid Search: Search phrase cannot end with 'and', 'or', or 'not'"
+msgstr ""
+
+#: ../browser/mail_archive_views.py:302
+msgid "Invalid Search: Search phrase must contain words other than 'and', 'or', and 'not'"
+msgstr ""
+
+#: ../browser/lookup_view.pt:16
+#: ../interfaces/mailinglist.py:142
+msgid "List Address"
+msgstr ""
+
+#: ../browser/lookup_view.pt:17
+msgid "List Path"
+msgstr ""
+
+#: ../interfaces/mailinglist.py:161
+msgid "List Type"
+msgstr ""
+
+#: ../browser/mailinglist_views.py:146
+msgid "List Type not set"
+msgstr ""
+
+#: ../interfaces/mail_message.py:58
+msgid "List of selected other headers: (key, value) pairs"
+msgstr ""
+
+#: ../browser/import_export.pt:30
+msgid "List preferences"
+msgstr ""
+
+#: ../browser/mailinglist_views.py:278
+msgid "Mailing list added."
+msgstr ""
+
+#: ../interfaces/mailinglist.py:143
+msgid "Main address for the mailing list."
+msgstr ""
+
+#: ../browser/manage_membership.py:138
+msgid "Manage Allowed Senders"
+msgstr ""
+
+#: ../interfaces/mailinglist.py:158
+msgid "Manager"
+msgstr ""
+
+#: ../interfaces/mailinglist.py:151
+msgid "Managers"
+msgstr ""
+
+#: ../browser/mailinglist_view.pt:49
+msgid "Managers:"
+msgstr ""
+
+#: ../browser/moderation.py:105
+msgid "Member moderated."
+msgstr ""
+
+#: ../interfaces/list_types.py:58
+msgid "Members List"
+msgstr ""
+
+#: ../content/send_mail.py:237
+msgid "Membership approval already pending"
+msgstr ""
+
+#: ../content/send_mail.py:156
+msgid "Membership awaiting approval"
+msgstr ""
+
+#: ../content/send_mail.py:186
+msgid "Membership denied"
+msgstr ""
+
+#: ../interfaces/mail_message.py:38
+msgid "Message Id"
+msgstr ""
+
+#: ../content/send_mail.py:274
+msgid "Message pending moderation"
+msgstr ""
+
+#: ../content/digest_template.pt:17
+msgid "Messages in this digest:"
+msgstr ""
+
+#: ../browser/mail_archive_views.py:59
+msgid "No Title"
+msgstr ""
+
+#: ../browser/mail_archive_views.py:73
+msgid "No address"
+msgstr ""
+
+#: ../browser/mailinglist_views.py:312
+msgid "No changes need to be saved."
+msgstr ""
+
+#: ../browser/import_export.py:110
+msgid "No emails found"
+msgstr ""
+
+#: ../browser/import_export.py:113
+msgid "No file selected. Please select a csv file before importing."
+msgstr ""
+
+#: ../browser/import_export.py:85
+msgid "No file selected. Please select an mbox file before importing."
+msgstr ""
+
+#: ../interfaces/list_types.py:59
+msgid "Only those approved by the list managers can post and receive messages."
+msgstr ""
+
+#: ../browser/search_debug_view.pt:19
+msgid "Parent"
+msgstr ""
+
+#: ../browser/moderation.py:93
+msgid "Post moderated."
+msgstr ""
+
+#: ../content/send_mail.py:318
+msgid "Post rejected"
+msgstr ""
+
+#: ../content/send_mail.py:258
+msgid "Post requiring moderation"
+msgstr ""
+
+#: ../browser/import_export.pt:33
+msgid "Post to list"
+msgstr ""
+
+#: ../browser/moderation.pt:26
+msgid "Posts awaiting moderation"
+msgstr ""
+
+#: ../interfaces/list_types.py:52
+msgid "Public List"
+msgstr ""
+
+#: ../browser/lookup_view.pt:35
+msgid "Purge Invalid Entries"
+msgstr ""
+
+#: ../interfaces/mail_message.py:52
+msgid "Reference"
+msgstr ""
+
+#: ../browser/search_debug_view.pt:17
+#: ../interfaces/mail_message.py:50
+msgid "References"
+msgstr ""
+
+#: ../browser/lookup_view.pt:10
+msgid "Registered Mailing Lists"
+msgstr ""
+
+#: ../browser/manage_membership.pt:34
+msgid "Remove"
+msgstr ""
+
+#: ../browser/import_export.py:65
+msgid "Removed %s message%s from the list archive."
+msgstr ""
+
+#: ../browser/manage_membership.py:77
+msgid "Removed: %s.  "
+msgstr ""
+
+#: ../interfaces/mail_message.py:44
+msgid "Reply To"
+msgstr ""
+
+#: ../content/digest_template.pt:36
+msgid "Reply to list"
+msgstr ""
+
+#: ../content/digest_template.pt:35
+msgid "Reply to sender"
+msgstr ""
+
+#: ../browser/threaded_message.pt:113
+msgid "Return to flat listing"
+msgstr ""
+
+#: ../browser/threaded_message.pt:110
+msgid "Return to threaded listing"
+msgstr ""
+
+#: ../browser/search.pt:97
+msgid "Search results"
+msgstr ""
+
+#: ../browser/moderation.pt:30
+#: ../interfaces/mail_message.py:21
+msgid "Subject"
+msgstr ""
+
+#: ../content/digest_template.pt:31
+msgid "Subject: ${digest_template_msg_subject}"
+msgstr ""
+
+#: ../browser/mailinglist_view.pt:143
+msgid "Subscribe"
+msgstr ""
+
+#: ../browser/mailinglist_view.pt:121
+msgid "Subscribe Address"
+msgstr ""
+
+#: ../browser/manage_membership.pt:36
+msgid "Subscribed"
+msgstr ""
+
+#: ../browser/manage_membership.py:79
+msgid "Subscribed: %s.  "
+msgstr ""
+
+#: ../content/send_mail.py:329
+msgid "Subscription request rejected"
+msgstr ""
+
+#: ../browser/archive_forum_view.pt:78
+msgid "Switch to date view"
+msgstr ""
+
+#: ../interfaces/mail_message.py:16
+msgid "The address the mail was sent from"
+msgstr ""
+
+#: ../browser/mail_archive_views.py:204
+#: ../browser/mail_message_views.py:202
+msgid "The current user has no address."
+msgstr ""
+
+#: ../interfaces/mail_message.py:28
+msgid "The date the mail was sent"
+msgstr ""
+
+#: ../content/mailinglist.py:1584
+msgid "The entire message, including attachments"
+msgstr ""
+
+#: ../interfaces/mail_message.py:33
+msgid "The mail message body"
+msgstr ""
+
+#: ../interfaces/mail_message.py:39
+msgid "The message id of this message."
+msgstr ""
+
+#: ../interfaces/mail_message.py:45
+msgid "The message id that this mail is in reply to."
+msgstr ""
+
+#: ../content/mailinglist.py:1585
+msgid "The message text only"
+msgstr ""
+
+#: ../interfaces/mailinglist.py:152
+msgid "The people who maintain the list.  Managers can edit list settings and can edit the list of allowed senders / subscribers.  Managers receive moderation requests, general inquiries and any bounced mail."
+msgstr ""
+
+#: ../interfaces/mailinglist.py:162
+msgid "The policy that defines the behavior of the list."
+msgstr ""
+
+#: ../interfaces/mail_message.py:22
+msgid "The subject of the email"
+msgstr ""
+
+#: ../interfaces/mailinglist.py:94
+msgid "The value entered is not a valid email address."
+msgstr ""
+
+#: ../browser/import_export.pt:33
+msgid "There are no messages archived for this list. ${is_archived} ${new_topic_to_list} a message to the list."
+msgstr ""
+
+#: ../browser/mail_archive_views.py:306
+msgid "There were no messages found"
+msgstr ""
+
+#: ../interfaces/mailinglist.py:97
+msgid "This address is already in use by another list."
+msgstr ""
+
+#: ../browser/mailinglist_views.py:86
+msgid "This email address is already subscribed"
+msgstr ""
+
+#: ../browser/mailinglist_views.py:83
+msgid "This email address is invalid"
+msgstr ""
+
+#: ../browser/import_export.pt:50
+msgid "This list does not have any subscribers to export."
+msgstr ""
+
+#: ../browser/search_debug_view.pt:23
+msgid "Thread # of Responses"
+msgstr ""
+
+#: ../browser/search_debug_view.pt:21
+msgid "Thread Updated"
+msgstr ""
+
+#: ../browser/forum_message_view.pt:48
+msgid "Thread order:"
+msgstr ""
+
+#: ../browser/forum_message_view.pt:37
+msgid "Thread view:"
+msgstr ""
+
+#: ../browser/archive_date_messages.pt:48
+msgid "Threaded listing"
+msgstr ""
+
+#: ../interfaces/mailinglist.py:131
+msgid "Title"
+msgstr ""
+
+#: ../browser/mailinglist_view.pt:95
+msgid "To subscribe to the list enter your email in the field below."
+msgstr ""
+
+#: ../browser/mailinglist_view.pt:56
+msgid "Type:"
+msgstr ""
+
+#: ../browser/import_export.pt:78
+msgid "Undo"
+msgstr ""
+
+#: ../browser/mailinglist_view.pt:136
+msgid "Unsubscribe"
+msgstr ""
+
+#: ../content/send_mail.py:217
+msgid "Unsubscription confirmed"
+msgstr ""
+
+#: ../browser/moderation.pt:62
+msgid "User"
+msgstr ""
+
+#: ../browser/moderation.pt:59
+msgid "Users awaiting moderation"
+msgstr ""
+
+#: ../interfaces/mailinglist.py:169
+msgid "When archiving is enabled, all messages sent to the list will be saved on the server.  You may choose whether to archive just the message text, or include attachments."
+msgstr ""
+
+#: ../browser/mailinglist_view.pt:129
+msgid "You are currently subscribed to this list."
+msgstr ""
+
+#: ../browser/mailinglist_view.pt:132
+msgid "You are not currently subscribed to this list."
+msgstr ""
+
+#: ../content/digest_template.pt:53
+msgid "You are receiving this message because you have selected to receive a daily digest for ${digest_template_mailinglist_title}. To view previous messages, update your email settings, or unsubscribe, visit: ${digest_template_mailinglist_absolute_url}"
+msgstr ""
+
+#: ../content/digest_template.pt:47
+msgid "You can view and respond to this message thread here: ${digest_template_fmt_msg_archive_url}"
+msgstr ""
+
+#: ../interfaces/mailinglist.py:91
+msgid "You cannot have a list address with '-manager@'"
+msgstr ""
+
+#: ../browser/mail_archive_views.py:200
+#: ../browser/mail_message_views.py:197
+msgid "You must enter a message"
+msgstr ""
+
+#: ../browser/mail_archive_views.py:202
+#: ../browser/mail_message_views.py:199
+msgid "You must enter a subject for your message."
+msgstr ""
+
+#: ../browser/mailinglist_views.py:310
+msgid "Your changes have been saved."
+msgstr ""
+
+#: ../browser/moderation.pt:44
+msgid "approve"
+msgstr ""
+
+#. Default: "There are currently no posts in this archive."
+#: ../browser/archive_date_messages.pt:74
+#: ../browser/archive_date_view.pt:59
+#: ../browser/archive_forum_view.pt:142
+msgid "description_no_posts"
+msgstr ""
+
+#. Default: "Your search did not yield any results."
+#: ../browser/search.pt:137
+msgid "description_no_search_results"
+msgstr ""
+
+#: ../browser/moderation.pt:45
+msgid "discard"
+msgstr ""
+
+#. Default: "${list} archive for ${date}"
+#: ../browser/mail_archive_views.py:157
+msgid "label_archive_list_archive_view"
+msgstr ""
+
+#. Default: "Search messages in ${title}"
+#: ../browser/mail_archive_views.py:278
+msgid "label_archive_search"
+msgstr ""
+
+#. Default: "Archive by date for ${title}"
+#: ../browser/mail_archive_views.py:134
+msgid "label_archive_views_date"
+msgstr ""
+
+#. Default: "Forum view for ${list}"
+#: ../browser/mail_archive_views.py:99
+msgid "label_archive_views_forum"
+msgstr ""
+
+#. Default: "by"
+#: ../browser/threaded_message.pt:34
+msgid "label_author"
+msgstr ""
+
+#. Default: "Cancel"
+#: ../browser/mailinglist_views.py:315
+#: ../browser/message_reply_view.pt:94
+#: ../browser/new_topic_view.pt:93
+msgid "label_cancel"
+msgstr ""
+
+#. Default: "Date:"
+#: ../browser/message_macros.pt:47
+msgid "label_date"
+msgstr ""
+
+#. Default: "Next by date:"
+#: ../browser/threaded_message.pt:69
+msgid "label_date_next"
+msgstr ""
+
+#. Default: "Previous by date:"
+#: ../browser/threaded_message.pt:82
+msgid "label_date_prev"
+msgstr ""
+
+#. Default: "Email Address:"
+#: ../browser/mailinglist_view.pt:102
+msgid "label_email"
+msgstr ""
+
+#. Default: "post new message"
+#: ../browser/archive_forum_view.pt:81
+msgid "label_forum_new_message_button"
+msgstr ""
+
+#. Default: "Post New Topic"
+#: ../browser/archive_date_messages.pt:38
+#: ../browser/archive_thread_messages.pt:36
+msgid "label_forum_new_topic_button"
+msgstr ""
+
+#. Default: "Reply"
+#: ../browser/message_macros.pt:57
+msgid "label_forum_reply_button"
+msgstr ""
+
+#. Default: "From:"
+#: ../browser/message_macros.pt:30
+#: ../browser/message_reply_view.pt:36
+#: ../browser/new_topic_view.pt:36
+msgid "label_from"
+msgstr ""
+
+#. Default: "Next in thread:"
+#: ../browser/threaded_message.pt:56
+msgid "label_mail_thread_next"
+msgstr ""
+
+#. Default: "Attachments"
+#: ../browser/message_macros.pt:73
+msgid "label_mailattachments"
+msgstr ""
+
+#. Default: "Message:"
+#: ../browser/new_topic_view.pt:66
+msgid "label_message_body"
+msgstr ""
+
+#. Default: "Migrate"
+#: ../migrations.py:44
+msgid "label_migrate"
+msgstr ""
+
+#. Default: "Reply:"
+#: ../browser/message_reply_view.pt:67
+msgid "label_reply_body"
+msgstr ""
+
+#. Default: "Save"
+#: ../browser/mailinglist_views.py:299
+msgid "label_save"
+msgstr ""
+
+#. Default: "Search text:"
+#: ../browser/search.pt:80
+msgid "label_search_text"
+msgstr ""
+
+#. Default: "Send"
+#: ../browser/message_reply_view.pt:89
+#: ../browser/new_topic_view.pt:88
+msgid "label_send"
+msgstr ""
+
+#. Default: "Subject:"
+#: ../browser/message_macros.pt:40
+#: ../browser/message_reply_view.pt:43
+#: ../browser/new_topic_view.pt:42
+msgid "label_subject"
+msgstr ""
+
+#. Default: "In reply to:"
+#: ../browser/threaded_message.pt:43
+msgid "label_thread_reply"
+msgstr ""
+
+#. Default: "Thread Outline:"
+#: ../browser/forum_message_view.pt:69
+msgid "label_threaded_replies"
+msgstr ""
+
+#. Default: "Replies:"
+#: ../browser/threaded_message.pt:24
+msgid "label_threadreplies"
+msgstr ""
+
+#: ../interfaces/list_types.py:36
+msgid "list marker"
+msgstr ""
+
+#. Default: "Opened By"
+#: ../browser/archive_forum_view.pt:102
+#: ../browser/search.pt:106
+msgid "list_archive_thread_originator"
+msgstr ""
+
+#. Default: "Last Updated"
+#: ../browser/archive_forum_view.pt:106
+msgid "list_archive_thread_recent_post_date"
+msgstr ""
+
+#. Default: "Replies"
+#: ../browser/archive_forum_view.pt:104
+msgid "list_archive_thread_replies"
+msgstr ""
+
+#. Default: "Subject"
+#: ../browser/archive_forum_view.pt:100
+#: ../browser/search.pt:104
+msgid "list_archive_thread_subject"
+msgstr ""
+
+#. Default: "\n--\nArchive: ${archive_url}\nTo unsubscribe send an email with subject \"unsubscribe\" to ${mailto}.  Please contact ${manager_email} for questions.\n"
+#: ../lib/default_email_text.py:235
+msgid "mail_footer_archived"
+msgstr ""
+
+#. Default: "\n--\nTo unsubscribe send an email with subject \"unsubscribe\" to ${mailto}.  Please contact ${manager_email} for questions.\n"
+#: ../lib/default_email_text.py:241
+msgid "mail_footer_unarchived"
+msgstr ""
+
+#. Default: "\nContent-type: ${content-type}\nSubject: ${subject}\nMessage-id: ${message_id}\nX-Mailer: ${xmailer}\nReply-To: ${mailto}\nErrors-To: ${returnpath}\nList-Post: <mailto:${mailto}>\nList-Subscribe: <mailto:${mailto}?subject=${subscribe}>\nList-Unsubscribe: <mailto:${mailto}?subject=${unsubscribe}>\nList-Id: ${title}\nPrecedence: Bulk\n"
+#: ../lib/default_email_text.py:246
+msgid "mail_header"
+msgstr ""
+
+#. Default: "Please direct inquiries about this list to ${view_manager_email}."
+#: ../browser/mailinglist_view.pt:158
+msgid "manager-email-prompt"
+msgstr ""
+
+#. Default: "\n--${boundary}\nContent-Type: text/plain\nContext-Transfer-Encoding: 8bit\n\nHello List Manager,\n\n${fullname} has sent a message to the ${listname} mailing list \nand it is waiting for your approval.\n${mod_url}\n\n--${boundary}\nContent-Type: message/rfc822\nContent-Description: ${fullname}\n\n${post}\n"
+#: ../lib/default_email_text.py:164
+msgid "manager_mod_post_request_body"
+msgstr ""
+
+#: ../interfaces/list_types.py:37
+msgid "marked interface used to indicate the list type"
+msgstr ""
+
+#. Default: "New reply to ${reply_subject} by ${reply_author}"
+#: ../browser/message_reply_view.pt:21
+msgid "message_reply"
+msgstr ""
+
+#. Default: "New Mailing List Post"
+#: ../browser/new_topic_view.pt:20
+msgid "new_topic"
+msgstr ""
+
+#. Default: "Flat"
+#: ../browser/forum_message_view.pt:44
+msgid "option_forum_flat"
+msgstr ""
+
+#. Default: "Oldest first"
+#: ../browser/forum_message_view.pt:52
+msgid "option_forum_oldest_first"
+msgstr ""
+
+#. Default: "Recent First"
+#: ../browser/forum_message_view.pt:55
+msgid "option_forum_recent_first"
+msgstr ""
+
+#. Default: "Threaded"
+#: ../browser/forum_message_view.pt:41
+msgid "option_forum_threaded"
+msgstr ""
+
+#: ../browser/moderation.pt:46
+msgid "reject"
+msgstr ""
+
+#. Default: "On ${date}, ${author} wrote:"
+#: ../browser/mail_message_views.py:273
+msgid "reply-attribution"
+msgstr ""
+
+#: ../browser/manage_membership.pt:68
+msgid "save changes"
+msgstr ""
+
+#: ../interfaces/list_types.py:40
+msgid "sort index"
+msgstr ""
+
+#. Default: "A table of registered list addresses and the paths to the corresponding lists"
+#: ../browser/lookup_view.pt:12
+msgid "summary_table_mailing_listsr"
+msgstr ""
+
+#. Default: "To unsubscribe from this list send an email to the list with the subject \"${sunsubscribe_keyword}\" and an empty body."
+#: ../browser/mailinglist_view.pt:83
+msgid "unsub-instructions"
+msgstr ""
+
+#. Default: "\nHello ${fullname},\n\nYou have been unsubscribed from ${listname}.\n\nFarewell!\n\nYours, \nList Manager\n"
+#: ../lib/default_email_text.py:104
+msgid "unsubscribe_confirm_body"
+msgstr ""
+
+#: ../browser/forum_message_view.pt:59
+msgid "update"
+msgstr ""
+
+#. Default: "\nHello ${fullname},\n\nWe have received more than one message from you to the ${listname} \nmailing list.  In order to be able to send a message to this list,\nplease reply to this message leaving the subject line unchanged.  \nAfter you have confirmed your email address, you may resend your\nmessage.\n\nPlease send questions to ${listmanager}.\n\nYours, \nList Manager\n"
+#: ../lib/default_email_text.py:131
+msgid "user_already_pending_body"
+msgstr ""
+
+#. Default: "\nHello ${fullname},\n\nYour request to join the ${listname} mailing list has been denied\nbecause there was no record of a request.\nAny questions regarding this should be sent to ${listmanager}.\n\nYours,\nList Manager\n"
+#: ../lib/default_email_text.py:15
+msgid "user_denied_body"
+msgstr ""
+
+#. Default: "\nHello List Manager,\n\n${fullname} is awaiting approval for membership on the ${listname} mailing list.\n${mod_url}\n\n"
+#: ../lib/default_email_text.py:66
+msgid "user_manager_body"
+msgstr ""
+
+#. Default: "\nHello ${fullname},\n\nWe have already received a message from you to the \n${listname} mailing list. Permission for you to post messages \nto this list is awaiting approval.  Once you are approved, \nyour initial message will be processed. You should then\nresend all subsequent messages.\n\nPlease send questions to ${listmanager}.\n\nYours, \nList Manager\n"
+#: ../lib/default_email_text.py:51
+msgid "user_mem_mod_already_pending_body"
+msgstr ""
+
+#. Default: "\nHello ${fullname},\n\nWe have received a message from you to the ${listname} mailing \nlist. Permission for you to post messages to this list is \nawaiting approval.  Once you are approved, your message will \nbe processed.\n\nPlease send questions to ${listmanager}.\n\nYours, \nList Manager\n"
+#: ../lib/default_email_text.py:27
+msgid "user_mod_body"
+msgstr ""
+
+#. Default: "\nHello ${fullname},\n\nYour request to join the ${listname} mailing list has been denied\nbecause the pin you provided does not match the one initially sent.\nAny questions regarding this should be sent to ${listmanager}.\n\nYours,\nList Manager\n"
+#: ../lib/default_email_text.py:4
+msgid "user_pin_mismatch_body"
+msgstr ""
+
+#. Default: "\nHello ${fullname},\n\nWe have received a message from you to the ${listname} mailing \nlist.  The message is waiting for approval from a list manager.\n\nPlease send questions to ${listmanager}.\n\nYours,\nList Manager\n"
+#: ../lib/default_email_text.py:182
+msgid "user_post_mod_notification"
+msgstr ""
+
+#. Default: "\nHello ${fullname},\n\nWe have received a message from you to the ${listname} mailing \nlist.  The message is waiting for approval from a list manager.\n\nTo subscribe to this list, send a message to ${listaddress}\nwith the subject: subscribe.\n\nPlease send questions to ${listmanager}.\n\nYours,\nList Manager\n"
+#: ../lib/default_email_text.py:194
+msgid "user_post_mod_subscribe_notification"
+msgstr ""
+
+#. Default: "\nHello ${fullname},\n\nThe message you have sent to ${listname} mailing list has been\nrejected for the following reason:\n${reject_reason}\n\nPlease send questions to ${listmanager}.\n\nYours, \nList Manager\n"
+#: ../lib/default_email_text.py:209
+msgid "user_post_rejected"
+msgstr ""
+
+#. Default: "\nHello ${fullname},\n\nWe have received a message from you to the ${listname} mailing \nlist.  In order to be able to send a message to this list,\nplease reply to this message leaving the subject line unchanged.  \nAfter you have confirmed your email address, your message will\nbe processed.\n\nTo subscribe to this list, send a message to ${listaddress}\nwith the subject: subscribe.\n\nPlease send questions to ${listmanager}.\n\nYours, \nList Manager\n"
+#: ../lib/default_email_text.py:146
+msgid "user_post_request_body"
+msgstr ""
+
+#. Default: "\nHello ${fullname},\n\nYour request to join the ${listname} mailing list is awaiting approval.\nAny questions regarding this invitation should be sent to ${listmanager}.\n\nYours, \nList Manager\n"
+#: ../lib/default_email_text.py:41
+msgid "user_sub_mod_body"
+msgstr ""
+
+#. Default: "\nHello ${fullname},\n\nYour request to subscribe to ${listname} mailing list has been\nrejected for the following reason:\n${reject_reason}\n\nPlease send questions to ${listmanager}.\n\nYours, \nList Manager\n"
+#: ../lib/default_email_text.py:222
+msgid "user_sub_rejected"
+msgstr ""
+
+#. Default: "\nHello ${fullname},\n\nWe have received a subscription request for your email address to the\n${listname} mailing list. To confirm the request, simply reply to this \nmessage leaving the subject line unchanged.\n\nIf you do not wish to subscribe to this list, please disregard this\nmessage. Send questions to ${listmanager}. \n\nYours, \nList Manager\n"
+#: ../lib/default_email_text.py:75
+msgid "user_subscribe_request_body"
+msgstr ""
+
+#. Default: "\nHello ${fullname},\n\nWe have received a request to unsubscribe your email address from the\n${listname} mailing list.\n\nTo confirm the request, simply reply to this message, leaving the \nsubject line unchanged.\n\nIf you do not wish to cancel your subscription, please disregard this\nmessage. Send questions to ${listmanager}.\n\nYours, \nList Manager\n"
+#: ../lib/default_email_text.py:115
+msgid "user_unsubscribe_request_body"
+msgstr ""
+
+#. Default: "\nHello ${fullname},\n\nYou are now subscribed to ${listname}.\n\nSend your messages to ${listaddress}\n\nIf you want to unsubscribe from ${listname}, send a message to \n${listaddress} with subject: unsubscribe.\n\nYours, \nList Manager\n"
+#: ../lib/default_email_text.py:90
+msgid "user_welcome_body"
+msgstr ""
+
+#: ../browser/mailinglist_view.pt:69
+msgid "view archive."
+msgstr ""
+
+#. Default: "Welcome to ${title}"
+#: ../content/send_mail.py:196
+msgid "welcome_to_list"
+msgstr ""
+

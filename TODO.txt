@@ -1,0 +1,29 @@
+Things that need doing:
+
+* Some style and pizazz (aka css)!
+* Tests for views and funtional tests
+* Caching of view methods.
+* Views for performing moderation tasks TTW, currently moderation is email
+  only.
+* Views for managing bounced and disabled senders as well as other fun
+  MailBoxer gadgets.
+* The List Lookup utility needs a more generic way to use the envelope
+  recipient.  Currently it finds the list to send to based on To + CC, this is
+  fine except when a mail is addressed to two lists handled by the same server
+  it will likely be sent to the first matched list twice.  On postfix this is
+  not the case because the proprietary x-original-to header is used there (so
+  use postfix or map your lists directly to the appropriate url for now if 
+  this is a likely scenario for you).
+* We need a nice z3 widget for lists, the one that comes with z3 is terribly
+  broken.
+* Policies for determining who can join a list (if anyone), currently all
+  lists can be subscribed to by anyone.
+* Broader Subscription adapters which hook into Group/Team/Portal-wide
+  membersip.
+* Parsing of message bodies into nicely formatted HTML (e.g. using
+  <blockquote> and linkifying obvious urls).
+* Use Dieter Maurer's AdvancedQuery to make some of the queries faster/more
+  predictably ordered.
+* Some architecture documentation.
+* Whatever else people my find useful or necessary, especially those people
+  who have funded this work. ;)

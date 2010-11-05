@@ -1,0 +1,39 @@
+#message-list-actions li {
+    display: inline;
+    margin-left: 0px;
+    margin-left: 0px;
+    margin-right: 1em;
+}
+
+#message-list-actions {
+    display: block;
+    padding-bottom: 0.25em;
+}
+
+#message-list-actions li a {
+    font-size: 95%;
+    text-transform: lowercase;
+    text-decoration: none;
+    border-bottom: none;
+}
+
+#message-list, #archive-folders {
+    padding: 1em;
+}
+
+#message-list li a:link {
+    text-decoration: none;
+    border-bottom: none;
+}
+
+#message-list li a:visited {
+    text-decoration: none;
+    border-bottom: none;
+}
+
+#new-topic {
+    font-size: 95%;
+    text-transform: lowercase;
+    text-decoration: none;
+    border-bottom: none;
+}

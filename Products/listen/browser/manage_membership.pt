@@ -1,0 +1,75 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en" lang="en"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="listen">
+  <body>
+    <div metal:fill-slot="main">
+      <div metal:define-macro="body">
+
+        <div i18n:domain="listen">
+
+          <div metal:define-slot="extra_info" tal:replace="nothing">
+          </div>
+
+          <div class="row"
+               metal:define-slot="extra_top" tal:replace="nothing">
+            <div i18n:translate="" class="label">Extra top</div>
+          </div>
+
+          <h1 i18n:translate="" tal:content="view/Title" class="documentFirstHeading">
+            Title or Id
+          </h1>
+
+          <form name="manage-form"
+                id="manage-form"
+		tal:attributes="action request/ACTUAL_URL"
+                tal:define="errors view/errors|nothing"
+                method="post">
+
+            <table style="padding-bottom:20px">
+	      <tr>
+		<th i18n:translate="">Remove</th>
+		<th i18n:translate="">Address / User ID</th>
+		<th i18n:translate="">Subscribed</th>
+	      </tr>
+              <tr tal:repeat="user view/allowed_senders_data">
+		<td style="text-align:center">
+		  <input type="checkbox" tal:attributes="name python:'remove_'+user" />
+		</td>
+		<td style="text-align:center" tal:content="string:${user}" />
+		<td style="text-align:center"
+		    tal:define="subscribed python:view.is_subscribed(user) and 1 or 0">
+		  <input type="checkbox" tal:attributes="name python:'subscribed_'+user; checked subscribed" />
+		  <input type="hidden"
+			 tal:condition="subscribed"
+			 tal:attributes="name python:'wassubscribed_'+user"
+			 />
+		</td>
+		<td>
+		  <span tal:replace="python: view.pending_status(user) " />
+		</td>
+              </tr>
+	      <tr>
+		<td i18n:translate="" style="vertical-align:bottom; text-align:center">
+		  Add:
+		</td>
+		<td style="padding-top:8px">
+		  <input type="text" name="add_email" value="" size="25" />
+		</td>
+		<td style="vertical-align:bottom; text-align:center">
+		  <input type="checkbox" name="add_subscribed" />
+		</td>
+		<td />
+	      </tr>
+	    </table>
+	    <input type="submit" name="save" i18n:attributes="value" value="save changes" />
+	    <p tal:content="python: errors" />
+	  </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

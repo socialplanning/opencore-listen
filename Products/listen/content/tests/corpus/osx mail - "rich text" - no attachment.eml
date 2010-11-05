@@ -1,0 +1,25 @@
+Message-Id: <FDA3E254-389E-4651-B4E6-B5B2B501E014@openplans.org>
+From: Rob Miller <robm@openplans.org>
+To: test-list@lists.example.com
+Content-Type: multipart/alternative;
+	boundary=Apple-Mail-21--168360707
+X-Smtp-Server: 127.0.0.1
+Mime-Version: 1.0 (Apple Message framework v929.2)
+Subject: osx mail - "rich text" - no attachment
+Date: Mon, 15 Dec 2008 18:27:05 -0800
+
+
+--Apple-Mail-21--168360707
+Content-Type: text/plain;
+	charset=US-ASCII;
+	format=flowed
+Content-Transfer-Encoding: 7bit
+
+Email body.
+--Apple-Mail-21--168360707
+Content-Type: text/html;
+	charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+
+<html><body style="word-wrap: break-word; -webkit-nbsp-mode: space; -webkit-line-break: after-white-space; "><i><b>Email body.</b></i></body></html>
+--Apple-Mail-21--168360707--

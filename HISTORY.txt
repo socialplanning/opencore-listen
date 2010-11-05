@@ -1,0 +1,37 @@
+* Basic back-end digest support, but no ui
+  [ra]
+  [robert]
+
+* Search bug fix
+  [robert]
+
+* encoding fixes
+  [slinkp]
+
+* show mailing list content tabs when looking at objects underneath
+  [robert]
+
+* Added support for exporting mailing list archive as mbox file, 
+  as well as support for exporting subscribers as a CSV file.
+  [nicholasbs]
+  [robert]
+
+* Modified listMail to support adding footers to messages of
+  different content-type and content-transfer-encoding
+  [robert]
+
+* allow subscription request confirmation from alternate email address
+  [robert]
+
+* plone 3 support
+  [ra]
+
+* Added additional policies.
+  [robert]
+
+* Expose SearchableText through a simplistic search form.
+  [nouri]
+
+* Fixed issue with storing unicode in portal_catalog, and added
+  SearchableText to mailing list objects.
+  [alecm]

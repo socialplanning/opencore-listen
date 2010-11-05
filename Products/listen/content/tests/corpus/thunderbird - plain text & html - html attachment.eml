@@ -1,0 +1,59 @@
+Message-ID: <4946FB75.1080601@example.com>
+Date: Mon, 15 Dec 2008 16:51:01 -0800
+From: Sendy Sender <sendy@example.com>
+User-Agent: Thunderbird 2.0.0.18 (X11/20081125)
+MIME-Version: 1.0
+To: test-list@lists.example.com
+Subject: thunderbird - plain text & html - html attachment
+Content-Type: multipart/mixed;
+ boundary="------------070006090007080608090304"
+
+This is a multi-part message in MIME format.
+--------------070006090007080608090304
+Content-Type: multipart/alternative;
+ boundary="------------020200020506070407070407"
+
+
+--------------020200020506070407070407
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
+
+/*Email body*/
+
+
+--------------020200020506070407070407
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+</head>
+<body bgcolor="#ffffff" text="#000000">
+<i><b>Email body</b></i><br>
+<br>
+</body>
+</html>
+
+--------------020200020506070407070407--
+
+--------------070006090007080608090304
+Content-Type: text/html;
+ name="loremipsum.html"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+ filename="loremipsum.html"
+
+<html>
+  <head>
+    <title>Lorem Ipsum</title>
+  </head>
+  <body>
+    <h1>Lorem Ipsum</h1>
+    <p>This is where there would be content, if in fact there were any
+      content.</p>
+  </body>
+</html>
+
+--------------070006090007080608090304--
+

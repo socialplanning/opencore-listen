@@ -1,0 +1,52 @@
+<div xmlns:tal="http://xml.zope.org/namespaces/tal"
+     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+     i18n:domain="listenwidget" id="test">
+
+<script type="text/javascript" src="listoperations.js"
+        tal:attributes="src python: view.resource_url()">
+</script>
+
+<div id="sourceParent"
+     tal:define="form_value python: view._getFormValue();
+                 widget_name python: view.name"
+                >
+  <input type="hidden" name="foo.marker" id="foo.marker"
+         tal:define="marker python: widget_name + '.marker'"
+         tal:attributes="name marker; id marker" />
+  <tal:loop tal:repeat="item form_value">
+    <input type="hidden" name="foo" id="value.0.foo" value="item"
+           tal:condition="item"
+           tal:attributes="name widget_name;
+                           id python:'value.%d.%s' % (repeat['item'].index(), widget_name);
+                           value item" />
+  </tal:loop>
+  <input type="hidden" id="foo" tal:attributes="id widget_name" />
+  <div id="select.foo" 
+          tal:attributes="id string:select.${widget_name}">
+    <tal:loop tal:repeat="item form_value">
+      <div tal:condition="item" id="select.0.foo"
+           tal:attributes="id python:'select.%d.%s' % (repeat['item'].index(), widget_name)">
+        <a href="#remove"
+           onclick="sequenceRemoveItem('foo'); return false;"
+           tal:attributes="onclick python:'sequenceRemoveItem(&quot;%s&quot;, &quot;%d&quot;);; return false;;' % (widget_name, repeat['item'].index())" 
+           i18n:translate="button-remove"
+           style="text-decoration: none;">[ - ]</a>
+        <span tal:content="item"><tal:comment replace="nothing">item</tal:comment></span>
+      </div>
+    </tal:loop>
+  </div>
+</div>
+
+<div tal:define="widget_name python: view.name">
+  <input type="text" id="input.foo"
+         tal:attributes="id string:input.${widget_name}"
+         onkeypress="return onKeyPress(event);"/>
+  <button
+      type="button" onclick="sequenceAddItem('foo')"
+      tal:attributes="onclick string:sequenceAddItem('${widget_name}')"
+      i18n:translate="button-add">
+    Add
+  </button>
+</div>
+
+</div>

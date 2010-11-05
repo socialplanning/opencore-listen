@@ -1,0 +1,58 @@
+Message-Id: <AE7ECABC-11F2-4CF6-9FDA-1B56FACDE6F0@openplans.org>
+From: Rob Miller <robm@openplans.org>
+To: test-list@lists.example.com
+Content-Type: multipart/alternative;
+	boundary=Apple-Mail-34--168198342
+X-Smtp-Server: 127.0.0.1
+Mime-Version: 1.0 (Apple Message framework v929.2)
+Subject: osx mail - "rich text" - html attachment
+Date: Mon, 15 Dec 2008 18:29:48 -0800
+
+
+--Apple-Mail-34--168198342
+Content-Type: text/plain;
+	charset=US-ASCII;
+	format=flowed
+Content-Transfer-Encoding: 7bit
+
+Email body.
+
+--Apple-Mail-34--168198342
+Content-Type: multipart/mixed;
+	boundary=Apple-Mail-35--168198341
+
+
+--Apple-Mail-35--168198341
+Content-Type: text/html;
+	charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+
+<html><body style="word-wrap: break-word; -webkit-nbsp-mode: space; -webkit-line-break: after-white-space; "><b><i>Email body.</i></b><br><span></span></body></html>
+--Apple-Mail-35--168198341
+Content-Disposition: attachment;
+	filename=loremipsum.html
+Content-Type: text/html;
+	x-unix-mode=0644;
+	name="loremipsum.html"
+Content-Transfer-Encoding: 7bit
+
+<html>
+  <head>
+    <title>Lorem Ipsum</title>
+  </head>
+  <body>
+    <h1>Lorem Ipsum</h1>
+    <p>This is where there would be content, if in fact there were any
+      content.</p>
+  </body>
+</html>
+
+--Apple-Mail-35--168198341
+Content-Type: text/html;
+	charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+
+<html><body style="word-wrap: break-word; -webkit-nbsp-mode: space; -webkit-line-break: after-white-space; "><span></span></body></html>
+--Apple-Mail-35--168198341--
+
+--Apple-Mail-34--168198342--

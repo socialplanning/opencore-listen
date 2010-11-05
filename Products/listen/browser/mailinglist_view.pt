@@ -1,0 +1,174 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xml:lang="en" lang="en"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="listen">
+  <body>
+    <div metal:fill-slot="main">
+      <div metal:define-macro="body"
+           tal:define="can_subscribe view/canSubscribe">
+        <metal:header_macro define-macro="heading">
+          <div metal:use-macro="here/document_actions/macros/document_actions|nothing">
+            Document actions (print, sendto etc)
+          </div>
+
+        </metal:header_macro>
+
+        <div i18n:domain="listen" tal:define="subscribed view/isSubscribed">
+
+          <div metal:define-slot="extra_info" tal:replace="nothing">
+          </div>
+
+          <div class="row"
+               metal:define-slot="extra_top" tal:replace="nothing">
+            <div i18n:translate="" class="label">Extra top</div>
+          </div>
+
+          <h1 i18n:translate="" tal:content="view/Title" class="documentFirstHeading">
+            Title or Id
+          </h1>
+
+          <p class="documentDescription"
+             tal:content="view/Description"
+             tal:condition="view/Description">
+            <tal:comment replace="nothing">Description</tal:comment>
+          </p>
+          <script type="text/javascript" src="++resource++obfuscation.js"></script>
+
+          <ul>
+            <li id="listaddress">
+              <b i18n:translate="">Address:</b>
+              <div tal:content="structure view/address">
+                <tal:comment replace="nothing">address@example.com</tal:comment>
+              </div>
+            </li>
+
+            <li id="listmanagers">
+              <b i18n:translate="">Managers:</b>
+	        <tal:manager tal:repeat="manager view/list_managers">
+                   <br /><span tal:content="manager" />
+		</tal:manager>
+            </li>
+
+            <li id="list-type">
+              <b i18n:translate="">Type:</b>
+              <div tal:content="view/list_type">
+                <tal:comment replace="nothing">List type</tal:comment>
+              </div>
+            </li>
+
+            <li id="archival-state">
+              <b i18n:translate="">Archive:</b>
+	      <div>
+		<span tal:content="view/archived">
+                  <tal:comment replace="nothing">Messages to this list are archived</tal:comment>
+		</span>
+		<a tal:condition="view/is_archived" tal:attributes="href python:'%s/archive' % view.context.absolute_url()">
+		  <span i18n:translate="">view archive.</span>
+		</a>
+	      </div>
+            </li>
+
+          </ul>
+	     
+          <hr />
+
+          <p tal:condition="python:isAnon or not can_subscribe"
+             id="unsub-instructions"
+             i18n:translate="unsub-instructions">
+            To unsubscribe from this list send an email to the list with the
+            subject
+            "<span tal:replace="view/unsubscribe_keyword"
+                  i18n:name="sunsubscribe_keyword" />"
+            and an empty body.
+          </p>
+
+          <form name="subscription-form"
+                id="subscription-form"
+                tal:define="errors view/errors|nothing; isPending view/isPending"
+                action="."
+                tal:attributes="action request/ACTUAL_URL">
+
+            <tal:anon condition="python:isAnon and can_subscribe">
+              <p id="subscription-satus"
+                 i18n:translate="">To subscribe to the list enter your email
+              in the field below.
+              </p>
+              <div class="field"
+                   tal:define="error errors/email_address|nothing"
+                   tal:attributes="class python:'field' + (error and ' error' or '')">
+                <label for="email_address"
+                       i18n:translate="label_email">Email Address:</label>
+                <span class="fieldRequired"
+                      title="Required"
+                      i18n:domain="plone"
+                      i18n:translate="label_required"
+                      i18n:attributes="title title_required;">
+                  (Required)
+                </span>
+                <div tal:condition="error" tal:content="error"
+                     i18n:translate="">
+                  The Error
+                </div>
+                <input type="text"
+                       value=""
+                       name="email_address"
+                       tal:attributes="value request/email_address|nothing" />
+              </div>
+              <div class="formControls">
+                <input type="submit"
+                       class="context"
+                       name="subscribe_email"
+                       value="Subscribe Address"
+                       i18n:attributes="value" />
+              </div>
+            </tal:anon>
+            <tal:member condition="python:can_subscribe and not isAnon and not isPending">
+              <p id="subscription-satus"
+                 tal:condition="subscribed"
+                 i18n:translate="">You are currently subscribed to this list.</p>
+              <p id="subscription-satus"
+                 tal:condition="not:subscribed"
+                 i18n:translate="">You are not currently subscribed to this list.</p>
+              <div class="formControls">
+                <input type="submit"
+                       class="standalone"
+                       name="unsubscribe_member"
+                       value="Unsubscribe"
+                       tal:condition="subscribed"
+                       i18n:attributes="value" />
+
+                <input type="submit"
+                       class="standalone"
+                       name="subscribe_member"
+                       value="Subscribe"
+                       tal:condition="not:subscribed"
+                       i18n:attributes="value" />
+              </div>
+            </tal:member>
+	    <p tal:condition="python: isPending">
+	      Your subscription request is pending moderation by the list manager.
+	    </p>
+          </form>
+
+	  <p id="manager_email"
+             i18n:translate="manager-email-prompt">
+            Please direct inquiries about this list to <span tal:replace="structure view/manager_email" i18n:name="view_manager_email"><tal:comment replace="nothing">manager@list.com</tal:comment></span>.
+          </p>
+
+
+          <metal:footer_macro define-macro="footer">
+            <tal:has_document_byline tal:condition="exists:here/document_byline">
+              <div metal:use-macro="here/document_byline/macros/byline">
+                Get the byline - contains details about author and
+                modification date.
+              </div>
+            </tal:has_document_byline>
+          </metal:footer_macro>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

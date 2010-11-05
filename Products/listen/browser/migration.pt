@@ -1,0 +1,25 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en" lang="en"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+  <body>
+    <div metal:fill-slot="main">
+      <div metal:define-macro="body"
+	   tal:define="results view/results;
+                  num_lists view/num_lists">
+	<h3 i18n:translate="">
+          Ran migration on <span i18n:name="migration_num_lists" tal:replace="num_lists">200</span> lists:
+	</h3>
+	<table>
+          <tr tal:repeat="result results">
+	    <td><a tal:attributes="href result/url" tal:content="result/title"><tal:comment replace="nothing">list title</tal:comment></a></td>
+	    - <td tal:content="result/msg"><tal:comment replace="nothing">reason</tal:comment></td>
+	  </tr>
+	</table>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,58 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en-US" lang="en-US"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="listen">
+
+<head>
+<title tal:content="string:${mailinglist/Title} Digest for ${date}" />
+</head>
+
+<body style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;">
+
+  <h1 tal:content="string:${mailinglist/Title} Digest for ${date}" />
+
+  <div style="padding: 10px 0 20px;">
+    <h2 i18n:translate="">Messages in this digest:</h2>
+    <ol>
+      <li tal:repeat="msg messages" style="padding: 0 0 0 0.5em; margin: 0 0 0.5em;">
+        <tal:vars define="fmt_msg python:constructor.format_message(msg)">
+          <a tal:attributes="href string:#message_${repeat/msg/index}"
+             tal:content="msg/subject" /> &mdash; <span i18n:translate="">From:</span> <span tal:replace="fmt_msg/from_name" />
+        </tal:vars>
+      </li>
+    </ol>
+  </div>
+
+  <tal:message repeat="msg messages">
+    <div tal:define="fmt_msg python:constructor.format_message(msg)">
+      <div tal:attributes="id string:message_${repeat/msg/index}" style="border-top: 1px solid #BBBBBB; background: #E5ECF2; padding: 10px; margin: 0 0 10px; font-size: 12px;">
+        <h2 style="margin: 0 0 .5em;" i18n:translate="">Subject: <span i18n:name="digest_template_msg_subject" tal:replace="msg/subject" /></h2>
+        <p style="margin: 0 0 .5em;"><strong i18n:translate="">From:</strong> <span tal:replace="fmt_msg/from_name" /> (<span tal:replace="fmt_msg/from_email" />)</p>
+        <p style="margin: 0 0 .5em;"><strong i18n:translate="">Date:</strong> <span tal:replace="msg/date" /></p>
+        <p style="margin: 0 0 .5em; font-size: .9em;">
+        <a tal:attributes="href string:mailto:${fmt_msg/from_email}?subject=Re:%20${fmt_msg/quoted_subject}" i18n:translate="">Reply to sender</a> &nbsp; 
+        <a tal:attributes="href string:mailto:${mailinglist/mailto}?subject=Re:%20${fmt_msg/quoted_subject}" i18n:translate="">Reply to list</a>
+        </p>
+      </div>
+
+      <div tal:define="unpacked python:constructor.unpack_message(msg);
+                       body unpacked/body;
+                       attachments unpacked/attachments"
+           tal:content="structure body"
+           style="padding: 10px;" />
+      <br style="display: none;" />
+      <p style="border-top: 1px solid #EEEEEE; padding: 10px; margin: 0 0 10px; color: #666666; font-size: 0.9em" i18n:translate="">
+        You can view and respond to this message thread here: <a i18n:name="digest_template_fmt_msg_archive_url" tal:attributes="href fmt_msg/archive_url" tal:content="fmt_msg/archive_url" />
+      </p>
+    </div>
+  </tal:message>
+
+  <div style="margin: 10px 0; padding: 10px; border-top: 1px solid #BBBBBB; background: #EEEEEE; color: #666666; font-size: 0.9em;" i18n:translate="">
+    You are receiving this message because you have selected to receive a daily digest for <tal:list-title replace="mailinglist/Title" i18n:name="digest_template_mailinglist_title" />. To view previous messages, update your email settings, or unsubscribe, visit: <a tal:attributes="href mailinglist/absolute_url" tal:content="mailinglist/absolute_url" i18n:name="digest_template_mailinglist_absolute_url"/>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:browser="http://namespaces.zope.org/browser">
+
+  <browser:viewlet
+    for="*"
+    name="plone.contentviews"
+    manager="plone.app.layout.viewlets.interfaces.IContentViews"
+    class=".contentviews.ListenContentViewsViewlet"
+    permission="zope2.View"
+    />
+
+</configure>

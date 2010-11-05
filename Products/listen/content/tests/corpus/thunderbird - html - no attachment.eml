@@ -1,0 +1,19 @@
+Message-ID: <4946FA13.2000503@example.com>
+Date: Mon, 15 Dec 2008 16:45:07 -0800
+From: Sendy Sender <sendy@example.com>
+User-Agent: Thunderbird 2.0.0.18 (X11/20081125)
+MIME-Version: 1.0
+To: test-list@lists.example.com
+Subject: thunderbird - html - no attachment
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+</head>
+<body bgcolor="#ffffff" text="#000000">
+<i><b>Email body</b></i><br>
+</body>
+</html>
+

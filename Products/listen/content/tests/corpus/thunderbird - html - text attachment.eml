@@ -1,0 +1,35 @@
+Message-ID: <4946FA53.7010800@example.com>
+Date: Mon, 15 Dec 2008 16:46:11 -0800
+From: Sendy Sender <sendy@example.com>
+User-Agent: Thunderbird 2.0.0.18 (X11/20081125)
+MIME-Version: 1.0
+To: test-list@lists.example.com
+Subject: thunderbird - html - text attachment
+Content-Type: multipart/mixed;
+ boundary="------------080409090703060005080403"
+
+This is a multi-part message in MIME format.
+--------------080409090703060005080403
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+</head>
+<body bgcolor="#ffffff" text="#000000">
+<i><b>Email body</b></i><br>
+</body>
+</html>
+
+--------------080409090703060005080403
+Content-Type: text/plain;
+ name="loremipsum.txt"
+Content-Transfer-Encoding: base64
+Content-Disposition: inline;
+ filename="loremipsum.txt"
+
+TG9yZW0gSXBzdW0KLS0tLS0tLS0tLS0KClRoaXMgaXMgd2hlcmUgdGhlcmUgd291bGQgYmUg
+Y29udGVudCwgaWYgaW4gZmFjdCB0aGVyZSB3ZXJlIGFueQpjb250ZW50Lgo=
+--------------080409090703060005080403--
+

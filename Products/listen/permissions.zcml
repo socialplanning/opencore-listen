@@ -1,0 +1,66 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           i18n_domain="Five">
+
+  <!-- Add our custom permissions -->
+
+  <permission
+    id="listen.AddMailingList"
+    title="Listen: Add list"
+    />
+
+  <permission
+    id="listen.AddMailMessage"
+    title="Listen: Add mail message"
+    />
+
+  <permission
+    id="listen.ManageSubscriptions"
+    title="Listen: Manage subscriptions"
+    />
+
+  <permission
+    id="listen.InviteSubscribers"
+    title="Listen: Invite subscribers"
+    />
+
+  <permission
+    id="listen.SubscribeSelf"
+    title="Listen: Subscribe self"
+    />
+
+  <permission
+    id="listen.ModerateMessage"
+    title="Listen: Moderate message"
+    />
+
+  <permission
+    id="listen.EditMailingList"
+    title="Listen: Edit mailing list"
+    />
+
+  <permission
+    id="listen.ViewSubscribers"
+    title="Listen: View subscribers"
+    />
+
+  <permission
+    id="listen.ExportMailingListArchives"
+    title="Listen: Export mailing list archives"
+    />
+
+  <permission
+    id="listen.ImportMailingListArchives"
+    title="Listen: Import mailing list archives"
+    />
+
+  <permission
+    id="listen.ExportMailingListSubscribers"
+    title="Listen: Export mailing list subscribers"
+    />
+
+  <permission
+    id="listen.ImportMailingListSubscribers"
+    title="Listen: Import mailing list subscribers"
+    />
+
+</configure>

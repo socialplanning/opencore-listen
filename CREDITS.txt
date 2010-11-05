@@ -1,0 +1,24 @@
+Listen contributors
+-----------------
+
+- Alec Mitchell (apm13@columbia.edu) 
+    whose work was generously funded by The Open Planning Project
+    http://www.openplans.org
+
+Thank you
+---------
+
+Maik Jablonski for MailBoxer which performs the important mail related
+tasks that this product acts as a front end for
+
+The PloneMailBoxer team for some inspiration and an icon.
+
+The Five team for bringing some of the elegance of zope 3 to the masses
+
+Plone developers everywhere for obvious reasons
+
+Dieter Maurer for ManagableIndex
+
+Whit Morriss for guidance on the Five way
+
+Rob Miller for the clever product name

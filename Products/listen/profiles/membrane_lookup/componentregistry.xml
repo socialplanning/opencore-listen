@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<componentregistry>
+  <adapters/>
+  <utilities>
+    <utility
+       interface="Products.listen.interfaces.IMemberLookup"
+       factory="Products.listen.utilities.token_to_email.MembraneMemberToEmail" />
+  </utilities>
+</componentregistry>

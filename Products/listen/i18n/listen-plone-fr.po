@@ -1,0 +1,113 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Listen 0.6\n"
+"POT-Creation-Date: 2010-08-31 21:55+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: fr\n"
+"Language-Name: French\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: plone\n"
+"X-Is-Fallback-For: fr-be fr-ca fr-lu fr-mc fr-ch fr-fr\n"
+
+#: ../portlets/list_details.py:71
+msgid "%s (creator)"
+msgstr ""
+
+#: ../profiles/default/types/MailingList.xml
+msgid "A mailing list manages user subscriptions and processes incoming mail."
+msgstr ""
+
+#: ../portlets/latest_posts.py:61
+msgid "Add Latest Posts Portlet"
+msgstr ""
+
+#: ../profiles/default/types/MailingList.xml
+msgid "Archive"
+msgstr ""
+
+#: ../portlets/latest_posts.py:69
+msgid "Edit Latest Posts Portlet"
+msgstr ""
+
+#: ../portlets/latest_posts.py:25
+msgid "How many items to list."
+msgstr ""
+
+#: ../profiles/default/types/MailingList.xml
+msgid "Import/Export"
+msgstr ""
+
+#: ../portlets/latest_posts.py:40
+msgid "Latest Posts"
+msgstr ""
+
+#: ../portlets/list_details.py:85
+msgid "List Type not set"
+msgstr ""
+
+#: ../portlets/list_details.py:28
+msgid "Mailing list details"
+msgstr ""
+
+#: ../profiles/default/types/MailingList.xml
+msgid "MailingList"
+msgstr ""
+
+#: ../profiles/default/types/MailingList.xml
+msgid "Membership"
+msgstr ""
+
+#: ../profiles/default/types/MailingList.xml
+msgid "Moderation"
+msgstr ""
+
+#: ../portlets/latest_posts.py:24
+msgid "Number of items to display"
+msgstr ""
+
+#: ../portlets/latest_posts.py:21
+msgid "Path to Listen's MailingList object, relative to portal root"
+msgstr ""
+
+#: ../portlets/latest_posts.py:20
+msgid "Path to the Mailing List object"
+msgstr ""
+
+#: ../profiles/default/types/MailingList.xml
+msgid "Search"
+msgstr ""
+
+#: ../portlets/latest_posts.py:62
+msgid "This portlet displays latest posts in mailing list"
+msgstr ""
+
+#: ../portlets/latest_posts.py:70
+msgid "This portlet displays latest posts in mailing list."
+msgstr ""
+
+#. Default: "A portlet which can show latest posts in a mailing list"
+#: ../profiles/default/types/MailingList.xml:16
+msgid "profiles_portlets_LatestPosts_help"
+msgstr ""
+
+#. Default: "Latest Posts"
+#: ../profiles/default/portlets.xml:15
+msgid "profiles_portlets_LatestPosts_title"
+msgstr ""
+
+#. Default: "A portlet that displays details for a Listen mailing list"
+#: ../profiles/default/types/MailingList.xml:8
+msgid "profiles_portlets_ListDetails_help"
+msgstr ""
+
+#. Default: "ListDetails"
+#: ../profiles/default/portlets.xml:7
+msgid "profiles_portlets_ListDetails_title"
+msgstr ""
+

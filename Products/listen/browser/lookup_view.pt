@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en" lang="en"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="listen">
+  <body>
+    <div metal:define-macro="body">
+
+      <h1 i18n:translate="">Registered Mailing Lists</h1>
+
+      <table id="mailing-lists"
+             summary="A table of registered list addresses and the paths to the corresponding lists" i18n:attributes="summary summary_table_mailing_listsr;">
+        <thead>
+          <tr>
+            <th i18n:translate="">List Address</th>
+            <th i18n:translate="">List Path</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tal:entry repeat="entry here/showAddressMapping">
+            <tr>
+              <td i18n:translate="" class="list-address" tal:content="entry/address">address</td>
+              <td i18n:translate="" class="list-path" tal:content="entry/path">path</td>
+            </tr>
+          </tal:entry>
+        </tbody>
+      </table>
+      <br />
+      <form name="purge"
+            method="post"
+            action="#"
+            tal:attributes="action string:${request/ACTUAL_URL}/purge_entries">
+
+        <input
+            type="submit"
+            name="purge"
+            id="purge"
+            value="Purge Invalid Entries"
+            i18n:attributes="value" />
+      </form>
+    </div>
+  </body>
+</html>

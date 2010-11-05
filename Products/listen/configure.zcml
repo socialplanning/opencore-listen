@@ -1,0 +1,424 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:five="http://namespaces.zope.org/five"
+           xmlns:i18n="http://namespaces.zope.org/i18n"
+           i18n_domain="listen">
+
+    <include file="permissions.zcml" />
+    <include file="profiles.zcml" />
+    <include package="zope.annotation" />
+
+    <vocabulary
+        name="Archive Options"
+        factory=".content.archiveOptionsVocabulary"
+        />
+
+    <vocabulary
+        name="List Types"
+        factory=".content.list_type_vocabulary"
+        />
+
+    <!-- set up Plone portal as a local site -->
+    <class class="Products.CMFPlone.Portal.PloneSite">
+        <implements
+            interface="zope.app.component.interfaces.IPossibleSite"
+            />
+    </class>
+
+    <class class=".content.MailingList">
+        <!-- This appears to do nothing with Five, we need to provide the
+             annotation adapter explicitly below -->
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
+        <implements
+            interface="zope.app.component.interfaces.IPossibleSite"
+            />
+        <implements
+            interface=".interfaces.IHaveSubscribers"
+            />
+        <require
+            permission="listen.EditMailingList"
+            interface=".interfaces.IMailingList"
+            />
+        <!-- We need to make a few methods publicly available -->
+        <require
+            permission="zope.Public"
+            attributes="manage_mailboxer pin"
+            />
+    </class>
+
+    <class class=".content.MailMessage">
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
+        <require
+            permission="listen.EditMailingList"
+            interface=".interfaces.IMailMessage"
+            />
+    </class>
+
+    <!-- This should be done in the class directive above using a
+         sub-directive but Five does not support it. -->
+    <utility
+       name="listen.MailFactory"
+       component=".content.factories.MailFactory"
+       provides="zope.component.interfaces.IFactory"
+       />
+
+    <adapter
+        for=".interfaces.IMailMessage"
+        provides=".interfaces.IMailFromString"
+        factory=".content.MailFromString"
+        />
+
+    <adapter
+        for=".interfaces.IMailMessage"
+        provides=".interfaces.ISearchableMessage"
+        factory=".content.SearchableMessage"
+        />
+
+    <adapter
+        for=".interfaces.IHaveSubscribers"
+        provides=".interfaces.IWriteMembershipList"
+        factory=".content.WriteMembershipList"
+        />
+
+    <adapter
+       for=".interfaces.IMailingList"
+       provides=".interfaces.IMembershipDigestList"
+       factory=".content.MembershipDigestList"
+       />
+
+    <adapter
+       for=".interfaces.IMailingList"
+       provides=".interfaces.IWriteMembershipDigestList"
+       factory=".content.WriteMembershipDigestList"
+       />
+
+    <adapter
+        for=".interfaces.IMailingList"
+        provides=".interfaces.ISendMail"
+        factory=".content.MailSender"
+        />
+    
+    <adapter
+        for="Products.listen.interfaces.IMailingList
+             zope.publisher.interfaces.browser.IDefaultBrowserLayer"
+        provides="Products.listen.interfaces.IMessageHandler"
+        factory="Products.listen.content.ConfirmationHandler"
+        name="confirm-member"
+        />
+
+    <!-- Policy post registrations -->
+    <adapter
+        for="Products.listen.interfaces.IBaseList"
+        provides="Products.listen.interfaces.IEmailPostPolicy"
+        factory="Products.listen.content.PublicEmailPostPolicy"
+        />
+
+    <adapter
+        for="Products.listen.interfaces.IBaseList"
+        provides="Products.listen.interfaces.ITTWPostPolicy"
+        factory="Products.listen.content.PublicTTWPostPolicy"
+        />
+
+    <adapter
+        for="Products.listen.interfaces.IPostModeratedList"
+        provides="Products.listen.interfaces.IEmailPostPolicy"
+        factory="Products.listen.content.PostModeratedEmailPostPolicy"
+        />
+
+    <adapter
+        for="Products.listen.interfaces.IPostModeratedList"
+        provides="Products.listen.interfaces.ITTWPostPolicy"
+        factory="Products.listen.content.PostModeratedTTWPostPolicy"
+        />
+
+    <adapter
+        for="Products.listen.interfaces.IMembershipModeratedList"
+        provides="Products.listen.interfaces.IEmailPostPolicy"
+        factory="Products.listen.content.MemModeratedEmailPostPolicy"
+        />
+
+    <adapter
+        for="Products.listen.interfaces.IMembershipModeratedList"
+        provides="Products.listen.interfaces.ITTWPostPolicy"
+        factory="Products.listen.content.MemModeratedTTWPostPolicy"
+        />
+
+    <!-- Policy membership registrations -->
+    <adapter
+        for="Products.listen.interfaces.IMembershipModeratedList"
+        provides="Products.listen.interfaces.IUserEmailMembershipPolicy"
+        factory="Products.listen.content.ModeratedUserMembershipPolicy"
+        />
+
+    <adapter
+        for="Products.listen.interfaces.IBaseList"
+        provides="Products.listen.interfaces.IUserEmailMembershipPolicy"
+        factory="Products.listen.content.UserMembershipPolicy"
+        />
+
+    <adapter
+        for="Products.listen.interfaces.IMembershipModeratedList"
+        provides="Products.listen.interfaces.IUserTTWMembershipPolicy"
+        factory="Products.listen.content.ModeratedTTWUserMembershipPolicy"
+        />
+
+    <adapter
+        for="Products.listen.interfaces.IBaseList"
+        provides="Products.listen.interfaces.IUserTTWMembershipPolicy"
+        factory="Products.listen.content.UserMembershipPolicy"
+        />
+
+    <adapter
+        for="Products.listen.interfaces.IBaseList"
+        provides="Products.listen.interfaces.IManagerTTWMembershipPolicy"
+        factory="Products.listen.content.ManagerTTWMembershipPolicy"
+        />
+
+    <!-- Import/Export list type switching adapters -->
+    <adapter
+        for="Products.listen.interfaces.IPublicList"
+        provides="Products.listen.interfaces.IImportListType"
+        factory="Products.listen.content.PublicListImport"
+        />
+
+    <adapter
+        for="Products.listen.interfaces.IMembershipModeratedList"
+        provides="Products.listen.interfaces.IImportListType"
+        factory="Products.listen.content.MembershipModeratedListImport"
+        />
+
+    <adapter
+        for="Products.listen.interfaces.IPostModeratedList"
+        provides="Products.listen.interfaces.IImportListType"
+        factory="Products.listen.content.PostModeratedListImport"
+        />
+
+    <adapter
+        for="Products.listen.interfaces.IPublicList"
+        provides="Products.listen.interfaces.IExportListType"
+        factory="Products.listen.content.PublicListExport"
+        />
+
+    <adapter
+        for="Products.listen.interfaces.IMembershipModeratedList"
+        provides="Products.listen.interfaces.IExportListType"
+        factory="Products.listen.content.MembershipModeratedListExport"
+        />
+
+    <adapter
+        for="Products.listen.interfaces.IPostModeratedList"
+        provides="Products.listen.interfaces.IExportListType"
+        factory="Products.listen.content.PostModeratedListExport"
+        />
+
+    <!-- pending queue adapters -->
+    <adapter
+        for="Products.listen.interfaces.IHaveSubscribers"
+        provides="Products.listen.interfaces.IMembershipPendingList"
+        factory="Products.listen.content.PendingAllowedSenderModeration"
+        name="pending_a_s_mod_email"
+        />
+
+    <adapter
+        for="Products.listen.interfaces.IHaveSubscribers"
+        provides="Products.listen.interfaces.IMembershipPendingList"
+        factory="Products.listen.content.PendingSubscriptionEmail"
+        name="pending_sub_email"
+        />
+
+    <adapter
+        for="Products.listen.interfaces.IHaveSubscribers"
+        provides="Products.listen.interfaces.IMembershipPendingList"
+        factory="Products.listen.content.PendingSubscriptionModerationEmail"
+        name="pending_sub_mod_email"
+        />
+
+    <adapter
+        for="Products.listen.interfaces.IHaveSubscribers"
+        provides="Products.listen.interfaces.IMembershipPendingList"
+        factory="Products.listen.content.PendingUnsubscriptionEmail"
+        name="pending_unsub_email"
+        />
+
+    <adapter
+        for="Products.listen.interfaces.IHaveSubscribers"
+        provides="Products.listen.interfaces.IPostPendingList"
+        factory="Products.listen.content.PendingAllowedSenderSubscriptionEmail"
+        name="a_s_pending_sub_email"
+        />
+
+    <adapter
+        for="Products.listen.interfaces.IHaveSubscribers"
+        provides="Products.listen.interfaces.IPostPendingList"
+        factory="Products.listen.content.PendingModerationPost"
+        name="pending_mod_post"
+        />
+
+    <adapter
+        for="Products.listen.interfaces.IHaveSubscribers"
+        provides="Products.listen.interfaces.IPostPendingList"
+        factory="Products.listen.content.PendingPostModerationPost"
+        name="pending_pmod_post"
+        />
+
+    <!-- Digest adapters -->
+    <adapter
+        for="Products.listen.interfaces.IMailingList"
+        provides="Products.listen.interfaces.IDigestStorage"
+        factory="Products.listen.content.digest.SimpleDigestStorage"
+        />
+
+    <!-- Define Factories for the Mailing list subfolders -->
+    <utility
+       name="listen.QueueFactory"
+       component=".content.factories.QueueFactory"
+       provides="zope.component.interfaces.IFactory"
+       />
+    <utility
+       name="listen.ArchiveFactory"
+       component=".content.factories.ArchiveFactory"
+       provides="zope.component.interfaces.IFactory"
+       />
+    <utility
+       name="listen.FolderFactory"
+       component=".content.factories.FolderFactory"
+       provides="zope.component.interfaces.IFactory"
+       />
+    <!-- This may be a funny way to do things -->
+    <utility
+       name="listen.SearchUtilityFactory"
+       component=".content.factories.SearchUtilityFactory"
+       provides="zope.component.interfaces.IFactory"
+       />
+
+    <!-- Register some event listeners -->
+    <subscriber
+        for=".interfaces.IMailMessage
+             zope.app.event.interfaces.IObjectModifiedEvent"
+        handler=".content.mailinglist.catalogMailBoxerMail"
+        />
+    <subscriber
+        for=".interfaces.IMailingList
+             zope.app.event.interfaces.IObjectModifiedEvent"
+        handler=".content.mailinglist.MailingListModified"
+        />
+    <subscriber
+        for=".interfaces.IMailingList
+             zope.app.event.interfaces.IObjectModifiedEvent"
+        handler=".utilities.list_lookup.changeMailingList"
+        />
+    <subscriber
+        for=".interfaces.IMailingList
+             zope.app.container.interfaces.IObjectMovedEvent"
+        handler=".utilities.list_lookup.changeMailingList"
+        />
+    <subscriber
+        for=".interfaces.IMailingList
+             OFS.interfaces.IObjectWillBeMovedEvent"
+        handler=".utilities.list_lookup.changeMailingList"
+        />
+    <subscriber
+        for=".interfaces.IMailingList
+             zope.app.container.interfaces.IObjectMovedEvent"
+        handler=".content.mailinglist.MailingListMoved"
+        />
+    <subscriber
+        for=".interfaces.IMailingList
+             OFS.interfaces.IObjectWillBeMovedEvent"
+        handler=".content.mailinglist.MailingListWillBeMoved"
+        />
+    <subscriber
+        for=".interfaces.IMailingList
+             zope.app.event.objectevent.IObjectCreatedEvent"
+        handler=".utilities.list_lookup.changeMailingList"
+        />
+    <subscriber
+        for=".interfaces.IMailingList
+             zope.app.event.objectevent.IObjectCreatedEvent"
+        handler=".content.mailinglist.MailingListAdded"
+        />
+    <subscriber
+        for=".interfaces.IMailingList
+             zope.app.container.interfaces.IObjectMovedEvent"
+        handler=".utilities.archive_search.SearchableListMoved"
+        />
+
+    <subscriber
+	for=".interfaces.IMailingList
+	     zope.app.event.interfaces.IObjectModifiedEvent"
+	handler=".utilities.rename.renameAfterCreation"
+	/>
+
+    <subscriber
+	for=".interfaces.IBecameAnAllowedSender"
+	handler=".content.became_allowed_sender"
+	/>
+
+    <subscriber
+	for=".interfaces.IBecameASubscriber"
+	handler=".content.became_subscriber"
+	/>
+
+    <subscriber
+        for=".interfaces.IListTypeChanged"
+        handler=".content.list_type_changed"
+        />
+
+    <utility component=".interfaces.list_types.PublicListTypeDefinition"
+             name="public"
+             />
+    <utility component=".interfaces.list_types.PostModeratedListTypeDefinition"
+             name="post-moderated"
+             />
+    <utility component=".interfaces.list_types.MembershipModeratedListTypeDefinition"
+             name="membership-moderated"
+             />
+    <utility factory=".utilities.obfuscate_emails.ObfuscateEmails"
+             provides=".interfaces.IObfuscateEmails"
+             />
+
+    <interface
+        interface=".interfaces.IPublicList"
+        type=".interfaces.IListType"
+        />
+
+    <interface
+        interface=".interfaces.IPostModeratedList"
+        type=".interfaces.IListType"
+        />
+
+    <interface
+        interface=".interfaces.IMembershipModeratedList"
+        type=".interfaces.IListType"
+        />
+
+    <adapter
+        for=".interfaces.IListTypeDefinition"
+        provides=".interfaces.mailinglist.IDisplayListTypes"
+        factory=".content.mailinglist.ListTypeDisplayer"
+        />
+
+    
+    <adapter
+        for=".interfaces.IMailingList"
+        provides=".interfaces.IMigrateList"
+        factory=".migrations.ListMigrationFromPropertiesToPolicies"
+        />
+        
+    <!--
+    <adapter
+        for=".interfaces.IMailingList"
+        provides=".interfaces.IMigrateList"
+        factory=".migrations.TestMigration"
+        />
+    -->
+
+    <include package=".browser" />
+    <include package=".extras" />
+
+    <i18n:registerTranslations directory="locales" />
+    
+</configure>

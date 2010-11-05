@@ -1,0 +1,130 @@
+<script type="text/javascript" src="MochiKit.js"
+        tal:attributes="src string:/++resource++MochiKit.js">
+</script>
+<script type="text/javascript" src="member_search.js"
+        tal:attributes="src string:/++resource++member_search.js">
+</script>
+<div id="member_search"
+     tal:define="search_results python:view.getSearchResults();
+                 field_prefix python:view.name;
+                 field_title python:view.context.title"
+     tal:attributes="id string:${field_prefix}.member_search">
+
+  <input type="hidden"
+         value="__marker"
+         tal:attributes="name  string:${field_prefix}:list;
+                         value python:view.marker" />
+  <div class="formHelp"
+       i18n:translate="">
+    Uncheck those you would like to remove, search for members to add using the
+    search form below.
+  </div>
+  <ul id="existing_members_list"
+      tal:attributes="id string:${field_prefix}.existing_members_list"
+      tal:define="members python:view.getData()">
+    <li tal:repeat="member members">
+      <input type="checkbox"
+             id="member_id"
+             name="member_ids:list"
+             value="userid"
+             checked="checked"
+             tal:attributes="id string:${field_prefix}.member_${member/id};
+                             name string:${field_prefix}:list;
+                             value member/id" />
+      <a href="portal/authors/id"
+         target="_blank"
+         tal:attributes="href member/url"
+	 i18n:translate="" 
+         tal:content="string:${member/fullname} (${member/name})">
+        Full Name (username)
+      </a>
+    </li>
+    <li tal:condition="not:members"
+        i18n:translate="no_members">
+      There are currently no
+      <span tal:replace="python:field_title.lower()"
+            i18n:name="field_title">Members</span>
+    </li>
+  </ul>
+  <ul id="member_search_results"
+      tal:attributes="id string:${field_prefix}.member_search_results">
+    <li tal:repeat="member search_results">
+      <input type="checkbox"
+             id="member_id"
+             name="member_ids:list"
+             value="userid"
+             tal:attributes="id string:${field_prefix}.member_${member/id};
+                             name string:${field_prefix}:list;
+                             value string:${member/id}" />
+      <a href="portal/authors/id"
+         tal:attributes="href member/url"
+	 i18n:translate="" 
+         tal:content="string:${member/fullname} (${member/name})">
+        Full Name (username)
+      </a>
+    </li>
+  </ul>
+  <div class="field"
+       i18n:domain="plone">
+    <label for="search_param" i18n:translate="label_search_by"
+           tal:attributes="for string:${field_prefix}.search_param">
+      Search by
+    </label>
+
+    <select name="search_param"
+            id="search_param"
+            tal:attributes="id string:${field_prefix}.search_param;
+                            name string:${field_prefix}.search_param;">
+      <option value="name" i18n:translate="label_user_name">
+        User Name
+      </option>
+      <option value="groupname" i18n:translate="label_group_name">
+        Group Name
+      </option>
+    </select>
+
+  </div>
+  <div class="field"
+       i18n:domain="plone"
+       tal:attributes="id string:${field_prefix}.search_term_field">
+    <label for="search_term"
+           i18n:translate="label_search_term"
+           tal:attributes="for string:${field_prefix}.search_term">
+      Search Term
+    </label>
+    <input type="text"
+           id="search_term"
+           name="search_term"
+           size="30"
+           tal:attributes="id string:${field_prefix}.search_term;
+                           name string:${field_prefix}.search_term" />
+  </div>
+  <div class="submit"
+       i18n:domain="plone">
+    <button class="ajax-member-search-submit context" 
+           type="submit"
+           id="member_search_submit"
+           name="member_search_submit"
+           title="Search for members"
+           value="Perform Search"
+           i18n:attributes="title;
+                            value member_search_button;"
+           i18n:translate="member_search_button"
+           tal:attributes="id string:${field_prefix}.member_search_submit;
+                           name string:${field_prefix}.member_search_submit">
+      Perform Search
+    </button>
+    <button class="ajax-member-search-reset context" 
+           type="submit"
+           id="member_search_reset"
+           name="member_search_reset"
+           title="Clear Results"
+           value="Clear Results"
+           i18n:attributes="title;
+                            value member_clear_button;"
+           i18n:translate="member_clear_button"
+           tal:attributes="id string:${field_prefix}.member_search_reset;
+                           name string:${field_prefix}.member_search_reset">
+      Clear Results</button>
+  </div>
+</div>

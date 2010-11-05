@@ -1,0 +1,49 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:five="http://namespaces.zope.org/five">
+    <!-- Some dummy adapters and factories for testing -->
+
+    <adapter
+        for="Products.listen.interfaces.IMailMessage"
+        provides="Products.listen.interfaces.IMailFromString"
+        factory="Products.listen.content.MailFromString"
+        />
+
+    <adapter
+        for="Products.listen.interfaces.IMailMessage"
+        provides="Products.listen.interfaces.ISearchableMessage"
+        factory="Products.listen.content.SearchableMessage"
+        />
+
+    <!-- Our messages need to be annotable to be searched -->
+    <adapter
+        for="Products.listen.interfaces.IMailMessage"
+        provides="zope.app.annotation.interfaces.IAnnotations"
+        factory="zope.app.annotation.attribute.AttributeAnnotations"
+        />
+
+    <utility
+        name="listen.MailFactory"
+        component="Products.listen.content.factories.MailFactory"
+        provides="zope.component.interfaces.IFactory"
+        />
+
+    <!-- Event handlers -->
+    <subscriber
+        for="Products.listen.interfaces.IMailingList
+             zope.app.container.interfaces.IObjectMovedEvent"
+        handler="Products.listen.utilities.list_lookup.changeMailingList"
+        />
+
+    <subscriber
+        for="Products.listen.interfaces.IMailingList
+             zope.app.container.interfaces.IObjectModifiedEvent"
+        handler="Products.listen.utilities.list_lookup.changeMailingList"
+        />
+
+    <subscriber
+        for="Products.listen.interfaces.IMailingList
+             OFS.interfaces.IObjectWillBeMovedEvent"
+        handler="Products.listen.utilities.list_lookup.changeMailingList"
+        />
+
+</configure>

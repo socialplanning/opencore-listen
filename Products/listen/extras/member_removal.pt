@@ -1,0 +1,33 @@
+<div id="member_search"
+     tal:define="field_prefix python:view.name;"
+     tal:attributes="id string:${field_prefix}.member_removal">
+
+  <div class="formHelp"
+       i18n:translate="">
+    Uncheck those you would like to remove
+  </div>
+  <input type="hidden"
+         value="__marker"
+         tal:attributes="name  string:${field_prefix}:list;
+                         value python:view.marker" />
+  <ul id="existing_members_list"
+      tal:attributes="id string:${field_prefix}.existing_members_list">
+    <li tal:repeat="member python:view.getData()">
+      <input type="checkbox"
+             id="member_id"
+             name="member_ids:list"
+             value="userid"
+             checked="checked"
+             tal:attributes="id string:${field_prefix}.member_${member/id};
+                             name string:${field_prefix}:list;
+                             value member/id" />
+      <a href="portal/authors/id"
+         target="_blank"
+         tal:attributes="href member/url"
+	 i18n:translate="" 
+         tal:content="string:${member/fullname} (${member/name})">
+        Full Name (username)
+      </a>
+    </li>
+  </ul>
+</div>

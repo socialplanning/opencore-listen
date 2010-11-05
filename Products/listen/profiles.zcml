@@ -1,0 +1,25 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="listen">
+
+  <genericsetup:registerProfile
+      name="listen"
+      title="Listen mailing lists"
+      directory="profiles/default"
+      description="Listen mailing list support."
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+
+  <genericsetup:registerProfile
+      name="listen_membrane_lookup"
+      title="Listen Membrane member lookup utility"
+      directory="profiles/membrane_lookup"
+      description="Overrides the default listen member lookup utility with one that uses the membrane_tool member catalog."
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+</configure>

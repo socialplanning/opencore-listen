@@ -1,0 +1,210 @@
+    Perform some basic test configuration:
+        >>> import Products.Five
+        >>> from Products.Five import zcml
+        >>> zcml.load_config('meta.zcml', Products.Five)
+        >>> zcml.load_config('permissions.zcml', Products.Five)
+        >>> from Products.listen.content import tests
+        >>> zcml.load_config('configure.zcml', tests)
+        >>> from Products.Five import site
+        >>> zcml.load_config('configure.zcml', site)
+
+    Create a list to play with:
+        >>> from Products.listen.content.mailboxer_list import MailBoxerMailingList
+        >>> from DateTime import DateTime
+        >>> mb = MailBoxerMailingList('mb', 'A mail boxer')
+        >>> mb.mailto='list1@example.com'
+
+    Fake the manage_afterAdd, because the catalog needs to be manually added:
+        >>> mb.REQUEST = {}
+        >>> mb.manage_afterAdd(mb, None)
+
+    Our archive should be empty:
+        >>> archive = mb.archive
+        >>> date = DateTime()
+        >>> archive.objectIds()
+        []
+
+    Now let's add a message:
+        >>> mail_message = '''To: list1@example.com
+        ... From: test1@example.com
+        ... Subject: A new Subject
+        ... Date: Wed, 5 Mar 2005 12:00:00 -0000
+        ...
+        ...
+        ... A new message.
+        ... '''
+        >>> message = mb.addMail(mail_message)
+        
+    Let's try a message with an image embedded in it.
+        >>> mail_message2 = '''Mime-Version: 1.0 (Apple Message framework v752.3)
+        ... To: test_listen_list@lists.openplans.org
+        ... Message-Id: <5A9F4BC4-2B14-41C1-9CB3-9D1803624D45@openplans.org>
+        ... Content-Type: multipart/mixed;
+        ... 	boundary=Apple-Mail-11-285035055
+        ... From: Chris Abraham <cabraham@openplans.org>
+        ... Subject: tiny image
+        ... Date: Thu, 25 Oct 2007 15:29:59 -0400
+        ... 
+        ... 
+        ... --Apple-Mail-11-285035055
+        ... Content-Transfer-Encoding: 7bit
+        ... Content-Type: text/plain;
+        ... 	charset=US-ASCII;
+        ... 	format=flowed
+        ... 
+        ... this text is before the image.
+        ... here's the image:
+        ... 
+        ... 
+        ... --Apple-Mail-11-285035055
+        ... Content-Transfer-Encoding: base64
+        ... Content-Type: image/gif;
+        ... 	x-unix-mode=0644;
+        ... 	name=world2.gif
+        ... Content-Disposition: inline;
+        ... 	filename=world2.gif
+        ... 
+        ... R0lGODlhFAAWAMIAAP///8z//8zMzJmZmQCZMwBmMwAAAAAAACH+TlRoaXMgYXJ0IGlzIGluIHRo
+        ... ZSBwdWJsaWMgZG9tYWluLiBLZXZpbiBIdWdoZXMsIGtldmluaEBlaXQuY29tLCBTZXB0ZW1iZXIg
+        ... MTk5NQAh+QQBAAABACwAAAAAFAAWAAADeBi63O4mytciuTjSKIj4HqgxxgViWFcYZNeFqLcu5et6
+        ... eDfMQWnasE9hwKrdTiDBrrAy/oA6JtEZfF2GQwsw5BIMd9NUcvzN+j6nFHhZ/HGvzDirl0YTBvjy
+        ... nG7L49d7PX5xX0s8NAaFhEwjEAZ+eI0UPRKSk5cMCQA7
+        ... 
+        ... --Apple-Mail-11-285035055
+        ... Content-Transfer-Encoding: 7bit
+        ... Content-Type: text/plain;
+        ... 	charset=US-ASCII;
+        ... 	format=flowed
+        ... 
+        ... 
+        ... this text is after the image.
+        ... done.
+        ... --Apple-Mail-11-285035055--
+        ... '''
+        >>> message2 = mb.addMail(mail_message2)
+        >>> print message2.body
+        this text is before the image.
+        here's the image:
+        <BLANKLINE>
+        <BLANKLINE>
+        <BLANKLINE>
+        this text is after the image.
+        done.
+        <BLANKLINE>
+
+    We should have added a folder structure like archive/year/month/message,
+    let's check:
+        >>> str(date.year()) in archive.objectIds()
+        True
+        >>> year = getattr(archive, str(date.year()))
+        >>> month = date.mm()
+        >>> month in year.objectIds()
+        True
+        >>> month = getattr(year, month)
+        >>> message.getId() in month.objectIds()
+        True
+
+    Let's inspect our message object:
+        >>> print message.body
+        <BLANKLINE>
+        A new message.
+        <BLANKLINE>
+        >>> message.from_addr
+        u'test1@example.com'
+        >>> message.date.earliestTime() == date.earliestTime()
+        True
+
+    Ensure our message is actually a conformant IMailMessage:
+        >>> from zope.interface.verify import verifyObject
+        >>> from Products.listen.interfaces import IMailMessage
+        >>> verifyObject(IMailMessage, message)
+        True
+
+    Our overridden getValueFor method should return mime encoded utf-8
+    strings for any stored unicode strings, or site-encoded ASCII
+        >>> mb.headers = 'a string'
+        >>> mb.getValueFor('headers')
+        'a string'
+        >>> mb.headers = u'a string'
+        >>> mb.getValueFor('headers')
+        'a string'
+        >>> mb.headers = 'a string \345\276\267\345\233\275'
+        >>> mb.getValueFor('headers')
+        '=?utf-8?b?YSBzdHJpbmcg5b635Zu9?='
+        >>> mb.headers = u'a string \u5fb7\u56fd'
+        >>> mb.getValueFor('headers')
+        '=?utf-8?b?YSBzdHJpbmcg5b635Zu9?='
+
+    This also works with lists of strings
+        >>> mb.headers = ['a string', 'a string2']
+        >>> mb.getValueFor('headers')
+        ['a string', 'a string2']
+        >>> mb.headers = ['a string', 'a string \345\276\267\345\233\275']
+        >>> mb.getValueFor('headers')
+        ['a string', '=?utf-8?b?YSBzdHJpbmcg5b635Zu9?=']
+
+    Shouldn't fail on non-strings or lists, lists with non-string values
+    are returned intact
+        >>> mb.headers = {}
+        >>> mb.getValueFor('headers')
+        {}
+        >>> mb.headers = ({}, 'a string', 'a string \345\276\267\345\233\275')
+        >>> mb.getValueFor('headers')[2] == 'a string \345\276\267\345\233\275'
+        True
+
+    Messages with special subjects should be routed through an adapter.  Let's
+    setup a simple adapter to test that our command message is routed as
+    expected:
+        >>> from zope.interface import Interface
+        >>> from zope.interface import directlyProvides
+        >>> from zope.interface import implements
+        >>> from zope.component import provideAdapter
+        >>> from ZPublisher.HTTPRequest import HTTPRequest
+        >>> from zope.publisher.interfaces.browser import IDefaultBrowserLayer
+        >>> from Products.listen.interfaces import IMessageHandler
+        >>> class SimpleAdapter(object):
+        ...     implements(IMessageHandler)
+        ...     def __init__(self, context, request):
+        ...         self.context = context
+        ...         self.request = request
+        ...     def processMail(self):
+        ...         self.request.set('processed', True)
+        >>> provideAdapter(factory=SimpleAdapter,
+        ...                adapts=(Interface, IDefaultBrowserLayer),
+        ...                name='simple-command')
+        >>> from sys import stdout # We need a legitimate seeming request
+        >>> REQUEST = HTTPRequest(stdout, {'SERVER_NAME':'a',
+        ...                                'SERVER_PORT': '80',
+        ...                                'REQUEST_METHOD': 'GET'}, {})
+        >>> directlyProvides(REQUEST, IDefaultBrowserLayer)
+        >>> REQUEST['Mail'] = '''To: list1@example.com
+        ... From: test1@example.com
+        ... Subject: Re: Simple Command (mail-command:simple-command)
+        ... Date: Wed, 5 Mar 2005 12:00:00 -0000
+        ...
+        ...
+        ... A new message.
+        ... '''
+        >>> mb.manage_mailboxer(REQUEST)
+        'TRUE'
+        >>> REQUEST['processed']
+        True
+
+    Putting encoded strings in the subject should not break adaptMail():
+
+        >>> REQUEST = HTTPRequest(stdout, {'SERVER_NAME':'a',
+        ...                                'SERVER_PORT': '80',
+        ...                                'REQUEST_METHOD': 'GET'}, {})
+        >>> directlyProvides(REQUEST, IDefaultBrowserLayer)
+        >>> REQUEST['Mail'] = '''To: Pe\xc3\xb1ate <foo@bar.com>
+        ... From: Pe\xc3\xb1ate <bat@baz.com>
+        ... Subject: Hi from Pe\xc3\xb1ate
+        ...
+        ...
+        ... Hi, this is Pe\xc3\xb1ate'''
+        >>> mb.adaptMail(REQUEST)
+        False
+        >>> # Hack around skins not being set up in this test:
+        >>> mb.mail_reply = lambda *args, **kw: None
+        >>> mb.manage_mailboxer(REQUEST)
+        'TRUE'

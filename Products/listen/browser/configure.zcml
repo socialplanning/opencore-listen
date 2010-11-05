@@ -1,0 +1,253 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:browser="http://namespaces.zope.org/browser">
+
+    <include package="plone.app.form" />
+
+    <!-- provide add and edit views for mailing list objects -->
+    <browser:page
+        name="listen_add_mailinglist"
+        for="Products.CMFCore.interfaces.IFolderish"
+        permission="listen.AddMailingList"
+        class=".mailinglist_views.MailingListAddForm"
+        />
+
+    <browser:page
+        name="listen.add_list"
+        for="zope.app.container.interfaces.IAdding"
+        permission="listen.AddMailingList"
+        class=".mailinglist_views.MailingListAddForm"
+        />
+
+    <browser:page
+        name="edit"
+        for="Products.listen.interfaces.IMailingList"
+        permission="listen.EditMailingList"
+        class=".mailinglist_views.MailingListEditForm"
+        />
+      
+    <!-- provide add and edit views for mail message objects -->
+    <browser:page
+        name="listen_add_mailmessage"
+        for="Products.listen.interfaces.IMailMessage"
+        permission="listen.AddMailMessage"
+        class=".mail_message_views.MailMessageAddForm"
+        />
+
+    <browser:page
+        name="edit"
+        for="Products.listen.interfaces.IMailMessage"
+        permission="listen.AddMailMessage"
+        class=".mail_message_views.MailMessageEditForm"
+        />
+
+    <!-- provide standard threading macros for messages and archive
+	 folders -->
+    <browser:page
+        for="Products.listen.interfaces.IMailMessage"
+        name="message_macros"
+        permission="zope2.View"
+        template="message_macros.pt"
+        />
+
+    <browser:page
+        for="Products.listen.interfaces.IListArchiveSubFolder"
+        name="message_macros"
+        permission="zope2.View"
+        template="message_macros.pt"
+        />
+
+    <!-- provide views for archived messages -->
+    <browser:page
+        for="Products.listen.interfaces.IMailMessage"
+        name="threaded_view"
+        class=".mail_message_views.ThreadedMailMessageView"
+        permission="zope2.View"
+        template="threaded_message.pt"
+        />
+
+    <browser:page
+        for="Products.listen.interfaces.IMailMessage"
+        name="forum_view"
+        class=".mail_message_views.ForumMailMessageView"
+        permission="zope2.View"
+        template="forum_message_view.pt"
+        />
+
+    <browser:page
+        for="Products.listen.interfaces.IMailMessage"
+        name="message_reply"
+        class=".mail_message_views.MessageReplyView"
+        permission="zope2.View"
+        template="message_reply_view.pt"
+        />
+
+    <browser:defaultView
+        for="Products.listen.interfaces.IMailMessage"
+        name="threaded_view"
+        />
+
+    <!-- provide views for the archive sub folders (by date) -->
+    <browser:page
+        for="Products.listen.interfaces.IListArchiveSubFolder"
+        name="by_date"
+        class=".mail_archive_views.SubFolderDateView"
+        permission="zope2.View"
+        template="archive_date_messages.pt"
+        />
+
+    <browser:page
+        for="Products.listen.interfaces.IListArchiveSubFolder"
+        name="by_thread"
+        class=".mail_archive_views.SubFolderDateView"
+        permission="zope2.View"
+        template="archive_thread_messages.pt"
+        />
+
+    <browser:defaultView
+        for="Products.listen.interfaces.IListArchiveSubFolder"
+        name="by_thread"
+        />
+
+    <!-- provide views for the archive itself -->
+    <browser:page
+        for="Products.listen.interfaces.IListArchive"
+        name="forum_view"
+        class=".mail_archive_views.ArchiveForumView"
+        permission="zope2.View"
+        template="archive_forum_view.pt"
+        />
+    <browser:page
+        for="Products.listen.interfaces.IListArchive"
+        name="date_view"
+        class=".mail_archive_views.ArchiveDateView"
+        permission="zope2.View"
+        template="archive_date_view.pt"
+        />
+
+    <browser:page
+        for="Products.listen.interfaces.IListArchive"
+        name="new_topic"
+        class=".mail_archive_views.ArchiveNewTopicView"
+        permission="zope2.View"
+        template="new_topic_view.pt"
+        />
+
+    <browser:page
+        for="Products.listen.interfaces.IListArchive"
+        name="search_archive"
+        class=".mail_archive_views.ArchiveSearchView"
+        permission="zope2.View"
+        template="search.pt"
+        />
+
+    <browser:defaultView
+        for="Products.listen.interfaces.IListArchive"
+        name="forum_view"
+        />
+
+    <!-- provide a default view for the Mailing List -->
+    <browser:page
+        for="Products.listen.interfaces.IMailingList"
+        name="mailinglist_view"
+        class=".mailinglist_views.MailingListView"
+        permission="zope2.View"
+        template="mailinglist_view.pt"
+        />
+
+    <browser:defaultView
+        for="Products.listen.interfaces.IMailingList"
+        name="mailinglist_view"
+        />
+
+    <!-- Provide a default view for the list lookup utility for debugging
+         purposes-->
+    <browser:pages
+        for="Products.listen.interfaces.IListLookup"
+        class="Products.listen.utilities.list_lookup.ListLookupView"
+        permission="zope2.View" >
+
+      <browser:page
+          name="lookup_view"
+          template="lookup_view.pt" />
+
+      <browser:page
+          name="purge_entries"
+          attribute="purge_entries" />
+    </browser:pages>
+
+    <browser:defaultView
+        for="Products.listen.interfaces.IListLookup"
+        name="lookup_view"
+        />
+
+    <!-- provide a view for moderation stuff -->
+    <browser:page
+        name="moderation"
+        for="Products.listen.interfaces.IMailingList"
+        permission="listen.EditMailingList"
+        class=".moderation.ModerationView"
+        template="moderation.pt"
+        />
+
+    <browser:page
+        name="import-export"
+        for="Products.listen.interfaces.IMailingList"
+        permission="listen.ExportMailingListArchives"
+        class=".import_export.ImportExportView"
+        template="import_export.pt"
+        />
+
+    <!-- provide a view for the zope application root that routes
+         requests to the list lookup utility -->
+    <browser:page
+        for="OFS.Application.Application"
+        name="send_listen_mail"
+        class="Products.listen.utilities.list_lookup.MailDeliveryView"
+        permission="zope2.Public"
+        />
+
+    <browser:page
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        name="send_listen_mail"
+        class="Products.listen.utilities.list_lookup.MailDeliveryView"
+        permission="zope2.Public"
+        />
+
+    <browser:page
+        for="Products.listen.interfaces.IHaveSubscribers"
+        name="manage_membership"
+        class=".manage_membership.ManageMembersView"
+        permission="listen.EditMailingList"
+        template="manage_membership.pt"
+        />
+
+    <!-- debugging views -->
+    <browser:page
+        for="Products.listen.interfaces.IMailMessage"
+        class=".mail_message_views.SearchDebugView"
+        name="search_debug_view"
+        template="search_debug_view.pt"
+        permission="zope2.View"
+        />
+
+    <!-- schemadisplay is not yet supported by five
+    <browser:schemadisplay
+        schema="Products.listen.interfaces.IMailMessage"
+        name="message_debug_view"
+        label="View Message Headers"
+        permission="zope2.View"
+        />
+    -->
+
+    <browser:page
+        for="Products.CMFPlone.Portal.PloneSite"
+        name="migrate_listen_mailing_lists"
+        class="Products.listen.migrations.MigrationView"
+        permission="zope2.Public"
+        />
+
+    <browser:resource name="obfuscation.js" file="obfuscation.js" />
+
+    <include package=".listwidget" />
+
+</configure>

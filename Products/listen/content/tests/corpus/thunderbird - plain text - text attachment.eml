@@ -1,0 +1,28 @@
+Message-ID: <4946F927.80500@example.com>
+Date: Mon, 15 Dec 2008 16:41:11 -0800
+From: Sendy Sender <sendy@example.com>
+User-Agent: Thunderbird 2.0.0.18 (X11/20081125)
+MIME-Version: 1.0
+To: test-list@lists.example.com
+Subject: thunderbird - plain text - text attachment
+Content-Type: multipart/mixed;
+ boundary="------------040703080701000509020604"
+
+This is a multi-part message in MIME format.
+--------------040703080701000509020604
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+
+Email body
+
+--------------040703080701000509020604
+Content-Type: text/plain;
+ name="loremipsum.txt"
+Content-Transfer-Encoding: base64
+Content-Disposition: inline;
+ filename="loremipsum.txt"
+
+TG9yZW0gSXBzdW0KLS0tLS0tLS0tLS0KClRoaXMgaXMgd2hlcmUgdGhlcmUgd291bGQgYmUg
+Y29udGVudCwgaWYgaW4gZmFjdCB0aGVyZSB3ZXJlIGFueQpjb250ZW50Lgo=
+--------------040703080701000509020604--
+
