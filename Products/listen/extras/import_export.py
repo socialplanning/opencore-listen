@@ -217,7 +217,6 @@ class MailingListMessageExporter(object):
                 attachment = Message()
                 attachment.add_header('Content-Disposition', 'attachment', filename=file.title)
                 attachment.add_header('Content-Type', content_type)
-                print '  ' + content_type 
                 attachment.set_payload(data)
             enc_msg.attach(attachment)
 
