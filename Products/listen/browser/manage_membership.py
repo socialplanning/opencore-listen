@@ -93,7 +93,10 @@ class ManageMembersView(BrowserView):
     def nextURL(self):
         return '%s/%s' % (self.context.absolute_url(), self.__name__)
 
-    def _add(self, user, subscribed):
+    def can_subscribe_others(self):
+        return False
+
+    def _add(self, user, subscribed, subscribe_directly=False):
         request = {'action': 'add_allowed_sender', 'email': user}
         policy_result = self.policy.enforce(request)
         if policy_result == MEMBERSHIP_ALLOWED:
@@ -103,8 +106,13 @@ class ManageMembersView(BrowserView):
 
         if subscribed:
             request = {'action': 'subscribe', 'email': user}
-            if self.policy.enforce(request) == MEMBERSHIP_ALLOWED:
+
+            if subscribe_directly and self.can_subscribe_others():
                 self.mem_list.subscribe(user)
+            else:
+                result = self.policy.enforce(request)
+                if result == MEMBERSHIP_ALLOWED:
+                    self.mem_list.subscribe(user)
         return True
 
     def _remove(self, remove_list):
