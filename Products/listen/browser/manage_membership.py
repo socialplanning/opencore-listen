@@ -126,14 +126,20 @@ class ManageMembersView(BrowserView):
                 self.mem_list.remove_allowed_sender(user)
 
 
+    def _subscribe_user_directly(self, user):
+        return False
+
     def _subscribe(self, add_list):
+        can_subscribe_others = self.can_subscribe_others()
         for user in add_list:
+            if can_subscribe_others and self._subscribe_user_directly(user):
+                self.mem_list.subscribe(user)
+                continue
             request = {'action': 'subscribe', 'email': user}
             policy_result = self.policy.enforce(request)
             if policy_result == MEMBERSHIP_ALLOWED:
                 self.mem_list.subscribe(user)
 
-            
 
     def _unsubscribe(self, remove_list):
         for user in remove_list:
