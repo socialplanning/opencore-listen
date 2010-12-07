@@ -30,6 +30,8 @@ from Products.listen.interfaces import IMembershipDigestList
 from Products.listen.interfaces import IWriteMembershipDigestList
 from Products.listen.interfaces import IBecameAnAllowedSender
 from Products.listen.interfaces import IBecameASubscriber
+from Products.listen.interfaces import ISubscriberRemoved
+from Products.listen.interfaces import IAllowedSenderRemoved
 from Products.listen.interfaces import IPostPendingList
 from Products.listen.interfaces import IMembershipPendingList
 from Products.listen.interfaces import IUserEmailMembershipPolicy
@@ -652,6 +654,16 @@ class WriteMembershipList(MembershipList):
         if email:
             notify(SubscriberPromotion(self.context, email))
 
+    def _notify_removed_subscriber(self, user):
+        email = is_email(user) and user or lookup_email(user, self.context)
+        if email:
+            notify(SubscriberRemoved(self.context, email))
+
+    def _notify_removed_allowed_sender(self, user):
+        email = is_email(user) and user or lookup_email(user, self.context)
+        if email:
+            notify(AllowedSenderRemoved(self.context, email))
+
     def subscribe(self, subscriber, send_notify=True):
         if is_email(subscriber):
             user_id = lookup_member_id(subscriber, self.context)
@@ -675,7 +687,7 @@ class WriteMembershipList(MembershipList):
         if send_notify:
             self._notify_added_subscriber(subscriber)
 
-    def unsubscribe(self, subscriber):
+    def unsubscribe(self, subscriber, send_notify=True):
         if is_email(subscriber):
             user_id = lookup_member_id(subscriber, self.context)
             if user_id:
@@ -686,6 +698,8 @@ class WriteMembershipList(MembershipList):
         else:
             if subscriber in self.members:
                 self.members[subscriber] = {'subscriber':False}
+        if send_notify:
+            self._notify_removed_subscriber(subscriber)
 
     def add_allowed_sender(self, allowed_sender, send_notify=True):
         if is_email(allowed_sender):
@@ -712,21 +726,33 @@ class WriteMembershipList(MembershipList):
                 if send_notify:
                     self._notify_added_a_s(member_id)
 
-    def remove_allowed_sender(self, allowed_sender):
+    def remove_allowed_sender(self, allowed_sender, send_notify=True):
+        was_subscribed = False
         if is_email(allowed_sender):
             user_id = lookup_member_id(allowed_sender, self.context)
             if user_id:
                 if user_id in self.members:
-                    self.members.pop(user_id)
+                    record = self.members.pop(user_id)
+                    if record.get("subscriber") == True:
+                        was_subscribed = True
             if allowed_sender in self.emails:
-                self.emails.pop(allowed_sender)
+                record = self.emails.pop(allowed_sender)
+                if record.get("subscriber") == True:
+                    was_subscribed = True
         else:
             email = lookup_email(allowed_sender, self.context)
             if email in self.emails:
-                self.email.pop(email)
+                record = self.email.pop(email)
+                if record.get("subscriber") == True:
+                    was_subscribed = True
             if allowed_sender in self.members:
-                self.members.pop(allowed_sender)
-
+                record = self.members.pop(allowed_sender)
+                if record.get("subscriber") == True:
+                    was_subscribed = True
+        if send_notify:
+            if was_subscribed:
+                self._notify_removed_subscriber(allowed_sender)
+            self._notify_removed_allowed_sender(allowed_sender)
 
 class MembershipDigestList(MembershipList):
     implements(IMembershipDigestList)
@@ -1069,6 +1095,19 @@ def became_allowed_sender(event):
     post_mod_list.remove(email)
 
 
+class SubscriberRemoved(object):
+    implements(ISubscriberRemoved)
+
+    def __init__(self, context, email):
+        self.context = context
+        self.email = email
+
+class AllowedSenderRemoved(object):
+    implements(IAllowedSenderRemoved)
+
+    def __init__(self, context, email):
+        self.context = context
+        self.email = email
 
 class SubscriberPromotion(object):
     implements(IBecameASubscriber)

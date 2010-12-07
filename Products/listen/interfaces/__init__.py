@@ -18,6 +18,8 @@ from mailinglist import IListArchiveSubFolder
 from mailinglist import ISendMail
 from mailinglist import IBecameAnAllowedSender
 from mailinglist import IBecameASubscriber
+from mailinglist import ISubscriberRemoved
+from mailinglist import IAllowedSenderRemoved
 from mailinglist import IListTypeChanged
 from mailinglist import IMigrateList
 from mailinglist import IUserEmailMembershipPolicy

@@ -500,6 +500,19 @@ class IBecameASubscriber(Interface):
     """
     email = TextLine()
 
+
+class ISubscriberRemoved(Interface):
+    """
+        Interface to indicate that a user has just recently become a non-subscriber
+    """
+    email = TextLine()
+
+class IAllowedSenderRemoved(Interface):
+    """
+        Interface to indicate that a user has just recently become a non-allowed-sender
+    """
+    email = TextLine()
+    
 class IListTypeChanged(Interface):
     """
         Interface to handle changing from one list type to another
