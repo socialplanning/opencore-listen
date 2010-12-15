@@ -1,21 +1,21 @@
 from setuptools import setup, find_packages
 import sys, os
 
-version = '0.6.5dev'
+version = '0.8'
 
 f = open('README.txt')
 readme = "".join(f.readlines())
 f.close()
 
-setup(name='Products.listen',
+setup(name='opencore-listen',
       version=version,
       description="listen is a mailing list product for Plone",
       long_description=readme,
       classifiers=[],
       keywords='',
-      author='Robert Marianski',
+      author='Robert Marianski, Alec Mitchell, Chris Abraham, Rob Miller, Ethan Jucovy',
       author_email='listen-dev at lists.coactivate.org',
-      url='https://projects.openplans.org/listen',
+      url='http://trac.socialplanning.org/listen',
       license='GPL',
       packages=find_packages(),
       namespace_packages=['Products'],
