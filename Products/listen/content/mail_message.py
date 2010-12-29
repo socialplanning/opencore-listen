@@ -59,6 +59,8 @@ class MailMessage(Folder):
     def __init__(self, id, from_addr, subject, date=None, **kwargs):
         from_addr = from_addr.decode('utf-8', 'replace')
         self.from_addr = decode_header(email.Header.Header(from_addr))
+
+        subject = subject.decode('utf-8', 'replace')
         self.subject = decode_header(email.Header.Header(subject))
         # date is expected to be a DateTime or None
         if not isinstance(date, DateTime):
