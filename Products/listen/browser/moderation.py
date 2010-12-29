@@ -120,7 +120,13 @@ class ModerationView(BrowserView):
             for post in posts:
                 header = post['header']
                 body = post['body']
-                subject = decode_header(header.get('subject'))
+                subject = header.get("subject")
+                
+                try:
+                    subject = decode_header(subject)
+                except UnicodeDecodeError:
+                    subject = subject.decode("utf-8", 'replace')
+
                 postid = post['postid']
                 list_out.append(dict(user=user_email, user_name=user_name, subject=subject, body=body, postid=postid))
 
