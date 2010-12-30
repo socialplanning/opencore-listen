@@ -58,8 +58,15 @@ class BaseMembershipPolicy(object):
         self.mem_list = IWriteMembershipList(self.context)
 
 
+    def _get_email_for_pin(self, request, pend_list):
+        email = request.get('email', None)
+        return email
+
     def _check_pin(self, request, pend_list):
-        return check_pin(request, pend_list)
+        email = self._get_email_for_pin(request, pend_list)
+        new_request = request.copy()
+        new_request['email'] = email
+        return check_pin(new_request, pend_list)
 
     def _is_confirm(self, request):
         return is_confirm(request)
@@ -156,6 +163,18 @@ class UserMembershipPolicy(BaseMembershipPolicy):
         self.subscribe_pending_list = getAdapter(context, IMembershipPendingList, 'pending_sub_email')
         self.unsubscribe_pending_list = getAdapter(context, IMembershipPendingList, 'pending_unsub_email')
 
+    def _get_email_for_pin(self, request, pend_list):
+        if pend_list == self.unsubscribe_pending_list:
+            return request.get('email', None)
+
+        subject = request.get('subject', '')
+        m = email_regex.search(subject)
+        if m:
+            user_email = m.group(1)
+        else:
+            user_email = request.get('email', None)
+        return user_email
+
     def enforce(self, request):
         user_email = request.get('email', None)
         user_name = request.get('name', None)
@@ -196,20 +215,11 @@ class UserMembershipPolicy(BaseMembershipPolicy):
             # if the from address is different but they still have the correct
             # pin number in the subject for the other email address, we should
             # confirm the subscription
-
-            subject = request.get('subject', '')
-            m = email_regex.search(subject)
-            if m:
-                user_email = m.group(1)
+            user_email = self._get_email_for_pin(request, self.subscribe_pending_list)
 
             if self.subscribe_pending_list.is_pending(user_email):
 
-                # we need to use a request with a new email address
-                # or the check pin function might use a different user email
-                new_request = request.copy()
-                new_request['email'] = user_email
-
-                if not self._check_pin(new_request, self.subscribe_pending_list):
+                if not self._check_pin(request, self.subscribe_pending_list):
                     return MEMBERSHIP_PIN_MISMATCH
 
                 self.subscribe_pending_list.remove(user_email)

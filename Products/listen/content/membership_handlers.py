@@ -13,13 +13,13 @@ from Products.listen.interfaces import IWriteMembershipList
 from Products.listen.interfaces import ISendMail
 from Products.listen.interfaces import IPostPendingList
 from Products.listen.interfaces import IMembershipList
+from Products.listen.interfaces import IUserEmailMembershipPolicy
 
 from Products.listen.config import PROJECTNAME
 from Products.listen.content import PendingList
 
 from Products.listen.lib.common import check_pin
 from Products.listen.lib.common import send_pending_posts
-
 
 class ConfirmationHandler(object):
     """
@@ -30,6 +30,10 @@ class ConfirmationHandler(object):
     >>> from Products.listen.extras.tests import TestMailingList
     >>> from Products.listen.content import tests
     >>> ml = TestMailingList()
+    >>> from zope.interface import alsoProvides
+    >>> from Products.listen.interfaces import IBaseList
+    >>> alsoProvides(ml, IBaseList)
+
     >>> mtool = tests.DummyMembershipTool('')
     >>> ml.portal_membership = mtool
     >>> mtool.result = None
@@ -123,7 +127,18 @@ class ConfirmationHandler(object):
 
     def _send_pending_posts(self, email):
         post_list = self._get_post_pending_list()
-        send_pending_posts(self.context, email, post_list)
+        # XXX currently expecting one post,
+        # this is not the case for Post Moderated Lists
+        # send the post for the user to the list
+        posts = post_list.get_posts(email)
+        # uniquify posts
+        post_dict = {}
+        for p in posts:
+            post_dict[p['body']] = p['header']
+        posts = [dict(header=v, body=k)
+                 for k,v in post_dict.iteritems()]
+
+        send_pending_posts(self.context, posts)
 
     def add_allowed_sender(self, email):
         IWriteMembershipList(self.context).add_allowed_sender(email)
@@ -149,14 +164,20 @@ class ConfirmationHandler(object):
             return
 
         # check to see if the pin matches
-        if not check_pin(dict(subject=subject, email=email), pend_list):
+        policy = getAdapter(self.context, IUserEmailMembershipPolicy)
+        fake_request = dict(subject=subject, email=email)
+        command_email = policy._get_email_for_pin(fake_request, pend_list)
+        
+        if not policy._check_pin(fake_request, pend_list):
             mail_sender = ISendMail(self.context)
             mail_sender.user_pin_mismatch(email, name)
             return
 
-        if pend_list.is_pending(email):
+        if pend_list.is_pending(command_email):
             self.add_allowed_sender(email)
-            pend_list.remove(email)
+            pend_list.remove(command_email)
+            if email != command_email:
+                self._send_pending_posts(command_email)
         else:
             # XXX why are we getting in here?
             pass
