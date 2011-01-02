@@ -169,13 +169,23 @@ class MailingListMessageExporter(object):
     def __init__(self, context):
         self.context = context
 
+    def export_messages_to_tempfile(self):
+        sa = getUtility(ISearchableArchive, context=self.context)
+        import tempfile, os
+        tmpfd, tmpname = tempfile.mkstemp(suffix='.mbox')
+        temp_outfile = os.fdopen(tmpfd, 'w')
+        msgs = sa(sort_on='modification_date')
+        for msg in msgs:
+            temp_outfile.write(self._convert_to_mbox_msg(msg.getObject()))
+            temp_outfile.write('\n')
+        temp_outfile.close()
+        return tmpfd, tmpname
+
     def export_messages(self):
         sa = getUtility(ISearchableArchive, context=self.context)
-        # for some reason utility comes back w/ no RequestContainer at the
-        # acq root, which breaks getObject; wedge it in there by force
-        sa.REQUEST = self.context.REQUEST
         msgs = sa(sort_on='modification_date')
-        file_data = [self._convert_to_mbox_msg(msg.getObject()) for msg in msgs]
+        file_data = [self._convert_to_mbox_msg(
+                msg.getObject()) for msg in msgs]
 
         return "\n".join(file_data)
 
