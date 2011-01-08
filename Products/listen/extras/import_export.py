@@ -302,7 +302,7 @@ class MailingListSubscriberExporter(object):
     def __init__(self, context):
         self.context = context
 
-    def export_subscribers(self):
+    def export_subscribers(self, include_allowed_senders=False):
         """ Returns CSV string of subscriber data """
         ml = IMembershipList(self.context)
         cat = getToolByName(self.context, 'portal_catalog')
@@ -320,7 +320,15 @@ class MailingListSubscriberExporter(object):
                 title = metadata['Title']
             else: # e-mail only subscriber 
                 memid = title = ""
-            file_data.append(','.join([memid, title, email]))
+            file_data.append(','.join([
+                        memid, title, email, 'subscribed']))
+
+        if include_allowed_senders:
+            for email, info in ml.allowed_senders_data.items():
+                if info['subscriber']:
+                    continue
+                file_data.append(','.join([
+                            '', '', email, 'allowed']))
 
         return "\n".join(file_data)
 
