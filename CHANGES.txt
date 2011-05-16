@@ -1,0 +1,25 @@
+0.8.0 (2011-05-16)
+==================
+
+ * Port from opencore's override of the csv exporter: optionally include
+   allowed senders in export; and always include a final item in each row
+   of the CSV, describing the user's subscription-status.
+
+ * Add export_messages_to_tempfile method on export utility
+   which writes the messages' mbox to a tempfile and returns
+   the (tmpfd, tmpfilename) -- this is better than writing
+   to memory for lists with large archives.  (Code written
+   by slinkp in opencore -- i'm moving it to listen)
+
+ * Make "confirm-member" behavior consistent with "subscribe" behavior:
+   on a non-member-moderated list, both actions should allow the 
+   confirmation email to come from a different address than the original 
+   message, provided the subject is left intact (including both the pin 
+   and the original sender)
+
+ * Handle non-ASCII characters in message subject
+
+ * Fix moderation queue when non-ASCII emails are queued 
+
+
+Changelogs weren't kept prior to this release.

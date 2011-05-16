@@ -1,11 +1,14 @@
 from setuptools import setup, find_packages
 import sys, os
 
-version = '0.8a'
+version = '0.8.0'
 
-f = open('README.txt')
-readme = "".join(f.readlines())
-f.close()
+try:
+    f = open('README.txt')
+    readme = "".join(f.readlines())
+    f.close()
+except:
+    readme = ""
 
 setup(name='opencore-listen',
       version=version,
@@ -22,9 +25,9 @@ setup(name='opencore-listen',
       include_package_data=True,
       zip_safe=False,
       dependency_links=[
-        'https://svn.openplans.org/svn/vendor/Products.MailBoxer#egg=Products.MailBoxer-0.1vendor',
-        'https://svn.openplans.org/svn/vendor/Products.ManageableIndex#egg=Products.ManageableIndex-0.1vendor',
-        'https://svn.openplans.org/svn/vendor/Products.OFolder#egg=Products.OFolder-0.1vendor',
+        'https://svn.socialplanning.org/svn/vendor/Products.MailBoxer#egg=Products.MailBoxer-0.1vendor',
+        'https://svn.socialplanning.org/svn/vendor/Products.ManageableIndex#egg=Products.ManageableIndex-0.1vendor',
+        'https://svn.socialplanning.org/svn/vendor/Products.OFolder#egg=Products.OFolder-0.1vendor',
         ],
       install_requires=[
         'setuptools',
