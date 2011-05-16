@@ -1,36 +1,36 @@
 Listen
--------
+======
 
 Listen is a mailing list management application that integrates into the Plone
 Content Management System.  It is based on the venerable MailBoxer Zope
 Product by Maik Jablonski, and offers most of the features of that product.
 Key features include:
 
-- Easily create mailing lists through the Plone interface.
+ * Easily create mailing lists through the Plone interface.
 
-- Lists may be moderated or unmoderated, open to all or restricted to
-  subscribers only.
+ * Lists may be moderated or unmoderated, open to all or restricted to
+   subscribers only.
 
-- Optional archiving of mail with or without attachments.
+ * Optional archiving of mail with or without attachments.
 
-- Fully threaded archive display, including a forum-like view.
+ * Fully threaded archive display, including a forum-like view.
 
-- Portal members and visitors can easily subscribe/unsubscribe themselves
-  through the Plone interface.
+ * Portal members and visitors can easily subscribe/unsubscribe themselves
+   through the Plone interface.
 
-- Each list maintains its own catalog featuring a full text index of messages.
+ * Each list maintains its own catalog featuring a full text index of messages.
 
-- Members can make responses with quotation to archived messages through the
-  Plone interface.
+ * Members can make responses with quotation to archived messages through the
+   Plone interface.
 
-- Automatic masking of member email addresses with links to author pages.
+ * Automatic masking of member email addresses with links to author pages.
 
-- Provides a registry of lists on a Zope instance allowing lists to be added
-  without any additional SMTP server configuration.
+ * Provides a registry of lists on a Zope instance allowing lists to be added
+   without any additional SMTP server configuration.
 
-- Performs well due to use of simple Zope types and z3/Five techniques.
-  Capable of higher mail volume that MailBoxer itself, and much greater
-  volume than Archetypes-based mailing list systems.
+ * Performs well due to use of simple Zope types and z3/Five techniques.
+   Capable of higher mail volume that MailBoxer itself, and much greater
+   volume than Archetypes-based mailing list systems.
 
 This product makes heavy use of Zope3 features within Plone via Five; it uses
 views, adapters, Zope3 schemas (add and edit views), local utilities,
@@ -58,10 +58,11 @@ Highly Recommended
 -------------------
 
 MaildropHost 1.13+ (http://www.dataflake.org/software/maildrophost/)
-    Any site that expects a reasonable amount of mail traffic (incoming and
-    especially outgoing) needs to use this.  It well not send duplicate mails
-    when a conflict error forces a retry, and it increases potential incoming
-    mail volume tremendously by not blocking on sending mail.
+
+Any site that expects a reasonable amount of mail traffic (incoming and
+especially outgoing) needs to use this.  It well not send duplicate mails
+when a conflict error forces a retry, and it increases potential incoming
+mail volume tremendously by not blocking on sending mail.
 
 
 Installation and setup
