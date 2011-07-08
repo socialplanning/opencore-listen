@@ -599,6 +599,45 @@ class MailingList(DynamicType, CMFCatalogAware, MailBoxerMailingList, FiveSite):
 
     list_type = property(fget=_get_list_type, fset=_set_list_type)
 
+    def can_view_archives(self, request):
+        obj = self
+        if not getattr(obj, 'private_archives', False):
+            return True
+
+        auth = obj.openplans.aq_inner.acl_users.credentials_signed_cookie_auth
+        creds = auth.extractCredentials(request) or {}
+        username = creds.get('login', None)
+        if not username:
+            return False
+
+        site = obj.openplans.aq_inner
+        try:
+            user = site.portal_memberdata[username]
+        except:
+            return False
+
+        mem_list = IMembershipList(obj)
+        email = user.getEmail()
+
+        if email in mem_list.subscribers:
+            return True
+
+        if email in obj.managers or username in obj.managers:
+            return True
+
+        from topp.utils import zutils
+        from opencore.interfaces import IProject
+        project = zutils.aq_iface(obj, IProject)
+        if not project:
+            return False
+        project_admins = project.projectMemberIds(admin_only=True)
+        if username in project_admins:
+            return True
+        # TODO: allow site admins
+        return False
+
+
+
     # not a property so we don't lose acquisition context
     def digest_constructor(self):
         return DigestConstructor(self)
