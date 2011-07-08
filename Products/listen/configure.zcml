@@ -13,6 +13,11 @@
         />
 
     <vocabulary
+        name="Archive Privacy Options"
+        factory=".content.mailinglist.archivePrivacyVocabulary"
+        />
+
+    <vocabulary
         name="List Types"
         factory=".content.list_type_vocabulary"
         />
@@ -366,6 +371,13 @@
         for=".interfaces.IListTypeChanged"
         handler=".content.list_type_changed"
         />
+
+    <subscriber
+        for=".interfaces.IMailingList
+	     zope.app.publication.interfaces.IBeforeTraverseEvent"
+        handler=".content.archive_privacy"
+        />
+
 
     <utility component=".interfaces.list_types.PublicListTypeDefinition"
              name="public"

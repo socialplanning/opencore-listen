@@ -42,3 +42,38 @@ from list_types import PostModeratedListImport
 from list_types import PublicListExport
 from list_types import MembershipModeratedListExport
 from list_types import PostModeratedListExport
+from Products.listen.interfaces import IMembershipList
+
+from Products.CMFCore.utils import getToolByName
+from zExceptions import Unauthorized
+
+def archive_privacy(obj, event):
+    # If the list doesn't have private archives we don't need to worry
+    if not getattr(obj, 'private_archives', False):
+        return
+
+    auth = obj.openplans.aq_inner.acl_users.credentials_signed_cookie_auth
+    creds = auth.extractCredentials(obj.REQUEST) or {}
+    username = creds.get('login', None)
+    if not username:
+        raise Unauthorized()
+
+    site = obj.openplans.aq_inner
+    try:
+        user = site.portal_memberdata[username]
+    except:
+        raise Unauthorized()
+
+    mem_list = IMembershipList(obj)
+    email = user.getEmail()
+
+    if email in mem_list.subscribers:
+        return
+
+    if email in obj.managers or username in obj.managers:
+        return
+
+    # TODO: allow project admins
+    # TODO: allow site admins
+
+    raise Unauthorized()

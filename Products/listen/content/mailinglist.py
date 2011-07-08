@@ -576,6 +576,7 @@ class MailingList(DynamicType, CMFCatalogAware, MailBoxerMailingList, FiveSite):
     description = FieldProperty(IMailingList['description'])
     mailto = FieldProperty(IMailingList['mailto'])
     archived = FieldProperty(IMailingList['archived'])
+    private_archives = FieldProperty(IMailingList['private_archives'])
     managers = FieldProperty(IMailingList['managers'])
 
     def __init__(self, *args, **kwargs):
@@ -1586,6 +1587,10 @@ def archiveOptionsVocabulary(context):
                        (_(u'Do not archive messages'),2)]
     return SimpleVocabulary.fromItems(archive_options)
 
+def archivePrivacyVocabulary(context):
+    archive_options = [(_(u'Allow non-subscribers to view the list archives'), False), 
+                       (_(u'Restrict the list archives to subscribers'), True)]
+    return SimpleVocabulary.fromItems(archive_options)    
 
 class ListTypeChanged(object):
     """ implementation to keep track of how a list type changed """

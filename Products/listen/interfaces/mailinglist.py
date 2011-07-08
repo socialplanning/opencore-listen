@@ -175,6 +175,15 @@ class IMailingList(Interface):
         required = True,
         )
 
+    private_archives = Choice(
+        title = _(u"Privacy"),
+        description = _(u"You can choose whether to allow list non-members "
+                        "to view the list's archives, or restrict the archives "
+                        "to logged-in subscribers."),
+        vocabulary = "Archive Privacy Options",
+        default = False,
+        required = True,
+        )
         
 # These methods really belong in an adapter(s), but because we are using
 # MailBoxer they are part of the content object.
