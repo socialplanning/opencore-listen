@@ -46,6 +46,8 @@ from Products.listen.interfaces import IMembershipList
 
 from Products.CMFCore.utils import getToolByName
 from zExceptions import Unauthorized
+from topp.utils import zutils
+from opencore.interfaces import IProject
 
 def archive_privacy(obj, event):
     # If the list doesn't have private archives we don't need to worry
@@ -73,7 +75,13 @@ def archive_privacy(obj, event):
     if email in obj.managers or username in obj.managers:
         return
 
-    # TODO: allow project admins
+    project = zutils.aq_iface(obj, IProject)
+    if not project:
+        return Unauthorized()
+    project_admins = project.projectMemberIds(admin_only=True)
+    if username in project_admins:
+        return
+
     # TODO: allow site admins
 
     raise Unauthorized()
