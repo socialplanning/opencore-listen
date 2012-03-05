@@ -98,9 +98,11 @@ class ImportExportView(BrowserView):
                 raise Unauthorized(_(u'Cannot import mailing list subscribers'))
             file = self.request.form.get("import_subscribers_file")
             if file:
-                emails = [s.strip().split(',')[-1] for s in file]
+                emails = [s.strip().split(',')[-2:] for s in file]
                 # quick sanity check
-                emails = [e for e in emails if '@' in e]
+                emails = [e for e in emails 
+                          if '@' in e[0]
+                          and e[1].strip() in ("subscribed", "allowed")]
                 subscriber_importer = IMailingListSubscriberImport(self.context)
                 if emails:
                     subscriber_importer.import_subscribers(emails)

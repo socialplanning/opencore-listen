@@ -293,9 +293,9 @@ class MailingListSubscriberExporter(object):
 
         And now we can finally export the subscribers
         >>> print exporter.export_subscribers()
-        hanz,Hans Gruber,badguy@example.com
-        john,John McClane,cowboy@example.com
-        ,,holly@example.com
+        hanz,Hans Gruber,badguy@example.com,subscribed
+        john,John McClane,cowboy@example.com,subscribed
+        ,,holly@example.com,subscribed
 
     """
     
@@ -355,7 +355,9 @@ class MailingListSubscriberImporter(object):
         >>> importer = MailingListSubscriberImporter(ml)
 
         We need to register a dummy membership subscription adapter
+        and a dummy allowed_sender adapter
         >>> test_addresses = []
+        >>> test_allowed_senders = []
         >>> class DummySubscriptionAdapter(object):
         ...     def __init__(self, context):
         ...         self.context = context
@@ -364,6 +366,11 @@ class MailingListSubscriberImporter(object):
         ...             raise ValueError('Expecting not to send out '
         ...                              'notifications')
         ...         test_addresses.append(address)
+        ...     def add_allowed_sender(self, address, send_notify=True):
+        ...         if send_notify:
+        ...             raise ValueError('Expecting not to send out '
+        ...                              'notifications')
+        ...         test_allowed_senders.append(address)
 
         We'll need to register our dummy subscription adapter
         >>> from zope.component import provideAdapter
@@ -372,11 +379,12 @@ class MailingListSubscriberImporter(object):
 
         And now we can import some subscribers
         >>> importer = MailingListSubscriberImporter(ml)
-        >>> importer.import_subscribers(['thug1@example.com',
-        ...                              'thug2@example.com'])
+        >>> importer.import_subscribers([('thug1@example.com', 'subscribed'),
+        ...                              ('thug2@example.com', 'allowed')])
         >>> print test_addresses
-        ['thug1@example.com', 'thug2@example.com']
-
+        ['thug1@example.com']
+        >>> print test_allowed_senders
+        ['thug2@example.com']
     """
     
     def __init__(self, context):
@@ -385,5 +393,8 @@ class MailingListSubscriberImporter(object):
     def import_subscribers(self, subscribers):
         """ Imports the list of subscriber email addresses """
         slist = IWriteMembershipList(self.context)
-        for subscriber in subscribers:
-            slist.subscribe(subscriber, send_notify=False)
+        for subscriber, status in subscribers:
+            if status == "subscribed":
+                slist.subscribe(subscriber, send_notify=False)
+            elif status == "allowed":
+                slist.add_allowed_sender(subscriber, send_notify=False)
