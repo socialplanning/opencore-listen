@@ -1,0 +1,6 @@
+listen.mo
+*.pyc
+*.egg-info
+*#
+.#*
+*~
