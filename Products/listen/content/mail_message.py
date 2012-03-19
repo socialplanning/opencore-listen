@@ -124,10 +124,16 @@ class MailFromString(object):
             body = convertHTML2Text(HtmlBody)
 
         try:
-            body = body.decode(encoding, 'replace')
-        except LookupError:
-            # The email specified an invalid encoding
-            body = body.decode('iso-8859-1', 'replace')
+            body = body.decode("utf8")
+        except UnicodeDecodeError:
+            try:
+                body = body.decode(encoding)
+            except UnicodeDecodeError:
+                try:
+                    body = body.decode(encoding, 'replace')
+                except LookupError:
+                    # The email specified an invalid encoding
+                    body = body.decode('iso-8859-1', 'replace')
 
         msg = email.message_from_string(msg_string)
         in_reply_to = msg.get('in-reply-to', context.in_reply_to).strip()
