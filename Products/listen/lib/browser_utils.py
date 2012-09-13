@@ -111,7 +111,19 @@ def createReplyStructureFromReferrers(message, search_interface,
                              full_message=full_message)
     proxy['children'] = []
     result = {origin_id: proxy}
-    tree = search_interface.getMessageReferrers(message.message_id)
+
+    tree = {}
+    add_to_tree = search_interface.getMessageReferrers(message.message_id)
+
+    while True:
+        len_tree = len(tree)
+        for to_add in add_to_tree:
+            tree[to_add.getId] = to_add
+        if len(tree) == len_tree:
+            tree = tree.values()
+            break
+        add_to_tree = search_interface.getMessageReferrers([i.message_id for i in tree.values()])
+
     result = generateThreadedMessageStructure(result, tree, sub_mgr=sub_mgr,
                                               full_message=full_message)
     if newest_first:
