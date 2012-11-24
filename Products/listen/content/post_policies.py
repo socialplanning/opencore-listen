@@ -76,7 +76,13 @@ class BasePostPolicy(object):
     def _is_unsubscribe(self, request):
         subject = request.get('subject', '')
         return bool('unsubscribe' in subject)        
-       
+    
+    def is_internal_message(self, request):
+        key = request.get('x-opencore-validation-key', None)
+        if key is None:
+            return False
+        from libopencore.mail_headers import validate_headers
+        return validate_headers(request, "/tmp/foo")
 
 class PublicEmailPostPolicy(BasePostPolicy):
     """
@@ -177,7 +183,9 @@ class PublicEmailPostPolicy(BasePostPolicy):
         if post is None:
             return POST_ERROR
 
-        if self.mem_list.is_allowed_sender(user_email):
+        if self.is_internal_message(request):
+            return POST_ALLOWED
+        elif self.mem_list.is_allowed_sender(user_email):
             return POST_ALLOWED
         elif self.mod_post_pending_list.is_pending(user_email):
             pin = self.a_s_pending_list.get_user_pin(user_email)
@@ -356,6 +364,10 @@ class PostModeratedEmailPostPolicy(BasePostPolicy):
 
         if post is None:
             return POST_ERROR
+
+        
+        if self.is_internal_message(request):
+            return POST_ALLOWED
 
         self.mod_post_pending_list.add(user_email, user_name=user_name, post=post)
 
@@ -547,8 +559,10 @@ class MemModeratedEmailPostPolicy(BasePostPolicy):
 
         if post is None:
             return POST_ERROR
-        
-        if self.mem_list.is_allowed_sender(user_email):
+     
+        if self.is_internal_message(request):
+            return POST_ALLOWED
+        elif self.mem_list.is_allowed_sender(user_email):
             return POST_ALLOWED
         elif self.mod_post_pending_list.is_pending(user_email):
             self.mail_sender.user_mem_mod_already_pending(user_email, user_name)

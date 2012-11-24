@@ -164,6 +164,25 @@ class MailFromString(object):
         context.in_reply_to = in_reply_to
         context.references = tuple(references)
         context.message_id = message_id
+
+        opencore_headers = [header for header in other_headers if header[0].startswith("x-opencore")]
+        other_headers = [header for header in other_headers if header not in opencore_headers]
+
+        opencore_headers = dict(opencore_headers)
+        if "x-opencore-validation-key" not in opencore_headers:
+            opencore_headers = []
+        else:
+            from libopencore.mail_headers import validate_headers
+            if not validate_headers(opencore_headers, "/tmp/foo"):
+                opencore_headers = []
+            else:
+                del opencore_headers["x-opencore-validation-key"]
+                if opencore_headers.get("x-opencore-send-from", None) is not None:
+                    context.from_addr = opencore_headers['x-opencore-send-from']
+                    
+                opencore_headers = opencore_headers.items()
+        other_headers = other_headers.extend(opencore_headers)
+
         context.other_headers = tuple(other_headers)
 
     def addAttachment(self, filename, content, mime_type):

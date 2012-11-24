@@ -1332,6 +1332,18 @@ class MailingList(DynamicType, CMFCatalogAware, MailBoxerMailingList, FiveSite):
         _set_header('List-Id', self.getValueFor('mailto'))
         _set_header('Precedence', 'Bulk')
 
+        suppress_send_to = []
+        from libopencore.mail_headers import validate_headers
+        if validate_headers(emailmsg, "/tmp/foo"):
+            if 'x-opencore-send-from' in emailmsg:
+                _set_header('From', emailmsg['x-opencore-send-from'])
+            if 'x-opencore-do-not-send-to' in emailmsg:
+                suppress_send_to = emailmsg.get_all("x-opencore-do-not-send-to")
+
+        for key in emailmsg.keys():
+            if key.lower().startswith("x-opencore"):
+                del emailmsg[key]
+
         # Get immediate delivery members along with digest subscribers
         digest_list = IMembershipDigestList(self)
 
@@ -1484,6 +1496,12 @@ class MailingList(DynamicType, CMFCatalogAware, MailBoxerMailingList, FiveSite):
 
         # send the message out to the immediate subscribers
         maillist = digest_list.nondigest_subscribers
+
+        from Products.listen.lib.common import lookup_emails
+        if suppress_send_to is not None and len(suppress_send_to):
+            suppress_send_to = lookup_emails(suppress_send_to)
+            maillist = [email for email in maillist if email not in suppress_send_to]
+
         self._send_msgs(maillist, emailmsg.as_string(), returnpath)
 
         # fire an event notifying that a message was received
