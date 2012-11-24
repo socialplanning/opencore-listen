@@ -165,7 +165,7 @@ class MailFromString(object):
         context.references = tuple(references)
         context.message_id = message_id
 
-        opencore_headers = [header for header in other_headers if header[0].startswith("x-opencore")]
+        opencore_headers = [(header[0].lower(), header[1]) for header in other_headers if header[0].lower().startswith("x-opencore")]
         other_headers = [header for header in other_headers if header not in opencore_headers]
 
         opencore_headers = dict(opencore_headers)
@@ -179,9 +179,9 @@ class MailFromString(object):
                 context.from_addr = opencore_headers['x-opencore-send-from']
                     
             opencore_headers = opencore_headers.items()
-        other_headers = other_headers.extend(opencore_headers)
+        other_headers.extend(opencore_headers)
 
-        context.other_headers = tuple(other_headers)
+        context.other_headers = tuple(other_headers or [])
 
     def addAttachment(self, filename, content, mime_type):
         """Adds a zope file object as an attachemnt"""

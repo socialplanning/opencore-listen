@@ -5,7 +5,7 @@ from Products.listen.i18n import _
 from Products.ZCatalog.interfaces import IZCatalog
 from zope.interface.interface import Attribute
 
-class IInternalHeaderValidator(Interface):
+class IHeaderValidator(Interface):
     """An interface for validating internal headers"""
     def validate_headers(headers):
         """Return true or false"""

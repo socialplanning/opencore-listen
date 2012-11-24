@@ -1500,7 +1500,7 @@ class MailingList(DynamicType, CMFCatalogAware, MailBoxerMailingList, FiveSite):
         from Products.listen.lib.common import lookup_emails
         if suppress_send_to is not None and len(suppress_send_to):
             suppress_send_to = lookup_emails(suppress_send_to)
-            maillist = [email for email in maillist if email not in suppress_send_to]
+            maillist = [email_addr for email_addr in maillist if email_addr not in suppress_send_to]
 
         self._send_msgs(maillist, emailmsg.as_string(), returnpath)
 
