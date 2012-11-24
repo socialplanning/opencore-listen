@@ -5,6 +5,15 @@ from Products.listen.i18n import _
 from Products.ZCatalog.interfaces import IZCatalog
 from zope.interface.interface import Attribute
 
+class IInternalHeaderValidator(Interface):
+    """An interface for validating internal headers"""
+    def validate_headers(headers):
+        """Return true or false"""
+
+    def clean_headers(headers):
+        """Return a cleaned version of the headers that is suitable for public viewing,
+        with any sensitive information removed"""
+
 class ISearchableArchive(IZCatalog):
     """An interface providing mailing list search methods"""
 

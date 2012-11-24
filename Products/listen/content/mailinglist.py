@@ -1333,8 +1333,8 @@ class MailingList(DynamicType, CMFCatalogAware, MailBoxerMailingList, FiveSite):
         _set_header('Precedence', 'Bulk')
 
         suppress_send_to = []
-        from libopencore.mail_headers import validate_headers
-        if validate_headers(emailmsg, "/tmp/foo"):
+        from Products.listen.lib.common import header_validator
+        if header_validator().validate_headers(emailmsg):
             if 'x-opencore-send-from' in emailmsg:
                 _set_header('From', emailmsg['x-opencore-send-from'])
             if 'x-opencore-do-not-send-to' in emailmsg:

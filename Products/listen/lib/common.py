@@ -26,6 +26,10 @@ from Products.listen.lib.is_email import email_regex
 
 pin_regex = '\[([0-9]{8})\]\)?$'
 
+from Products.listen.interfaces.utilities import IHeaderValidator
+def header_validator():
+    return getUtility(IHeaderValidator)
+
 def lookup_email(member_id, context):
     results = lookup_emails([member_id])
     return results and results[0] or ''

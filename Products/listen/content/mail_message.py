@@ -169,18 +169,16 @@ class MailFromString(object):
         other_headers = [header for header in other_headers if header not in opencore_headers]
 
         opencore_headers = dict(opencore_headers)
-        if "x-opencore-validation-key" not in opencore_headers:
+        from Products.listen.lib.common import header_validator
+        validator = header_validator()
+        if not validator.validate_headers(opencore_headers):
             opencore_headers = []
         else:
-            from libopencore.mail_headers import validate_headers
-            if not validate_headers(opencore_headers, "/tmp/foo"):
-                opencore_headers = []
-            else:
-                del opencore_headers["x-opencore-validation-key"]
-                if opencore_headers.get("x-opencore-send-from", None) is not None:
-                    context.from_addr = opencore_headers['x-opencore-send-from']
+            del opencore_headers["x-opencore-validation-key"]
+            if opencore_headers.get("x-opencore-send-from", None) is not None:
+                context.from_addr = opencore_headers['x-opencore-send-from']
                     
-                opencore_headers = opencore_headers.items()
+            opencore_headers = opencore_headers.items()
         other_headers = other_headers.extend(opencore_headers)
 
         context.other_headers = tuple(other_headers)

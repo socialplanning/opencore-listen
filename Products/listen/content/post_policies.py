@@ -78,11 +78,9 @@ class BasePostPolicy(object):
         return bool('unsubscribe' in subject)        
     
     def is_internal_message(self, request):
-        key = request.get('x-opencore-validation-key', None)
-        if key is None:
-            return False
-        from libopencore.mail_headers import validate_headers
-        return validate_headers(request, "/tmp/foo")
+        from Products.listen.lib.common import header_validator
+        validator = header_validator()
+        return validator.validate_headers(request)
 
 class PublicEmailPostPolicy(BasePostPolicy):
     """
