@@ -171,6 +171,8 @@ class MailingListMessageExporter(object):
 
     def export_messages_to_tempfile(self):
         sa = getUtility(ISearchableArchive, context=self.context)
+        if not hasattr(sa, 'REQUEST'):
+            sa.REQUEST = self.context.REQUEST
         import tempfile, os
         tmpfd, tmpname = tempfile.mkstemp(suffix='.mbox')
         temp_outfile = os.fdopen(tmpfd, 'w')
