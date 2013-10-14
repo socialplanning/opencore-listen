@@ -300,6 +300,8 @@ class SearchableMessage(object):
                     # use unrestricted get object to prevent unauthorized
                     # errors when posting through email
                     initial = resolved_refs[0]._unrestrictedGetObject()
+                    if initial == context:
+                        raise AttributeError
                     annotations = IAnnotations(initial)
                     data = annotations[PROJECTNAME]
                     data['modification_date'] = context.date
