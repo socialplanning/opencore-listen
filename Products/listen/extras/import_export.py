@@ -210,7 +210,7 @@ class MailingListMessageExporter(object):
 
         enc_msg['From'] = encode_header(msg.from_addr, encoding)
         enc_msg['To'] = encode_header(self.context.mailto, encoding)
-        enc_msg['Subject'] = encode_header(msg.subject, encoding)
+        enc_msg['Subject'] = encode_header(msg.subject, encoding).replace("\n", " ").strip()
         enc_msg['Date'] = encode_header(msg.date.strftime("%d %b %Y %T %Z"), encoding)
         enc_msg['Message-id'] = encode_header(msg.message_id, encoding)
         if msg.references:
