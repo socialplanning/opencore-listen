@@ -153,8 +153,8 @@ class MailBoxerMailingList(MailBoxer):
 
         # if 'keepdate' is set, get date from mail,
         if self.getValueFor('keepdate'):
-            timetuple = rfc822.parsedate_tz(header.get('date'))
-            time = DateTime(rfc822.mktime_tz(timetuple))
+            assert header.get("date") is not None
+            time = DateTime(header.get("date"))
         # ... take our own date, clients are always lying!
         else:
             time = DateTime()
