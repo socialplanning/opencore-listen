@@ -1,3 +1,5 @@
+import hmac
+import sha
 from plone.mail import decode_header
 
 from zope.component import getAdapter
@@ -129,6 +131,7 @@ class ModerationView(BrowserView):
 
                 postid = post['postid']
                 info = dict(user=user_email, user_name=user_name, 
+                            email_hash=hmac.new(user_email, digestmod=sha).hexdigest(),
                             subject=subject, body=body, postid=postid,
                             raw_headers=header)
                 if queue_name is not None:
