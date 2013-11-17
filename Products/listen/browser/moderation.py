@@ -112,7 +112,7 @@ class ModerationView(BrowserView):
     def nextURL(self):
         return '%s/%s' % (self.context.absolute_url(), self.__name__)
 
-    def _get_pending_list(self, pending_list):
+    def _get_pending_list(self, pending_list, queue_name=None):
         list_out = []
         for user_email in pending_list.get_user_emails():
             posts = pending_list.get_posts(user_email)
@@ -128,7 +128,12 @@ class ModerationView(BrowserView):
                     subject = subject.decode("utf-8", 'replace')
 
                 postid = post['postid']
-                list_out.append(dict(user=user_email, user_name=user_name, subject=subject, body=body, postid=postid))
+                info = dict(user=user_email, user_name=user_name, 
+                            subject=subject, body=body, postid=postid,
+                            raw_headers=header)
+                if queue_name is not None:
+                    info['queue_name'] = queue_name
+                list_out.append(info)
 
         return list_out
 
@@ -136,10 +141,10 @@ class ModerationView(BrowserView):
         return self.get_pending_mod_post_list() + self.get_pending_pmod_post_list()
 
     def get_pending_pmod_post_list(self):
-        return self._get_pending_list(self.pmod_post_pending_list)
+        return self._get_pending_list(self.pmod_post_pending_list, queue_name='pmod_post_pending_list')
 
     def get_pending_mod_post_list(self):
-        return self._get_pending_list(self.mod_post_pending_list)
+        return self._get_pending_list(self.mod_post_pending_list, queue_name='mod_post_pending_list')
 
     def Title(self):
         return 'Moderate Things'
