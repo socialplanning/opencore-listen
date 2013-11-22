@@ -187,6 +187,7 @@ class PendingList(object):
 def create_pending_list_for(pendinglist_annotation):
     class New_Pending_List(PendingList):
         def __init__(self, context):
+            self.trust_caller = False
             self.context = context
             annot = IAnnotations(context)
             listen_annot = annot.setdefault(PROJECTNAME, OOBTree())
