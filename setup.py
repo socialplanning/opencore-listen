@@ -4,7 +4,7 @@ import sys, os
 version = '0.8.0'
 
 try:
-    readme = open('README.txt').read()
+    readme = open('README.rst').read()
     changes = open("CHANGES.txt").read()
     readme = "%s\n%s" % (changes, readme)
 except:
