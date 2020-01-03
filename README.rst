@@ -1,9 +1,15 @@
+======
 Listen
 ======
 
 Listen is a mailing list management application that integrates into the Plone
 Content Management System.  It is based on the venerable MailBoxer Zope
 Product by Maik Jablonski, and offers most of the features of that product.
+
+
+Features
+========
+
 Key features include:
 
  * Easily create mailing lists through the Plone interface.
@@ -41,18 +47,33 @@ ideal content class would.  Hopefully, those parts which make heavy use of
 Five technologies can serve as a helpful example for those intending to use
 Five in their own products.
 
-Requirements
-------------
 
-Plone 2.1+ (and all that entails)
-Zope 2.8.4+
-Five 1.4
-plone.app.form
-MailBoxer (svn version from
-https://svn.plone.org/svn/collective/MailBoxerTempDev/trunk)
-ManagableIndex 1.1
-(also OFolder http://www.dieter.handshake.de/pyprojects/zope/index.html#ManagableIndex)
-plone.mail (https://svn.plone.org/svn/plone/plone.mail/trunk)
+Examples
+========
+
+This add-on can be seen in action at the following sites:
+
+- http://coactivate.org/
+
+- http://openfsm.net/
+
+
+Requirements
+============
+
+- Plone 2.1+ (and all that entails)
+
+- Zope 2.8.4+
+
+- Five 1.4
+
+- plone.app.form
+
+- MailBoxer (svn version from https://svn.plone.org/svn/collective/MailBoxerTempDev/trunk)
+
+- ManagableIndex 1.1 (also OFolder http://www.dieter.handshake.de/pyprojects/zope/index.html#ManagableIndex)
+
+- plone.mail (https://svn.plone.org/svn/plone/plone.mail/trunk)
 
 Highly Recommended
 -------------------
@@ -63,6 +84,25 @@ Any site that expects a reasonable amount of mail traffic (incoming and
 especially outgoing) needs to use this.  It well not send duplicate mails
 when a conflict error forces a retry, and it increases potential incoming
 mail volume tremendously by not blocking on sending mail.
+
+
+Translations
+============
+
+This product has been translated into:
+
+- Spanish
+
+- French
+
+- Portuguese
+
+
+Documentation
+=============
+
+Full documentation for end users can be found in the "docs" folder.
+It is also available online at https://www.coactivate.org/projects/listen/project-home
 
 
 Installation and setup
@@ -84,14 +124,20 @@ a simple single list instance the easiest way to do this is the standard
 MailBoxer way:
 
 1) Copy the smtp2zope.py script from your MailBoxer folder to the relevant
-SMTP server (if you are using sendmail with smrsh, then you need to place/link
-it in a folder accessible to smrsh; for postfix place/link it in /etc/postfix).
+   SMTP server (if you are using sendmail with smrsh, then you need to place/link
+   it in a folder accessible to smrsh; for postfix place/link it in ``/etc/postfix``).
 
 2) Add an alias for the mailing list of the form:
-my_list@lists.mydomain.com    "|/etc/smrsh/smtp2zope.py http://my_site.example.com/path/to/list/manage_mailboxer 200000"
+
+::
+
+  my_list@lists.mydomain.com    "|/etc/smrsh/smtp2zope.py http://my_site.example.com/path/to/list/manage_mailboxer 200000"
 
 for postfix:
-my_list:      "|/etc/postfix/smtp2zope.py http://my_site.example.com/path/to/list/manage_mailboxer 200000"
+
+::
+
+  my_list:      "|/etc/postfix/smtp2zope.py http://my_site.example.com/path/to/list/manage_mailboxer 200000"
 
 Where the number at the end restricts the maximum size of a message intended
 for the list, this is optional, but highly recommended.
@@ -103,20 +149,25 @@ is that you need to map a catch-all domain to a similar command which uses a
 tool in your Zope instance to decide where to route the mail.  In sendmail the
 process is as follows:
 
-1) same as step 1 above.
+1) Same as step 1 above.
 
 2) Add an entry to your virtusertable to create the catch-all domain:
 
-@lists.my_domain.com      my_zope_lists
+::
+
+  @lists.my_domain.com      my_zope_lists
 
 3) Add an alias pointing to the script with the URL for the global list lookup
 utility:
 
-my_zope_lists   "|/etc/smrsh/smtp2zope.py http://my_site.example.com/send_listen_mail 200000"
+::
+
+  my_zope_lists   "|/etc/smrsh/smtp2zope.py http://my_site.example.com/send_listen_mail 200000"
 
 That should be about it.  Site members and anonymous users can subscribe
 themselves to the list, the list creator and/or site manager can choose
 whether the list is moderated or closed and how it is archived.
+
 
 Qmail
 =====
@@ -125,15 +176,18 @@ is slightly different. You need to create a file .qmail-mylist,
 where mylist is the name of the list (i.e. mylist@example.com).
 
 So on my system (which serves multiple domains), I had to create the file in
-this directory: /var/qmail/mailnames/example.com
-Depending on your setup, it might go somewhere else (i.e. /var/qmail/alias)
+this directory: ``/var/qmail/mailnames/example.com``
+Depending on your setup, it might go somewhere else (i.e. ``/var/qmail/alias``)
 
 The contents of the file look like this:
 
-/etc/smrsh/smtp2zope.py http://my_site.example.com/send_listen_mail 200000
+::
+
+  /etc/smrsh/smtp2zope.py http://my_site.example.com/send_listen_mail 200000
 
 Unlike with postfix/sendmail, you don't need to run a command 'newaliases'.
 The new alias should be active immediately after you create the file.
+
 
 Migration
 =========
@@ -156,6 +210,20 @@ the existing 'mail_lexicon' and add a new ZCTextIndex Lexicon with::
 
 Then go to the following URL to reindex your archive
 ``http://site/path/to/list/fixupMessages``
+
+
+Contribute
+==========
+
+- Issue Tracker: https://github.com/socialplanning/opencore-listen/issues
+- Source Code: https://github.com/socialplanning/opencore-listen
+- Documentation: https://www.coactivate.org/projects/listen/project-home
+
+
+License
+=======
+
+The project is licensed under the GPLv2.
 
 
 Enjoy!
