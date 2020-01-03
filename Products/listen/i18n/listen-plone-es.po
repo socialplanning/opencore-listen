@@ -1,13 +1,12 @@
 # Spanish translations for Listen package
-# Traducciones al Espa駉l del producto Listen.
-# Leonardo J. Caballero G. <leonardocaballero@gmail.com>, 2009, 2010.
+# Leonardo J. Caballero G. <leonardocaballero@gmail.com>, 2009 - 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: Listen 0.6\n"
-"POT-Creation-Date: 2010-08-31 21:55+0000\n"
-"PO-Revision-Date: 2010-08-31 15:42-0400\n"
+"POT-Creation-Date: 2020-01-03 04:27+0000\n"
+"PO-Revision-Date: 2020-01-02 23:09-0400\n"
 "Last-Translator: Leonardo J. Caballero G. <leonardocaballero@gmail.com>\n"
-"Language-Team: Spanish <plone-conosur@lists.plone.org>\n"
+"Language-Team: ES <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,11 +24,11 @@ msgstr "%s (creador)"
 #. Default: "A mailing list manages user subscriptions and processes incoming mail."
 #: ../profiles/default/types/MailingList.xml
 msgid "A mailing list manages user subscriptions and processes incoming mail."
-msgstr "Una lista de correo electr髇ico administra subscripciones de usuario y procesa los correos entrantes."
+msgstr "Una lista de correo electr贸nico administra subscripciones de usuario y procesa los correos entrantes."
 
 #: ../portlets/latest_posts.py:61
 msgid "Add Latest Posts Portlet"
-msgstr "Agregar portlet de 鷏timos mensajes"
+msgstr "A帽adir portlet de 煤ltimos mensajes"
 
 #: ../profiles/default/types/MailingList.xml
 msgid "Archive"
@@ -37,11 +36,11 @@ msgstr "Archivo"
 
 #: ../portlets/latest_posts.py:69
 msgid "Edit Latest Posts Portlet"
-msgstr "Editar portlet de 鷏timos mensajes"
+msgstr "Editar portlet de 煤ltimos mensajes"
 
 #: ../portlets/latest_posts.py:25
 msgid "How many items to list."
-msgstr "緾u醤tos elementos a la lista?."
+msgstr "驴Cu谩ntos elementos a la lista?."
 
 #. Default: "Import/Export"
 #: ../profiles/default/types/MailingList.xml
@@ -50,7 +49,7 @@ msgstr "Importar/Exportar"
 
 #: ../portlets/latest_posts.py:40
 msgid "Latest Posts"
-msgstr "趌timos mensajes"
+msgstr "脷ltimos mensajes"
 
 #: ../portlets/list_details.py:85
 msgid "List Type not set"
@@ -58,54 +57,54 @@ msgstr "Tipo de lista no definido"
 
 #: ../portlets/list_details.py:28
 msgid "Mailing list details"
-msgstr "Detalles de lista de correo electr髇ico"
+msgstr "Detalles de lista de correo electr贸nico"
 
 #. Default: "MailingList"
 #: ../profiles/default/types/MailingList.xml
 msgid "MailingList"
-msgstr "Lista de correo electr髇ico"
+msgstr "Lista de correo electr贸nico"
 
 #: ../profiles/default/types/MailingList.xml
 msgid "Membership"
-msgstr "Membresia"
+msgstr "Participaci贸n"
 
 #: ../profiles/default/types/MailingList.xml
 msgid "Moderation"
-msgstr "Moderaci髇"
+msgstr "Moderaci贸n"
 
 #: ../portlets/latest_posts.py:24
 msgid "Number of items to display"
-msgstr "N鷐ero de elementos a mostrar"
+msgstr "N煤mero de elementos a mostrar"
 
 #: ../portlets/latest_posts.py:21
 msgid "Path to Listen's MailingList object, relative to portal root"
-msgstr "Ruta al objeto de la lista de correo electr髇ico de Listen, relativo a la ra韟 del portal"
+msgstr "Ruta al objeto de la lista de correo electr贸nico de Listen, relativo a la ra铆z del portal"
 
 #: ../portlets/latest_posts.py:20
 msgid "Path to the Mailing List object"
-msgstr "Ruta al objeto de la lista de correo electr髇ico"
+msgstr "Ruta al objeto de la lista de correo electr贸nico"
 
 #: ../profiles/default/types/MailingList.xml
 msgid "Search"
-msgstr "B鷖queda"
+msgstr "B煤squeda"
 
 #: ../portlets/latest_posts.py:62
 msgid "This portlet displays latest posts in mailing list"
-msgstr "Este portlet muestra los 鷏timos env韔s en la lista de correo electr髇ico"
+msgstr "Este portlet muestra los 煤ltimos env铆os en la lista de correo electr贸nico"
 
 #: ../portlets/latest_posts.py:70
 msgid "This portlet displays latest posts in mailing list."
-msgstr "Este portlet muestra los 鷏timos env韔s en la lista de correo electr髇ico."
+msgstr "Este portlet muestra los 煤ltimos env铆os en la lista de correo electr贸nico."
 
 #. Default: "A portlet which can show latest posts in a mailing list"
 #: ../profiles/default/types/MailingList.xml:16
 msgid "profiles_portlets_LatestPosts_help"
-msgstr "Un portlet el cual puede mostrar los 鷏timos mensajes en una lista de correo"
+msgstr "Un portlet el cual puede mostrar los 煤ltimos mensajes en una lista de correo"
 
 #. Default: "Latest Posts"
 #: ../profiles/default/portlets.xml:15
 msgid "profiles_portlets_LatestPosts_title"
-msgstr "趌timos mensajes"
+msgstr "脷ltimos mensajes"
 
 #. Default: "A portlet that displays details for a Listen mailing list"
 #: ../profiles/default/types/MailingList.xml:8
