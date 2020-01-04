@@ -140,7 +140,7 @@ class MailBoxerMailingList(MailBoxer):
         MailBoxer.manage_afterAdd(self, self.REQUEST, kw)
 
     # modified manage_addMail from MailBoxer.py to make things more modular
-    def addMail(self, mailString):
+    def addMail(self, mailString, force_id=False):
         """ Store mail in date based folder archive.
             Returns created mail.  See IMailingList interface.
         """
@@ -154,8 +154,8 @@ class MailBoxerMailingList(MailBoxer):
 
         # if 'keepdate' is set, get date from mail,
         if self.getValueFor('keepdate'):
-            timetuple = rfc822.parsedate_tz(header.get('date'))
-            time = DateTime(rfc822.mktime_tz(timetuple))
+            assert header.get("date") is not None
+            time = DateTime(header.get("date"))
         # ... take our own date, clients are always lying!
         else:
             time = DateTime()
@@ -181,7 +181,9 @@ class MailBoxerMailingList(MailBoxer):
         # search a free id for the mailobject
         id = time.millis()
         while base_hasattr(mailFolder, str(id)):
-             id = id + 1
+            if force_id:
+                raise AssertionError("ID %s already exists on folder %s" % (id, mailFolder))
+            id = id + 1
         id = str(id)
 
         self.addMailBoxerMail(mailFolder, id, sender, subject, time,

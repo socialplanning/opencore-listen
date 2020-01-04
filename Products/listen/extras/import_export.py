@@ -91,7 +91,7 @@ class MailingListMessageImporter(object):
         return self.msgids
 
     def _add_msg(self, buf):
-        msg = self.context.addMail("".join(buf))
+        msg = self.context.addMail("".join(buf), force_id=True)
         if msg:
             self.msg_count += 1
             self.msgids.append(msg.getId())
@@ -171,6 +171,10 @@ class MailingListMessageExporter(object):
 
     def export_messages_to_tempfile(self):
         sa = getUtility(ISearchableArchive, context=self.context)
+        changed = False
+        if not hasattr(sa, 'REQUEST'):
+            sa.REQUEST = self.context.REQUEST
+            changed = True
         import tempfile, os
         tmpfd, tmpname = tempfile.mkstemp(suffix='.mbox')
         temp_outfile = os.fdopen(tmpfd, 'w')
@@ -178,6 +182,8 @@ class MailingListMessageExporter(object):
         for msg in msgs:
             temp_outfile.write(self._convert_to_mbox_msg(msg.getObject()))
             temp_outfile.write('\n')
+        if changed:
+            delattr(sa, 'REQUEST')
         temp_outfile.close()
         return tmpfd, tmpname
 
@@ -204,15 +210,15 @@ class MailingListMessageExporter(object):
 
         enc_msg['From'] = encode_header(msg.from_addr, encoding)
         enc_msg['To'] = encode_header(self.context.mailto, encoding)
-        enc_msg['Subject'] = encode_header(msg.subject, encoding)
-        enc_msg['Date'] = encode_header(msg.date.strftime("%d %b %Y %T %Z"), encoding)
+        enc_msg['Subject'] = encode_header(msg.subject, encoding).replace("\n", " ").strip()
+        enc_msg['Date'] = encode_header(str(msg.date), encoding)
         enc_msg['Message-id'] = encode_header(msg.message_id, encoding)
         if msg.references:
             enc_msg['References'] = encode_header(" ".join(msg.references), encoding)
         if msg.in_reply_to:
             enc_msg['In-reply-to'] = encode_header(msg.in_reply_to, encoding)
                                     
-        ctime = msg.date.strftime("%a %b %e %T %Y")
+        ctime = str(msg.date)
         enc_msg.set_unixfrom("From %s %s" % (parseaddr(msg.from_addr)[1], ctime))
 
         for file_id in file_ids:

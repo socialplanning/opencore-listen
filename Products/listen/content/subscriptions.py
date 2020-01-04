@@ -114,10 +114,13 @@ class PendingList(object):
 
     def __init__(self):
         self.pend = OOBTree()
-        
+        self.trust_caller = False
+
     def add(self, item, **values):
         self.pend.setdefault(item, OOBTree())
         if 'time' not in values:
+            if self.trust_caller:
+                raise AssertionError("No time passed in: %s" % values)
             values['time'] = DateTime().ISO()
         if 'post' in values:
             post_list = self.pend[item].setdefault('post', IOBTree())
@@ -129,9 +132,12 @@ class PendingList(object):
                 nextid = post_list.maxKey() + 1
             except ValueError:
                 nextid = 0
-                
-            new_post['postid'] = nextid
-            post_list[nextid] = new_post
+
+            if self.trust_caller:
+                assert 'postid' in new_post, new_post
+            else:
+                new_post['postid'] = nextid
+            post_list[new_post['postid']] = new_post
             values.pop('post')
         self.pend[item].update(values)
 
@@ -181,6 +187,7 @@ class PendingList(object):
 def create_pending_list_for(pendinglist_annotation):
     class New_Pending_List(PendingList):
         def __init__(self, context):
+            self.trust_caller = False
             self.context = context
             annot = IAnnotations(context)
             listen_annot = annot.setdefault(PROJECTNAME, OOBTree())
