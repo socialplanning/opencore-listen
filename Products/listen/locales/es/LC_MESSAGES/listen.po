@@ -21,12 +21,12 @@ msgstr ""
 
 #: ../browser/import_export.py:120
 msgid "1 email address imported"
-msgstr "una dirección de correo electróico importado"
+msgstr "una dirección de correo electrónico importado"
 
 #. Default: "A description of the mailing list."
 #: ../interfaces/mailinglist.py:137
 msgid "A description of the mailing list."
-msgstr "Una descripción de la lista de correo electróico."
+msgstr "Una descripción de la lista de correo electrónico."
 
 #: ../utilities/list_lookup.py:186
 msgid "A list is already registered for this address"
@@ -38,7 +38,7 @@ msgstr "Ya hay una lista registrada para esta dirección, primero debe cancelar 
 
 #: ../browser/mailinglist_views.py:252
 msgid "Add Mailing List"
-msgstr "Añadir Lista de correo electróico"
+msgstr "Añadir Lista de correo electrónico"
 
 #: ../browser/manage_membership.pt:56
 msgid "Add:"
@@ -62,7 +62,7 @@ msgstr "Permitir a los no suscriptores ver los archivos de la lista"
 
 #: ../browser/mailinglist_views.py:80
 msgid "An email address is required"
-msgstr "Una dirección de correo electróico es requerido"
+msgstr "Una dirección de correo electrónico es requerido"
 
 #: ../interfaces/list_types.py:64
 msgid "Announce List"
@@ -78,7 +78,7 @@ msgstr "Cualquiera puede recibir mensajes, pero cada mensaje enviado tiene que s
 
 #: ../interfaces/list_types.py:53
 msgid "Anyone who confirms their email address is valid can post and receive messages."
-msgstr "Cualquiera quien confirme su dirección de correo electróico como valido puede enviar y recibir mensajes."
+msgstr "Cualquiera quien confirme su dirección de correo electrónico como valido puede enviar y recibir mensajes."
 
 #: ../interfaces/mailinglist.py:168
 msgid "Archival method"
@@ -99,7 +99,7 @@ msgstr "Cuerpo"
 
 #: ../browser/import_export.py:42
 msgid "Cannot export mailing list archives"
-msgstr "No puede exportar los archivos de lista de correo electróico"
+msgstr "No puede exportar los archivos de lista de correo electrónico"
 
 #: ../browser/import_export.py:36
 msgid "Cannot export mailing list subscribers"
@@ -107,7 +107,7 @@ msgstr "No puede exportar los archivos de lista de subscriptores"
 
 #: ../browser/import_export.py:65
 msgid "Cannot import mailing list archives"
-msgstr "No puede importar los archivos de lista de correo electróico"
+msgstr "No puede importar los archivos de lista de correo electrónico"
 
 #: ../browser/import_export.py:103
 msgid "Cannot import mailing list subscribers"
@@ -150,7 +150,7 @@ msgstr "Sin archivar mensajes"
 
 #: ../browser/mailinglist_views.py:297
 msgid "Edit Mailing List"
-msgstr "Editar lista de correo electróico"
+msgstr "Editar lista de correo electrónico"
 
 #: ../browser/mailinglist_views.py:321
 msgid "Edit cancelled."
@@ -170,7 +170,7 @@ msgstr "Exportar como mbox"
 
 #: ../browser/import_export.pt:14
 msgid "Export mailing list data"
-msgstr "Exportar data de lista de correo electróico"
+msgstr "Exportar data de lista de correo electrónico"
 
 #: ../browser/import_export.pt:17
 msgid "Export messages"
@@ -186,7 +186,7 @@ msgstr "Exportar todos los mensajes desde un archivo de lista de correo como un 
 
 #: ../browser/import_export.pt:42
 msgid "Exports the usernames, full names, and e-mail addresses of all subscribers as a CSV file."
-msgstr "Exportar todos los nombre de usuarios, nombres completo y dirección de correo electróico de todos los suscriptores como un archivo CSV."
+msgstr "Exportar todos los nombre de usuarios, nombres completo y dirección de correo electrónico de todos los suscriptores como un archivo CSV."
 
 #. Default: "Flat listing"
 #: ../browser/archive_thread_messages.pt:46
@@ -232,7 +232,7 @@ msgstr "El ID debe contener solo caracteres ASCII."
 
 #: ../browser/import_export.pt:56
 msgid "Import mailing list data"
-msgstr "Importar data de lista de correo electróico"
+msgstr "Importar data de lista de correo electrónico"
 
 #: ../browser/import_export.pt:59
 msgid "Import messages"
@@ -305,16 +305,16 @@ msgstr "Soporte a la lista de correo Listen."
 
 #: ../profiles.zcml:13
 msgid "Listen mailing lists"
-msgstr "Listen - Listas de correo electróico"
+msgstr "Listen - Listas de correo electrónico"
 
 #: ../browser/mailinglist_views.py:282
 msgid "Mailing list added."
-msgstr "Lista de correo electróico añadido."
+msgstr "Lista de correo electrónico añadido."
 
 #. Default: "Main address for the mailing list."
 #: ../interfaces/mailinglist.py:143
 msgid "Main address for the mailing list."
-msgstr "Dirección principal para la lista de correo electróico."
+msgstr "Dirección principal para la lista de correo electrónico."
 
 #: ../browser/manage_membership.py:160
 msgid "Manage Allowed Senders"
@@ -388,7 +388,7 @@ msgstr "No hay cambios que necesiten ser guardados."
 
 #: ../browser/import_export.py:123
 msgid "No emails found"
-msgstr "Sin correo electróico encontrado"
+msgstr "Sin correo electrónico encontrado"
 
 #: ../browser/import_export.py:126
 msgid "No file selected. Please select a csv file before importing."
@@ -495,7 +495,7 @@ msgstr "Referencias"
 #. Default: "Registered Mailing Lists"
 #: ../browser/lookup_view.pt:10
 msgid "Registered Mailing Lists"
-msgstr "Lista de correo electróico registradas"
+msgstr "Lista de correo electrónico registradas"
 
 #. Default: "Remove"
 #: ../browser/manage_membership.pt:34
@@ -574,7 +574,7 @@ msgstr "Cambiar a ver por fecha"
 
 #: ../interfaces/mail_message.py:16
 msgid "The address the mail was sent from"
-msgstr "La dirección del correo electróico fue enviado desde"
+msgstr "La dirección del correo electrónico fue enviado desde"
 
 #: ../browser/mail_archive_views.py:205
 #: ../browser/mail_message_views.py:203
@@ -583,7 +583,7 @@ msgstr "El usuario actual no tiene ninguna dirección."
 
 #: ../interfaces/mail_message.py:28
 msgid "The date the mail was sent"
-msgstr "La fecha de envió del correo electróico fue"
+msgstr "La fecha de envió del correo electrónico fue"
 
 #: ../content/mailinglist.py:1642
 msgid "The entire message, including attachments"
@@ -611,7 +611,7 @@ msgstr "El mensaje de identificación de este mensaje."
 
 #: ../interfaces/mail_message.py:45
 msgid "The message id that this mail is in reply to."
-msgstr "El identificador del mensaje de este correo electróico es en respuesta a."
+msgstr "El identificador del mensaje de este correo electrónico es en respuesta a."
 
 #: ../content/mailinglist.py:1643
 msgid "The message text only"
@@ -628,11 +628,11 @@ msgstr "La política que defines el comportamiento de la lista."
 
 #: ../interfaces/mail_message.py:22
 msgid "The subject of the email"
-msgstr "El asunto del correo electróico"
+msgstr "El asunto del correo electrónico"
 
 #: ../interfaces/mailinglist.py:94
 msgid "The value entered is not a valid email address."
-msgstr "El valor introducido no es una dirección de correo electróico valido."
+msgstr "El valor introducido no es una dirección de correo electrónico valido."
 
 #: ../browser/import_export.pt:33
 msgid "There are no messages archived for this list. ${is_archived} ${new_topic_to_list} a message to the list."
@@ -648,11 +648,11 @@ msgstr "La dirección esta siendo usada en otra lista."
 
 #: ../browser/mailinglist_views.py:85
 msgid "This email address is already subscribed"
-msgstr "Esta dirección de correo electróico ya esta subscrita"
+msgstr "Esta dirección de correo electrónico ya esta subscrita"
 
 #: ../browser/mailinglist_views.py:82
 msgid "This email address is invalid"
-msgstr "Esta dirección de correo electróico es invalida"
+msgstr "Esta dirección de correo electrónico es invalida"
 
 #: ../browser/import_export.pt:50
 msgid "This list does not have any subscribers to export."
@@ -694,7 +694,7 @@ msgstr "Título"
 
 #: ../browser/mailinglist_view.pt:94
 msgid "To subscribe to the list enter your email in the field below."
-msgstr "Para suscribir a la lista introduzca su dirección de correo electróico en el siguiente campo."
+msgstr "Para suscribir a la lista introduzca su dirección de correo electrónico en el siguiente campo."
 
 #: ../browser/mailinglist_view.pt:56
 msgid "Type:"
@@ -747,7 +747,7 @@ msgstr "Usted no esta actualmente suscrito a esta lista."
 #. Default: "You are receiving this message because you have selected to receive a daily digest for ${digest_template_mailinglist_title}. To view previous messages, update your email settings, or unsubscribe, visit: ${digest_template_mailinglist_absolute_url}"
 #: ../content/digest_template.pt:53
 msgid "You are receiving this message because you have selected to receive a daily digest for ${digest_template_mailinglist_title}. To view previous messages, update your email settings, or unsubscribe, visit: ${digest_template_mailinglist_absolute_url}"
-msgstr "Usted está recibiendo este mensaje porque usted ha seleccionado para recibir un resumen diario para ${digest_template_mailinglist_title}. Para ver los mensajes previos, actualizar su configuración de correo electróico, o darse de baja, visite: ${digest_template_mailinglist_absolute_url}"
+msgstr "Usted está recibiendo este mensaje porque usted ha seleccionado para recibir un resumen diario para ${digest_template_mailinglist_title}. Para ver los mensajes previos, actualizar su configuración de correo electrónico, o darse de baja, visite: ${digest_template_mailinglist_absolute_url}"
 
 #: ../interfaces/mailinglist.py:180
 msgid "You can choose whether to allow list non-members to view the list's archives, or restrict the archives to logged-in subscribers."
@@ -797,7 +797,7 @@ msgstr "aprobar"
 #. Default: "Bad user or email address: ${to_add}.  "
 #: ../browser/manage_membership.py:74
 msgid "bad_user_email_portal_msg"
-msgstr "Mal usuario o dirección de correo electróico: ${to_add}.  "
+msgstr "Mal usuario o dirección de correo electrónico: ${to_add}.  "
 
 #. Default: "Add"
 #: ../browser/listwidget/widget.pt:44
@@ -889,7 +889,7 @@ msgstr "Anterior por fecha:"
 #. Default: "Email Address:"
 #: ../browser/mailinglist_view.pt:101
 msgid "label_email"
-msgstr "Dirección de correo electróico:"
+msgstr "Dirección de correo electrónico:"
 
 #. Default: "post new message"
 #: ../browser/archive_forum_view.pt:81
@@ -990,7 +990,7 @@ msgstr "Abierto por"
 #. Default: "Last Updated"
 #: ../browser/archive_forum_view.pt:106
 msgid "list_archive_thread_recent_post_date"
-msgstr "Útimo actualizado"
+msgstr "Último actualizado"
 
 #. Default: "Replies"
 #: ../browser/archive_forum_view.pt:104
@@ -1006,12 +1006,12 @@ msgstr "Asunto"
 #. Default: "Bad email address"
 #: ../browser/mailinglist_views.py:104
 msgid "list_bad_email_address_status_msg"
-msgstr "Dirección de correo electróico incorrecta"
+msgstr "Dirección de correo electrónico incorrecta"
 
 #. Default: "Email subscribed"
 #: ../browser/mailinglist_views.py:97
 msgid "list_email_subscribed_status_msg"
-msgstr "Correo electróico suscrito"
+msgstr "Correo electrónico suscrito"
 
 #. Default: "You have been subscribed"
 #: ../browser/mailinglist_views.py:170
@@ -1045,7 +1045,7 @@ msgstr ""
 "\n"
 "--\n"
 "Archivo: ${archive_url}\n"
-"Para darse de baja envió un correo electróico con el asunto \"unsubscribe\" a ${mailto}.  Por favor, contacte a ${manager_email} para preguntas.\n"
+"Para darse de baja envió un correo electrónico con el asunto \"unsubscribe\" a ${mailto}.  Por favor, contacte a ${manager_email} para preguntas.\n"
 
 #. Default: "\n--\nTo unsubscribe send an email with subject \"unsubscribe\" to ${mailto}.  Please contact ${manager_email} for questions.\n"
 #: ../lib/default_email_text.py:241
@@ -1053,7 +1053,7 @@ msgid "mail_footer_unarchived"
 msgstr ""
 "\n"
 "--\n"
-"Para darse de baja envió un correo electróico con el asunto \"unsubscribe\" a ${mailto}.  Por favor, contacte ${manager_email} para preguntas.\n"
+"Para darse de baja envió un correo electrónico con el asunto \"unsubscribe\" a ${mailto}.  Por favor, contacte ${manager_email} para preguntas.\n"
 
 #. Default: "\nContent-type: ${content-type}\nSubject: ${subject}\nMessage-id: ${message_id}\nX-Mailer: ${xmailer}\nReply-To: ${mailto}\nErrors-To: ${returnpath}\nList-Post: <mailto:${mailto}>\nList-Subscribe: <mailto:${mailto}?subject=${subscribe}>\nList-Unsubscribe: <mailto:${mailto}?subject=${unsubscribe}>\nList-Id: ${title}\nPrecedence: Bulk\n"
 #: ../lib/default_email_text.py:246
@@ -1092,7 +1092,7 @@ msgstr ""
 "\n"
 "Hola Administrador de Lista,\n"
 "\n"
-"${fullname} ha enviado un mensaje a la lista de correo electróico ${listname} \n"
+"${fullname} ha enviado un mensaje a la lista de correo electrónico ${listname} \n"
 "y ese espera su aprobación.\n"
 "${mod_url}\n"
 "\n"
@@ -1119,7 +1119,7 @@ msgstr "Nueva respuesta a ${reply_subject} por ${reply_author}"
 #. Default: "New Mailing List Post"
 #: ../browser/new_topic_view.pt:19
 msgid "new_topic"
-msgstr "Nuevo mensaje a lista de correo electróico"
+msgstr "Nuevo mensaje a lista de correo electrónico"
 
 #. Default: "There are currently no ${field_title}"
 #: ../extras/member_search.pt:45
@@ -1153,7 +1153,7 @@ msgstr "permiso denegado"
 #. Default: "${num_emails} email addresses imported"
 #: ../browser/import_export.py:116
 msgid "psm_email_addresses_imported_msg"
-msgstr "${num_emails} direcciones de correo electróico importadas"
+msgstr "${num_emails} direcciones de correo electrónico importadas"
 
 #: ../browser/moderation.pt:47
 msgid "reject"
@@ -1202,7 +1202,7 @@ msgstr "Una tabla de lista de direcciones registradas y las rutas a las listas c
 #. Default: "To unsubscribe from this list send an email to the list with the subject \"${sunsubscribe_keyword}\" and an empty body."
 #: ../browser/mailinglist_view.pt:82
 msgid "unsub-instructions"
-msgstr "Para cancelar la suscripción desde esta lista, por favor, enviar un correo electróico a la lista con el asunto \"${sunsubscribe_keyword}\" y el cuerpo del correo vacío."
+msgstr "Para cancelar la suscripción desde esta lista, por favor, enviar un correo electrónico a la lista con el asunto \"${sunsubscribe_keyword}\" y el cuerpo del correo vacío."
 
 #. Default: "\nHello ${fullname},\n\nYou have been unsubscribed from ${listname}.\n\nFarewell!\n\nYours, \nList Manager\n"
 #: ../lib/default_email_text.py:104
@@ -1211,7 +1211,7 @@ msgstr ""
 "\n"
 "Hola ${fullname},\n"
 "\n"
-"A usted se le ha dado de bajo de la lista de correo electróico ${listname}.\n"
+"A usted se le ha dado de bajo de la lista de correo electrónico ${listname}.\n"
 "\n"
 "¡Despedido!\n"
 "\n"
@@ -1240,10 +1240,10 @@ msgstr ""
 "Hola ${fullname},\n"
 "\n"
 "Nosotros hemos recibido más que un mensaje de usted  \n"
-"a la lista de correo electróico ${listname}.\n"
+"a la lista de correo electrónico ${listname}.\n"
 "Con el fin de poder enviar un mensaje a esta lista,\n"
 "por favor, responda a este mensaje dejando la línea del asunto sin cambios.  \n"
-"Después de haber confirmado su dirección de correo electróico, puede reenviar su\n"
+"Después de haber confirmado su dirección de correo electrónico, puede reenviar su\n"
 "mensaje.\n"
 "\n"
 "Por favor, envíe sus preguntas a ${listmanager}.\n"
@@ -1258,7 +1258,7 @@ msgstr ""
 "\n"
 "Hola ${fullname},\n"
 "\n"
-"Su solicitud para unirse a lista de correo electróico ${listname} ha sido denegada\n"
+"Su solicitud para unirse a lista de correo electrónico ${listname} ha sido denegada\n"
 "porque no había ningún registro de una solicitud.\n"
 "Cualquier pregunta relacionada con esto deben ser enviado a ${listmanager}.\n"
 "\n"
@@ -1272,7 +1272,7 @@ msgstr ""
 "\n"
 "Hola Administrador de la Lista,\n"
 "\n"
-"${fullname} esta esperando la aprobación de su participación en la lista de correo electróico ${listname}.\n"
+"${fullname} esta esperando la aprobación de su participación en la lista de correo electrónico ${listname}.\n"
 "${mod_url}\n"
 "\n"
 
@@ -1284,7 +1284,7 @@ msgstr ""
 "Hola ${fullname},\n"
 "\n"
 "Nosotros hemos recibidos un mensaje de usted a la \n"
-"lista de correo electróico ${listname}. El permiso para que usted pueda enviar \n"
+"lista de correo electrónico ${listname}. El permiso para que usted pueda enviar \n"
 "mensajes a esta lista está pendiente de aprobación. Una vez se ha aprobado, \n"
 " su mensaje inicial será procesado. A continuación, deberá\n"
 "volver a enviar todos los mensajes posteriores.\n"
@@ -1301,7 +1301,7 @@ msgstr ""
 "\n"
 "Hola ${fullname},\n"
 "\n"
-"Nosotros recibimos un mensaje de usted a la lista de correo electróico \n"
+"Nosotros recibimos un mensaje de usted a la lista de correo electrónico \n"
 "${listname}. El permiso para que usted pueda enviar mensajes a esta lista está\n"
 "pendiente de aprobación. Una vez aprobado, su mensaje será\n"
 "procesado.\n"
@@ -1318,7 +1318,7 @@ msgstr ""
 "\n"
 "Hola ${fullname},\n"
 "\n"
-"Su petición para unirse a la lista de correo electróico ${listname} ha sido denegada\n"
+"Su petición para unirse a la lista de correo electrónico ${listname} ha sido denegada\n"
 "por que el pin que usted suministro no coinciden con el enviado inicialmente.\n"
 "Cualquier pregunta sobre esto debe ser enviada a ${listmanager}.\n"
 "\n"
@@ -1332,7 +1332,7 @@ msgstr ""
 "\n"
 "Hola ${fullname},\n"
 "\n"
-"Nosotros hemos recibido un mensaje de usted a la lista de correo electróico ${listname}. El mensaje esta en espera por aprobación por administrador de lista.\n"
+"Nosotros hemos recibido un mensaje de usted a la lista de correo electrónico ${listname}. El mensaje esta en espera por aprobación por administrador de lista.\n"
 "\n"
 "Por favor, envíe sus preguntas a ${listmanager}.\n"
 "\n"
@@ -1346,7 +1346,7 @@ msgstr ""
 "\n"
 "Hola ${fullname},\n"
 "\n"
-"Nosotros hemos recibido un mensaje proveniente de usted a la lista de correo electróico ${listname}. \n"
+"Nosotros hemos recibido un mensaje proveniente de usted a la lista de correo electrónico ${listname}. \n"
 "El mensaje esta en espera de la aprobación por parte del administrador de la lista de correo.\n"
 "\n"
 "Para suscribirte a esta lista, enviar un mensaje a ${listaddress}\n"
@@ -1364,7 +1364,7 @@ msgstr ""
 "\n"
 "Hola ${fullname},\n"
 "\n"
-"El mensaje que usted envío a la lista de correo electróico ${listname} ha sido\n"
+"El mensaje que usted envío a la lista de correo electrónico ${listname} ha sido\n"
 "rechazado por la siguientes razones:\n"
 "${reject_reason}\n"
 "\n"
@@ -1380,10 +1380,10 @@ msgstr ""
 "\n"
 "Hola ${fullname},\n"
 "\n"
-"Nosotros recibimos un mensaje de usted a la lista de correo electróico \n"
+"Nosotros recibimos un mensaje de usted a la lista de correo electrónico \n"
 "${listname}. Para habilitar el envío de un mensaje a la lista,\n"
 "por favor, responda a este mensaje dejando el asunto sin cambiar.  \n"
-"Después que usted allá confirmado su dirección correo electróico, \n"
+"Después que usted allá confirmado su dirección correo electrónico, \n"
 "su mensaje será procesado.\n"
 "\n"
 "Para suscribirse a esta lista, envíe un mensaje a ${listaddress}\n"
@@ -1401,7 +1401,7 @@ msgstr ""
 "\n"
 "Hola ${fullname},\n"
 "\n"
-"Su solicitud para unirse a la lista de correo electróico ${listname} esta en espera por aprobación.\n"
+"Su solicitud para unirse a la lista de correo electrónico ${listname} esta en espera por aprobación.\n"
 "Cualquier pregunta relacionada con esta invitación podrá enviar preguntas a ${listmanager}.\n"
 "\n"
 "Atentamente, \n"
@@ -1414,7 +1414,7 @@ msgstr ""
 "\n"
 "Hola ${fullname},\n"
 "\n"
-"Su solicitud de subscripción a la lista de correo electróico ${listname} ha sido \n"
+"Su solicitud de subscripción a la lista de correo electrónico ${listname} ha sido \n"
 "rechazada por esta la(s) siguiente(s) razones:\n"
 "${reject_reason}\n"
 "\n"
@@ -1430,8 +1430,8 @@ msgstr ""
 "\n"
 "Hola ${fullname},\n"
 "\n"
-"Nosotros hemos recibido un solicitud de subscripción de su dirección de correo electróico a la\n"
-"lista de correo electróico ${listname}. Para confirmar la solicitud, simplemente responda este \n"
+"Nosotros hemos recibido un solicitud de subscripción de su dirección de correo electrónico a la\n"
+"lista de correo electrónico ${listname}. Para confirmar la solicitud, simplemente responda este \n"
 "mensaje, dejando el asunto sin cambiar.\n"
 "\n"
 "Si usted no quiere suscribirse, por favor, descarte este\n"
@@ -1447,8 +1447,8 @@ msgstr ""
 "\n"
 "Hola ${fullname},\n"
 "\n"
-"Nosotros hemos recibido un solicitud de eliminar su subscripción de su dirección de correo electróico de la\n"
-"lista de correo electróico ${listname}.\n"
+"Nosotros hemos recibido un solicitud de eliminar su subscripción de su dirección de correo electrónico de la\n"
+"lista de correo electrónico ${listname}.\n"
 "\n"
 "Para confirmar la solicitud, simplemente responda este mensaje, dejando el \n"
 "asunto sin cambiar.\n"
@@ -1484,3 +1484,4 @@ msgstr "ver archivo."
 #: ../content/send_mail.py:195
 msgid "welcome_to_list"
 msgstr "Bienvenidos a ${title}"
+
