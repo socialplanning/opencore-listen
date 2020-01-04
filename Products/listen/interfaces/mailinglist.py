@@ -129,7 +129,7 @@ class IMailingList(Interface):
 
     title = TextLine(
         title = _(u"Title"),
-        description = _(u""),
+        description = _(u'mailing_list_title', u""),
         required = True,)
 
     description = Text(

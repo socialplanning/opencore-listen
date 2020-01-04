@@ -16,7 +16,7 @@
 
         </metal:header_macro>
 
-        <div i18n:domain="listen" tal:define="subscribed view/isSubscribed">
+        <div tal:define="subscribed view/isSubscribed">
 
           <div metal:define-slot="extra_info" tal:replace="nothing">
           </div>
@@ -26,7 +26,7 @@
             <div i18n:translate="" class="label">Extra top</div>
           </div>
 
-          <h1 i18n:translate="" tal:content="view/Title" class="documentFirstHeading">
+          <h1 tal:content="view/Title" class="documentFirstHeading">
             Title or Id
           </h1>
 
@@ -47,9 +47,9 @@
 
             <li id="listmanagers">
               <b i18n:translate="">Managers:</b>
-	        <tal:manager tal:repeat="manager view/list_managers">
-                   <br /><span tal:content="manager" />
-		</tal:manager>
+              <tal:manager tal:repeat="manager view/list_managers">
+                <br /><span tal:content="manager" />
+              </tal:manager>
             </li>
 
             <li id="list-type">
@@ -61,18 +61,17 @@
 
             <li id="archival-state">
               <b i18n:translate="">Archive:</b>
-	      <div>
-		<span tal:content="view/archived">
+              <div>
+                <span tal:content="view/archived">
                   <tal:comment replace="nothing">Messages to this list are archived</tal:comment>
-		</span>
-		<a tal:condition="view/is_archived" tal:attributes="href python:'%s/archive' % view.context.absolute_url()">
-		  <span i18n:translate="">view archive.</span>
-		</a>
-	      </div>
+                </span>
+                <a tal:condition="view/is_archived" tal:attributes="href python:'%s/archive' % view.context.absolute_url()">
+                  <span i18n:translate="">view archive.</span>
+                </a>
+              </div>
             </li>
 
           </ul>
-	     
           <hr />
 
           <p tal:condition="python:isAnon or not can_subscribe"
@@ -148,12 +147,13 @@
                        i18n:attributes="value" />
               </div>
             </tal:member>
-	    <p tal:condition="python: isPending">
-	      Your subscription request is pending moderation by the list manager.
-	    </p>
+        <p tal:condition="python: isPending"
+           i18n:translate="manager_subscription_request_pending_moderation">
+          Your subscription request is pending moderation by the list manager.
+        </p>
           </form>
 
-	  <p id="manager_email"
+          <p id="manager_email"
              i18n:translate="manager-email-prompt">
             Please direct inquiries about this list to <span tal:replace="structure view/manager_email" i18n:name="view_manager_email"><tal:comment replace="nothing">manager@list.com</tal:comment></span>.
           </p>

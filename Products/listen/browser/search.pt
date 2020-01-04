@@ -1,7 +1,7 @@
 <metal:archive-view define-macro="archive">
 <tal:comment condition="nothing">
-	We set the template_id to ensure correct highlighting, and we use the
-	actions defined for the parent mailing list
+    We set the template_id to ensure correct highlighting, and we use the
+    actions defined for the parent mailing list
 </tal:comment>
 <tal:defines define="dummy python:options.setdefault('template_id', 'search_archive');
                      dummy python:options.setdefault('actions', here.portal_actions.listFilteredActionsFor(view.getMailingList()))" />

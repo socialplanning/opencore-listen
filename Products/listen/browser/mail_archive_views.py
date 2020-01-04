@@ -8,6 +8,7 @@ from zope.app import zapi
 
 from Products.Five import BrowserView
 
+from Products.listen.i18n import _
 from Products.listen.interfaces import ISearchableArchive
 from Products.listen.interfaces import IMembershipList
 from Products.listen.interfaces import IMailingList
@@ -29,7 +30,6 @@ from Products.listen.config import POST_ALLOWED
 
 from Products.listen.lib.common import construct_simple_encoded_message
 
-from Products.listen.i18n import _
 from zope.i18nmessageid import Message
 
 class ArchiveBaseView(BrowserView):
@@ -180,7 +180,7 @@ class ArchiveNewTopicView(ArchiveBaseView):
         # Make sure that the current user is allowed to post:
         if not self.canPost():
             raise Unauthorized, \
-                "You do not have permission to respond to this message."
+                _(u"You do not have permission to respond to this message.")
         # Save the referring URL, either from the template form, or the
         # HTTP_REFERER, otherwise just use the message url.
         referring_url = (self.request.get('referring_url', None) or
@@ -190,8 +190,9 @@ class ArchiveNewTopicView(ArchiveBaseView):
         submitted = self.request.get('submit', None)
         cancelled = self.request.get('cancel', None)
         if cancelled:
+            portal_status_msg=_(u"Post Cancelled")
             return self.request.response.redirect(self.referring_url+
-                                    '?portal_status_message=Post%20Cancelled')
+                                    '?portal_status_message=%s' % (portal_status_msg))
         if submitted:
             self.errors = {}
             body = self.request.get('body', None)
@@ -208,17 +209,21 @@ class ArchiveNewTopicView(ArchiveBaseView):
                 self.request.set('Mail', message)
                 result = ml.processMail(self.request)
                 if result == POST_ALLOWED:
+                    portal_status_msg=_(u"Post Sent")
                     return self.request.response.redirect(self.referring_url+
-                                    '?portal_status_message=Post%20Sent')
+                                    '?portal_status_message=%s' % (portal_status_msg))
                 elif result == POST_DEFERRED:
+                    portal_status_msg=_(u"Post Pending Moderation")
                     return self.request.response.redirect(self.referring_url+
-                                    '?portal_status_message=Post%20Pending%20Moderation')
+                                    '?portal_status_message=%s' % (portal_status_msg))
                 elif result == POST_DENIED:
+                    portal_status_msg=_(u"Post Rejected: You already have a post pending moderation.")
                     return self.request.response.redirect(self.referring_url+
-                                    '?portal_status_message=Post%20Rejected:%20You%20already%20have%20a%20post%20pending%20moderation.')
+                                    '?portal_status_message=%s' % (portal_status_msg))
                 else:
+                    portal_status_msg=_(u"Post Error")
                     return self.request.response.redirect(self.referring_url+
-                                    '?portal_status_message=Post%20Error')
+                                    '?portal_status_message=%s' % (portal_status_msg))
                     
 
                     

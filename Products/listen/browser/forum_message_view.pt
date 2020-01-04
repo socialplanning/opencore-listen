@@ -1,7 +1,7 @@
 <tal:ml define="ml view/getMailingList">
   <metal:archive-view use-macro="ml/archive/@@forum_view/macros/archive">
     <html xmlns="http://www.w3.org/1999/xhtml"
-	  xml:lang="en" lang="en"
+          xml:lang="en" lang="en"
           xmlns:metal="http://xml.zope.org/namespaces/metal"
           xmlns:tal="http://xml.zope.org/namespaces/tal"
           xmlns:i18n="http://xml.zope.org/namespaces/i18n"
@@ -16,7 +16,7 @@
           <div metal:define-macro="body"
                tal:define="messages view/getMessageBodies;">
 
-            <h1 i18n:translate="" tal:content="structure messages/subject" class="documentFirstHeading">
+            <h1 tal:content="structure messages/subject" class="documentFirstHeading">
               Title or Id
             </h1>
             <a id="to_threaded" href="."
@@ -57,7 +57,7 @@
                             i18n:translate="option_forum_recent_first">Recent First</option>
                   </select>
                   <input name="forum-update"
-		  	 i18n:attributes="value"
+                         i18n:attributes="value"
                          value="update"
                          type="submit"/>
                 </form>
@@ -66,8 +66,7 @@
                     tal:define="thread view/getReplyStructure;
                                 local_thread thread/children;
                                 use_id_anchors python:True">
-                  <dt i18n:translate="label_threaded_replies">
-                  Thread Outline:</dt>
+                  <dt i18n:translate="label_threaded_replies">Thread Outline:</dt>
                   <dd>
                     <div metal:use-macro="here/message_macros/macros/thread" />
                   </dd>

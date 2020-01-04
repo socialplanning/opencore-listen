@@ -7,6 +7,7 @@ from zope.app.exception.interfaces import UserError
 from zExceptions import BadRequest
 
 from Products.CMFCore.utils import getToolByName
+from Products.listen.i18n import _
 
 # Content objects which wish to use the renamer must have title in the
 # set_before_add parameter of their addform configuration, so that the
@@ -127,7 +128,7 @@ class TitleBasedNameChooser:
         try:
             name = name.encode('ascii')
         except UnicodeDecodeError:
-            raise UserError, "Id must contain only ASCII characters."
+            raise UserError, _("Id must contain only ASCII characters.")
 
         context = self.context
         # XXX: Try Plone check_id script this should become a view/adapter
@@ -145,7 +146,7 @@ class TitleBasedNameChooser:
             try:
                 self.context._checkId(name, allow_dup=False)
             except BadRequest, e:
-                msg = ' '.join(e.args) or "Id is in use or invalid"
+                msg = ' '.join(e.args) or _("Id is in use or invalid")
                 raise UserError, msg
 
     def chooseName(self, name, object):
@@ -157,7 +158,7 @@ class TitleBasedNameChooser:
         try:
             name = name.encode('ascii')
         except UnicodeDecodeError:
-            raise UserError, "Id must contain only ASCII characters."
+            raise UserError, _("Id must contain only ASCII characters.")
 
         dot = name.rfind('.')
         if dot >= 0:

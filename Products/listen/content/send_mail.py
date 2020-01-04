@@ -5,6 +5,7 @@ from zope.interface import implements
 from zope.i18nmessageid import Message, MessageFactory
 from zope.i18n import translate
 
+from Products.listen.i18n import _
 from Products.listen.interfaces import ISendMail
 from Products.listen.lib import default_email_text
 from Products.listen.lib.browser_utils import getSiteEncoding
@@ -12,8 +13,6 @@ from Products.listen.lib.common import create_request_from
 from Products.listen.lib.common import is_email
 from Products.listen.lib.common import lookup_email
 from Products.listen.lib.common import lookup_emails
-
-from Products.listen.i18n import _
 
 def nonascii_username(user_email, user_name):
     if user_name:

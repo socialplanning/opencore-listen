@@ -8,6 +8,7 @@ from Products.MailBoxer.MailBoxer import TRUE
 from Products.MailBoxer.MailBoxer import setMailBoxerProperties
 from Products.MailBoxer.MailBoxerTools import splitMail
 from Products.MailBoxer.messagevalidators import setDefaultValidatorChain
+from Products.listen.i18n import _
 from Products.listen.interfaces import IMailFromString
 from Products.listen.interfaces import IMessageHandler
 from Products.listen.lib.browser_utils import getSiteEncoding
@@ -118,12 +119,12 @@ class MailBoxerMailingList(MailBoxer):
 
             # Add Archive
             archive = zapi.createObject('listen.ArchiveFactory', self.storage,
-                                        title=u'List Archive')
+                                        title=_(u'List Archive'))
             item._setObject(self.storage, archive)
 
             # Add moderation queue
             mqueue = zapi.createObject('listen.QueueFactory', self.mailqueue,
-                                       title=u'Moderation queue')
+                                       title=_(u'Moderation queue'))
             item._setObject(self.mailqueue, mqueue)
 
             ttool = getToolByName(self, 'portal_types', None)
@@ -174,8 +175,8 @@ class MailBoxerMailingList(MailBoxer):
             self.addMailBoxerFolder(yearFolder, month, title)
         mailFolder=getattr(yearFolder, month)
 
-        subject = header.get('subject', 'No Subject')
-        sender = header.get('from','Unknown')
+        subject = header.get('subject', _('No Subject'))
+        sender = header.get('from',_('Unknown'))
 
         # search a free id for the mailobject
         id = time.millis()

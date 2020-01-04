@@ -63,7 +63,7 @@
        i18n:translate="label_forum_reply_button">Reply</a>
     
     
-    <pre width="80" i18n:translate="" tal:content="structure message/body">
+    <pre width="80" tal:content="structure message/body">
         A mail message
     </pre>
     

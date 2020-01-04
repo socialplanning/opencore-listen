@@ -1,23 +1,23 @@
 <metal:archive-view use-macro="here/@@forum_view/macros/archive">
-  <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
-        lang="en"
-        i18n:domain="plone">
+  <html xmlns="http://www.w3.org/1999/xhtml"
+        xml:lang="en" lang="en"
+        xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+        i18n:domain="listen">
     <body>
       <div metal:fill-slot="body">
         <div metal:define-macro="body"
              tal:define="thread view/getThreadedMessageStructure;
-                         template_id string:by_date;"
-             i18n:domain="listen">
+                         template_id string:by_date;">
 
           <div metal:define-slot="extra_info" tal:replace="nothing">
           </div>
 
           <div class="row" 
                metal:define-slot="extra_top" tal:replace="nothing">
-            <div i18n:translate="" class="label">Extra top</div>
+            <div class="label" i18n:translate="">Extra top</div>
           </div>
 
-          <h1 i18n:translate="" tal:content="view/Title" class="documentFirstHeading">
+          <h1 tal:content="view/Title" class="documentFirstHeading">
             Title or Id
           </h1>
 
@@ -38,7 +38,7 @@
              tal:condition="view/canPost"
              tal:attributes="href string:${here_url}/new_topic;"
              i18n:translate="label_forum_new_topic_button">
-            Post New Topic   	
+            Post New Topic
           </a>
 
           <ul id="message-list-actions">
@@ -57,8 +57,11 @@
           <ul id="message-list">
             <li tal:repeat="message thread">
               <a href="."
-                 tal:attributes="href message/url;"
-                 ><strong tal:content="structure message/brief_subject"><tal:comment replace="nothing">Re: Subj</tal:comment></strong></a> &mdash;
+                 tal:attributes="href message/url;">
+                 <strong tal:content="structure message/brief_subject">
+                  <tal:comment replace="nothing">Re: Subj</tal:comment>
+                 </strong>
+              </a> &mdash;
               <a href="."
                  tal:omit-tag="not:message/from_id"
                  tal:attributes="href string:${portal_url}/author/${message/from_id}"

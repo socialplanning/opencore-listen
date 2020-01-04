@@ -1,6 +1,7 @@
 <div id="member_search"
      tal:define="field_prefix python:view.name;"
-     tal:attributes="id string:${field_prefix}.member_removal">
+     tal:attributes="id string:${field_prefix}.member_removal"
+     i18n:domain="listen">
 
   <div class="formHelp"
        i18n:translate="">
@@ -24,7 +25,6 @@
       <a href="portal/authors/id"
          target="_blank"
          tal:attributes="href member/url"
-	 i18n:translate="" 
          tal:content="string:${member/fullname} (${member/name})">
         Full Name (username)
       </a>

@@ -7,6 +7,7 @@ from config import PROJECTNAME, GLOBALS
 
 import content
 import permissions
+import Products.listen.i18n
 
 # Add builtin mailboxer skin
 from Products.MailBoxer.config import SKINS_DIR as MB_SKINS_DIR

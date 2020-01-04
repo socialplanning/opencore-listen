@@ -1,23 +1,23 @@
 <metal:archive-view use-macro="here/@@forum_view/macros/archive">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
-      lang="en"
-      i18n:domain="plone">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en" lang="en"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="listen">
 <body>
 <div metal:fill-slot="body">
   <div metal:define-macro="body"
        tal:define="dates view/getAvailableDates;
-                   template_id string:date_view;"
-       i18n:domain="listen">
+                   template_id string:date_view;">
 
     <div metal:define-slot="extra_info" tal:replace="nothing">
     </div>
 
     <div class="row"
          metal:define-slot="extra_top" tal:replace="nothing">
-        <div i18n:translate="" class="label">Extra top</div>
+        <div class="label" i18n:translate="">Extra top</div>
     </div>
 
-    <h1 i18n:translate="" tal:content="view/Title" class="documentFirstHeading">
+    <h1 tal:content="view/Title" class="documentFirstHeading">
         Title or Id
     </h1>
 
@@ -33,8 +33,8 @@
         Description
     </p>
 
-	<ul id="message-list-actions">
-	  <li>
+    <ul id="message-list-actions">
+      <li>
         <a id="switch_view" href="forum_view"
            i18n:translate="">Forum view</a>
       </li>
@@ -48,7 +48,6 @@
             <ul tal:condition="year/children">
                 <li tal:repeat="month year/children">
                     <a href="."
-		       i18n:translate=""
                        tal:attributes="href month/url"
                        tal:content="month/title">November</a>
                 </li>

@@ -1,8 +1,9 @@
 <tal:ml define="ml view/getMailingList">
   <metal:archive-view use-macro="ml/archive/@@forum_view/macros/archive">
-    <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
-          lang="en"
-          i18n:domain="plone">
+    <html xmlns="http://www.w3.org/1999/xhtml"
+          xml:lang="en" lang="en"
+          xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+          i18n:domain="listen">
       <body>
         
         <metal:fillbase fill-slot="base">
@@ -11,8 +12,7 @@
 
         <div metal:fill-slot="body">
           <div metal:define-macro="body"
-               tal:define="errors view/errors|nothing"
-               i18n:domain="listen">
+               tal:define="errors view/errors|nothing">
             
             <h1 i18n:translate="message_reply" class="documentFirstHeading">
               New reply to
@@ -49,8 +49,7 @@
                       i18n:attributes="title title_required;">
                   (Required)
                 </span>
-                <div tal:condition="error" tal:content="error"
-                     i18n:translate="">
+                <div tal:condition="error" tal:content="error">
                   The Error
                 </div>
                 <div>
@@ -73,8 +72,7 @@
                       i18n:attributes="title title_required;">
                   (Required)
                 </span>
-                <div tal:condition="error" tal:content="error"
-                     i18n:translate="">
+                <div tal:condition="error" tal:content="error">
                   The Error
                 </div>
                 <div>

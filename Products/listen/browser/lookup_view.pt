@@ -10,7 +10,8 @@
       <h1 i18n:translate="">Registered Mailing Lists</h1>
 
       <table id="mailing-lists"
-             summary="A table of registered list addresses and the paths to the corresponding lists" i18n:attributes="summary summary_table_mailing_listsr;">
+             summary="A table of registered list addresses and the paths to the corresponding lists"
+             i18n:attributes="summary summary_table_mailing_listsr;">
         <thead>
           <tr>
             <th i18n:translate="">List Address</th>

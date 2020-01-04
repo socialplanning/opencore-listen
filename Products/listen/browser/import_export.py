@@ -66,8 +66,10 @@ class ImportExportView(BrowserView):
                 key = key[len(UNDO_SUBMIT):]
                 msg_count = self.undo_import(key)
                 if msg_count:
-                    txt = (_(u"Removed %s message%s from the list archive.")
-                           % (msg_count, self._plural(msg_count)))
+                    txt = (_(u'import_export_removed_message_status_msg',
+                             u'Removed ${msg_count} message${msg_plural} from the list archive.',
+                             mapping={'msg_count':msg_count,
+                                      'msg_plural':self._plural(msg_count)}))
                     plone_utils.addPortalMessage(txt, type='info')
                     self.request.response.redirect(self.nextURL())
                     return
@@ -82,8 +84,11 @@ class ImportExportView(BrowserView):
                 self.filename = file.filename
                 self.save_import_history()
                 msg_count = len(self.msgids)
-                psm_text = (_(u'Imported %s message%s from \'%s\'')
-                    % (msg_count, self._plural(msg_count), file.filename))
+                psm_text = (_(u'import_export_imported_message_status_msg',
+                              u'Imported ${msg_count} message${msg_plural} from \'${filename}\'',
+                              mapping={'msg_count':msg_count,
+                                       'msg_plural':self._plural(msg_count),
+                                       'filename':file.filename}))
                 psm_type = 'info'
             else:
                 psm_text = _(u"No file selected. Please select an mbox file before importing.")
@@ -108,7 +113,9 @@ class ImportExportView(BrowserView):
                     subscriber_importer.import_subscribers(emails)
                     n_emails = len(emails)
                     if n_emails != 1:
-                        psm_text = _(u'%s email addresses imported') % n_emails
+                        psm_text = _(u'psm_email_addresses_imported_msg',
+                                      u'${num_emails} email addresses imported',
+                                      mapping={'num_emails':n_emails})
                     else:
                         psm_text = _(u'1 email address imported')
                     psm_type = 'info'

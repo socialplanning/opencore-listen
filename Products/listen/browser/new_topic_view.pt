@@ -5,7 +5,7 @@
           xmlns:metal="http://xml.zope.org/namespaces/metal"
           xmlns:tal="http://xml.zope.org/namespaces/tal"
           xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-          i18n:domain="plone">
+          i18n:domain="listen">
       <body>
 
         <metal:fillbase fill-slot="base">
@@ -14,8 +14,7 @@
 
         <div metal:fill-slot="body">
           <div metal:define-macro="body"
-               tal:define="errors view/errors|nothing"
-               i18n:domain="listen">
+               tal:define="errors view/errors|nothing">
 
             <h1 i18n:translate="new_topic" class="documentFirstHeading">
               New Mailing List Post
@@ -48,8 +47,7 @@
                       i18n:attributes="title title_required;">
                   (Required)
                 </span>
-                <div tal:condition="error" tal:content="error"
-                     i18n:translate="">
+                <div tal:condition="error" tal:content="error">
                   The Error
                 </div>
                 <div>
@@ -72,8 +70,7 @@
                       i18n:attributes="title title_required;">
                   (Required)
                 </span>
-                <div tal:condition="error" tal:content="error"
-                     i18n:translate="">
+                <div tal:condition="error" tal:content="error">
                   The Error
                 </div>
                 <div>

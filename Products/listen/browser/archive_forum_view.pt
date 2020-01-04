@@ -1,7 +1,7 @@
 <metal:archive-view define-macro="archive">
 <tal:comment condition="nothing">
-	We set the template_id to ensure correct highlighting, and we use the
-	actions defined for the parent mailing list
+    We set the template_id to ensure correct highlighting, and we use the
+    actions defined for the parent mailing list
 </tal:comment>
 <tal:defines define="dummy python:options.setdefault('template_id', 'archive');
                      dummy python:options.setdefault('actions', here.portal_actions.listFilteredActionsFor(view.getMailingList()))" />
@@ -11,7 +11,7 @@
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       metal:use-macro="here/main_template/macros/master"
-      i18n:domain="plone">
+      i18n:domain="listen">
 
     <metal:fillbase fill-slot="base">
       <metal:baseslot define-slot="base">
@@ -43,8 +43,7 @@
         Document actions (print, sendto etc)
       </div>
       
-      <div metal:define-slot="body"
-           i18n:domain="listen">
+      <div metal:define-slot="body">
         <tal:threads define="batch view/getTopics;
                              threads python:batch.topic_list;">
 
@@ -53,10 +52,10 @@
 
           <div class="row"
                metal:define-slot="extra_top" tal:replace="nothing">
-            <div i18n:translate="" class="label">Extra top</div>
+            <div class="label" i18n:translate="">Extra top</div>
           </div>
 
-          <h1 i18n:translate="" tal:content="view/Title" class="documentFirstHeading">
+          <h1 tal:content="view/Title" class="documentFirstHeading">
             Title or Id
           </h1>
 
@@ -75,7 +74,8 @@
           <table cellpadding="20">
             <tr>
               <td>
-                <a i18n:translate="" tal:attributes="href string:${here_url}/date_view;" href="#">Switch to date view</a>
+                <a tal:attributes="href string:${here_url}/date_view;"
+                   href="#" i18n:translate="">Switch to date view</a>
               </td>
               <td>
                 <a href="#"
@@ -115,8 +115,7 @@
 
                   <td>
                     <a href="#"
-                       i18n:translate=""
-		       tal:content="structure item/brief_subject"
+                       tal:content="structure item/brief_subject"
                        tal:attributes="href item/url">
                     Subject</a>
                   </td>
@@ -128,10 +127,8 @@
                       <span tal:replace="structure item/mail_from">test@example.com</span>
                     </a>
                   </td>
-                  <td tal:content="item/responses"
-                      >10</td>
-                  <td tal:content="item/last_post" i18n:translate=""
-                      >12/1/2005 3:54 pm</td>
+                  <td tal:content="item/responses">10</td>
+                  <td tal:content="item/last_post">12/1/2005 3:54 pm</td>
                 </tr>
               </tal:items>
             </tbody>

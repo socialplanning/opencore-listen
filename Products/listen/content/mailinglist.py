@@ -49,6 +49,7 @@ from Products.listen.lib.browser_utils import encode
 from Products.listen.interfaces.events import NewMsgDeliveredEvent
 
 from mailboxer_list import MailBoxerMailingList
+from Products.listen.i18n import _
 from Products.listen.lib import default_email_text
 from Products.listen.interfaces import IDigestStorage
 from Products.listen.interfaces import IMailingList
@@ -85,7 +86,6 @@ from Products.listen.content.digest import DigestConstructor
 from Products.listen.lib.common import is_email
 from Products.listen.lib.common import lookup_email
 from Products.listen.lib.common import lookup_member_id
-from Products.listen.i18n import _
 
 logger = logging.getLogger('listen.mailinglist')
 

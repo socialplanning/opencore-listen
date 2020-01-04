@@ -7,6 +7,7 @@ from OFS.interfaces import IObjectWillBeMovedEvent
 from OFS.interfaces import IObjectWillBeRemovedEvent
 from Products.Five import BrowserView
 from Products.MailBoxer.MailBoxer import MAIL_PARAMETER_NAME
+from Products.listen.i18n import _
 from Products.listen.interfaces import IListLookup
 from email import message_from_string
 from rfc822 import AddressList
@@ -151,11 +152,11 @@ class ListLookup(SimpleItem):
         current_addr = self._reverse.get(path, None)
         current_path = self._mapping.get(address, None)
         if current_addr is not None:
-            raise UserError, "This list is already registered, use "\
-                             "updateList to change the address."
+            raise UserError, _("This list is already registered, use "\
+                             "updateList to change the address.")
         if current_path is not None:
-            raise UserError, "A list is already registered for this address,"\
-                             " you must unregister it first."
+            raise UserError, _("A list is already registered for this address,"\
+                             " you must unregister it first.")
         self._mapping[address] = path
         self._reverse[path] = address
 
@@ -182,7 +183,7 @@ class ListLookup(SimpleItem):
             self.registerList(ml)
         else:
             # The new address is already registered
-            raise UserError, "A list is already registered for this address"
+            raise UserError, _("A list is already registered for this address")
 
     def unregisterList(self, ml):
         """See IListLookup interface documentation"""
@@ -220,7 +221,7 @@ class ListLookup(SimpleItem):
             message = message_from_string(message)
         else:
             logger.error("request.get(%s) returned None" % MAIL_PARAMETER_NAME)
-            raise NotFound, "The message destination cannot be deterimined."
+            raise NotFound, _("The message destination cannot be deterimined.")
         # preferentially use the x-original-to header (is this postfix only?),
         # so that mails to multiple lists are handled properly
         address = message.get('x-original-to', None)
@@ -235,7 +236,7 @@ class ListLookup(SimpleItem):
         if not address:
             import pprint
             logger.warn("No destination found in headers:\n%s" % pprint.pformat(message))
-            raise NotFound, "The message destination cannot be deterimined."
+            raise NotFound, _("The message destination cannot be deterimined.")
         address = address.lower()
         if '-manager@' in address:
             address = address.replace('-manager@','@')
@@ -248,8 +249,8 @@ class ListLookup(SimpleItem):
             # raise an error on bad requests, so that the SMTP server can
             # send a proper failure message.
             logger.warn("no list found for any of %r" % str(address_list))
-            raise ListDoesNotExist, "The message address does not correspond to a "\
-                             "known mailing list."
+            raise ListDoesNotExist, _("The message address does not correspond to a "\
+                             "known mailing list.")
         setSite(ml)
         return ml.manage_mailboxer(request)
 
@@ -394,7 +395,7 @@ class MailDeliveryView(BrowserView):
         try:
             return ll.deliverMessage(self.request)
         except ListDoesNotExist:
-            raise NotFound, "The message address does not correspond to a known mailing list"
+            raise NotFound, _("The message address does not correspond to a known mailing list")
         except:
             message = str(self.request.get(MAIL_PARAMETER_NAME, None))
             logger.error("Listen delivery failed for message: \n%s" % message)

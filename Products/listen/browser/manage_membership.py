@@ -11,6 +11,7 @@ from Products.SecureMailHost.SecureMailHost import EMAIL_RE
 
 from BTrees.OOBTree import OOBTree
 
+from Products.listen.i18n import _
 from Products.listen.interfaces import IMailingList
 from Products.listen.interfaces import ISubscriptionList
 from Products.listen.interfaces import IMembershipPolicy
@@ -22,8 +23,6 @@ from Products.listen.lib.browser_utils import encode
 from Products.listen.permissions import SubscribeSelf
 
 from Products.listen.content import PendingList
-
-from Products.listen.i18n import _
 
 from Products.listen.lib.common import is_email
 from Products.listen.lib.common import lookup_email
@@ -69,16 +68,25 @@ class ManageMembersView(BrowserView):
         if to_add:
             subscribed = d.get('add_subscribed', None)
             if self._add(to_add, subscribed):
-                psm += 'Added: %s.  ' % to_add
+                psm += _(u'add_subscribed_portal_msg',
+                         u'Added: ${to_add}.  ', mapping={'to_add':to_add})
             else:
-                psm += 'Bad user or email address: %s.  ' % to_add
+                psm += _(u'bad_user_email_portal_msg',
+                         u'Bad user or email address: ${to_add}.  ',
+                         mapping={'to_add':to_add})
             
         if to_remove:
-            psm += _(u'Removed: %s.  ') % ', '.join(to_remove)
+            psm += _(u'removed_portal_msg',
+                     u'Removed: ${to_remove}.  ',
+                     mapping={'to_remove':to_remove})
         if to_subscribe:
-            psm += _(u'Subscribed: %s.  ') % ', '.join(to_subscribe)
+            psm += _(u'subscribed_portal_msg',
+                     u'Subscribed: ${to_subscribe}.  ',
+                     mapping={'to_subscribe':to_subscribe})
         if to_unsubscribe:
-            psm += 'Unsubscribed: %s.  ' % ', '.join(to_unsubscribe)
+            psm += _(u'unsubscribed_portal_msg',
+                     u'Unsubscribed: ${to_unsubscribe}.  ',
+                     mapping={'to_unsubscribe':to_unsubscribe})
 
 
         if psm:
@@ -175,10 +183,10 @@ class ManageMembersView(BrowserView):
 
         status_msg = ''
         if inlist(subscribe_pending_list):
-            status_msg += status('subscription pending user confirmation: ', subscribe_pending_list)
+            status_msg += status(_(u'subscription pending user confirmation: '), subscribe_pending_list)
         if inlist(unsubscribe_pending_list):
-            status_msg += status('unsubscription pending user confirmation: ', unsubscribe_pending_list)
+            status_msg += status(_(u'unsubscription pending user confirmation: '), unsubscribe_pending_list)
         if inlist(sub_mod_pending_list):
-            status_msg += status('subscription pending manager moderation: ', sub_mod_pending_list)
+            status_msg += status(_(u'subscription pending manager moderation: '), sub_mod_pending_list)
 
         return status_msg

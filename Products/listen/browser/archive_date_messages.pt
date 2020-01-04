@@ -40,7 +40,7 @@
              tal:condition="view/canPost"
              tal:attributes="href string:${here_url}/new_topic;"
              i18n:translate="label_forum_new_topic_button">
-            Post New Topic   	
+            Post New Topic
           </a>
 
           <ul id="message-list-actions">
@@ -59,8 +59,11 @@
           <ul id="message-list">
             <li tal:repeat="message messages">
               <a href="."
-                 tal:attributes="href message/url;"
-                 ><strong tal:content="structure message/brief_subject"><tal:comment replace="nothing">Re: Subj</tal:comment></strong></a> &mdash;
+                 tal:attributes="href message/url;">
+                 <strong tal:content="structure message/brief_subject">
+                   <tal:comment replace="nothing">Re: Subj</tal:comment>
+                 </strong>
+              </a> &mdash;
               <a href="."
                  tal:omit-tag="not:message/from_id"
                  tal:attributes="href string:${portal_url}/author/${message/from_id}"

@@ -17,6 +17,7 @@ from Products.CMFCore.utils import getToolByName
 
 from Products.statusmessages.interfaces import IStatusMessage
 
+from Products.listen.i18n import _
 from Products.listen.interfaces import IMailingList
 from Products.listen.interfaces import IWriteMembershipList
 from Products.listen.interfaces import IMembershipList
@@ -31,7 +32,6 @@ from Products.listen.lib.browser_utils import encode, obfct_de
 from Products.listen.lib.common import assign_local_role
 from Products.listen.permissions import SubscribeSelf
 
-from Products.listen.i18n import _
 from Products.listen.lib.common import is_email
 from Products.listen.lib.common import lookup_email
 
@@ -44,7 +44,6 @@ from Products.listen.content import ListTypeChanged
 from zope.component import getAdapter
 from zope.app.annotation.interfaces import IAnnotations
 
-from Products.listen.i18n import _
 
 class MailingListView(BrowserView):
     """A basic view of a mailing list"""
@@ -95,12 +94,15 @@ class MailingListView(BrowserView):
                 if ret == MEMBERSHIP_ALLOWED:
                     # make user a subscriber
                     self.mem_list.subscribe(address)
-                    self.request.set('portal_status_message', 'Email subscribed')
+                    self.request.set('portal_status_message', _(u'list_email_subscribed_status_msg',
+                                                                u'Email subscribed'))
                 elif ret == MEMBERSHIP_DEFERRED:
                     self.request.set('portal_status_message',
-                                     'Subscription request sent')
+                                     _(u'list_subscription_request_sent_status_msg',
+                                       u'Subscription request sent'))
                 else:
-                    self.request.set('portal_status_message', 'Bad email address')
+                    self.request.set('portal_status_message', _(u'list_bad_email_address_status_msg',
+                                                                u'Bad email address'))
                     
                 # Blank the email field to avoid the postback
                 self.request.set('email_address', '')
@@ -143,7 +145,7 @@ class MailingListView(BrowserView):
     def list_type(self):
         list_type = self.context.list_type
         if list_type is None:
-            return _(u'List Type not set')
+            return _(u'list_type_not_set', u'List Type not set')
         return '%s. %s' % (list_type.title, list_type.description)
 
     def subscribe_keyword(self):
@@ -165,16 +167,18 @@ class MailingListView(BrowserView):
         if ret == MEMBERSHIP_ALLOWED:
             self.mem_list.subscribe(self.user_email)
             self.request.set('portal_status_message',
-                             'You have been subscribed')
+                             _(u'list_have_been_subscribed_status_msg',
+                               u'You have been subscribed'))
             pass
         elif ret == MEMBERSHIP_DEFERRED:
             self.request.set('portal_status_message',
-                             'Your subscription request is pending moderation '
-                             'by the list manager.')       
+                             _(u'list_subscription_pending_moderation_status_msg',
+                               u"Your subscription request is pending moderation by the list manager."))
 
     def unsubscribe(self):
         self.mem_list.unsubscribe(self.user_email)
-        self.request.set('portal_status_message', 'You have been unsubscribed')
+        self.request.set('portal_status_message', _(u'list_have_been_unsubscribed_status_msg',
+                                                    u"You have been unsubscribed"))
 
     def _get_logged_in_user(self):
         mtool = getToolByName(self.context, 'portal_membership')

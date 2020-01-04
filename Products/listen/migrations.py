@@ -13,6 +13,7 @@ from BTrees.OOBTree import OOBTree
 
 from Products.Five.browser.pagetemplatefile import ZopeTwoPageTemplateFile
 
+from Products.listen.i18n import _
 from Products.listen.interfaces import IMailingList
 from Products.listen.interfaces import IListLookup
 from Products.listen.interfaces import IMigrateList
@@ -27,8 +28,6 @@ from Products.MailBoxer.MailBoxerTools import splitMail
 
 from zope.component import getAdapter
 
-from Products.listen.i18n import _
-
 from rfc822 import parseaddr
 
 from Products.listen.content import convert_manager_emails_to_memberids
@@ -41,14 +40,14 @@ class MigrationView(Form):
     form_fields = Fields()
     result_template = ZopeTwoPageTemplateFile('browser/migration.pt')
 
-    @action(_('label_migrate', u'Migrate'))
+    @action(_('label_migrate', _(u'Migrate')))
     def handle_migrate_action(self, action, data):
 
         # permission checking needed since setting the permission
         # in zcml doesn't seem to work
         mtool = getToolByName(self.context, 'portal_membership')
         if not mtool.checkPermission('Manage Portal', self.context):
-            return 'permission denied'
+            return _(u'permission denied')
 
 
         ll = getUtility(IListLookup)
@@ -63,7 +62,7 @@ class MigrationView(Form):
                 return_msg = migrator.migrate()
                 absolute_url = ml.absolute_url()
             except AttributeError:
-                return_msg = 'Error: List not found'
+                return_msg = _(u'Error: List not found')
                 absolute_url = ''
 
             self.results.append({'url':absolute_url, 'title':path, 'msg':return_msg})
@@ -86,7 +85,7 @@ class TestMigration(object):
         return False
 
     def migrate(self):
-        return 'successfully migrated'
+        return _(u'successfully migrated')
 
 
 class ListMigrationFromPropertiesToPolicies(object):
@@ -104,7 +103,7 @@ class ListMigrationFromPropertiesToPolicies(object):
 
     def migrate(self):
         if self.is_updated(): 
-            return 'already migrated'
+            return _(u'already migrated')
         
         # set the appropriate list type based on the previous settings
         # this may need to mark the appropriate interface on the mailing
@@ -156,9 +155,9 @@ class ListMigrationFromPropertiesToPolicies(object):
         elif self.context.archived == 'with attachments':
             self.context.archived = 0
         else:
-            return 'error translating archive option'
+            return _(u'error translating archive option')
 
         # annotate the list to say the migration completed
         self.migration_annot.append('policy_migration')
 
-        return 'successfully migrated'
+        return _(u'successfully migrated')

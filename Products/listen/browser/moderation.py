@@ -9,6 +9,7 @@ from Products.Five.browser.pagetemplatefile import ZopeTwoPageTemplateFile
 
 from BTrees.OOBTree import OOBTree
 
+from Products.listen.i18n import _
 from Products.listen.interfaces import IPostPolicy
 from Products.listen.interfaces import IMembershipPolicy
 from Products.listen.interfaces import IWriteMembershipList
@@ -20,8 +21,6 @@ from Products.listen.interfaces import IUserEmailMembershipPolicy
 from Products.listen.interfaces import IEmailPostPolicy
 
 from Products.listen.content import PendingList
-
-from Products.listen.i18n import _
 
 from Products.listen.config import PROJECTNAME
 from Products.listen.config import MODERATION_FAILED
