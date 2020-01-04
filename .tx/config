@@ -1,0 +1,17 @@
+[main]
+host = https://www.transifex.com
+
+[social-planning.listen-pot]
+file_filter = Products/listen/locales/<lang>/LC_MESSAGES/listen.po
+minimum_perc = 0
+source_file = Products/listen/locales/listen.pot
+source_lang = en
+type = PO
+
+[social-planning.listen-plone-pot]
+file_filter = Products/listen/locales/<lang>/LC_MESSAGES/plone.po
+minimum_perc = 0
+source_file = Products/listen/locales/plone.pot
+source_lang = en
+type = PO
+
