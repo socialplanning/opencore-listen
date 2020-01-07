@@ -218,6 +218,7 @@ Contribute
 - Issue Tracker: https://github.com/socialplanning/opencore-listen/issues
 - Source Code: https://github.com/socialplanning/opencore-listen
 - Documentation: https://www.coactivate.org/projects/listen/project-home
+- Translations: https://www.transifex.com/plone/social-planning/dashboard/
 
 
 License
