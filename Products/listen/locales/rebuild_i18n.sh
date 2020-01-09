@@ -27,7 +27,7 @@ echo "There are $ERRORS errors (almost definitely missing i18n markup)"
 echo "There are $WARNINGS warnings (possibly missing i18n markup)"
 echo "There are $FATAL fatal errors (template could not be parsed, eg. if it's not html)"
 echo ""
-echo "For more details, run 'find . -name \"*pt\" | xargs i18ndude find-untranslated' or"
+echo "For more details, run 'find ../ -name \"*pt\" | xargs i18ndude find-untranslated' or"
 echo "Look the rebuild i18n log generate for this script called 'rebuild_i18n.log' on locales dir"
 
 touch $LOGI18NDUDE
