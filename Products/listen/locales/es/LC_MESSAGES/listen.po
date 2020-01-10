@@ -4,12 +4,12 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Listen 0.6\n"
 "POT-Creation-Date: 2020-01-04 03:41+0000\n"
-"PO-Revision-Date: 2020-01-03 23:56-0400\n"
+"PO-Revision-Date: 2020-01-10 18:48-0400\n"
 "Last-Translator: Leonardo J. Caballero G. <leonardocaballero@gmail.com>\n"
 "Language-Team: ES <LL@li.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Virtaal 0.7.1\n"
@@ -335,7 +335,7 @@ msgstr "Administradores:"
 
 #: ../browser/moderation.py:104
 msgid "Member moderated."
-msgstr "Miembro moderado."
+msgstr "Participante moderado."
 
 #: ../interfaces/list_types.py:58
 msgid "Members List"
@@ -412,7 +412,9 @@ msgstr "Solamente esos participantes previamente aprobados por los administrador
 
 #: ../profiles.zcml:23
 msgid "Overrides the default listen member lookup utility with one that uses the membrane_tool member catalog."
-msgstr "Sobrescribe la predeterminada utilidad de búsqueda de participante Listen con una que usa el catálogo de participante de la herramienta membrane_tool."
+msgstr ""
+"Sobrescribe la predeterminada utilidad de búsqueda de participante Listen "
+"con una que usa el catálogo de participante de la herramienta membrane_tool."
 
 #. Default: "Parent"
 #: ../browser/search_debug_view.pt:20
@@ -706,7 +708,9 @@ msgstr "Desmarca aquellos que le gustaría eliminar"
 
 #: ../extras/member_search.pt:18
 msgid "Uncheck those you would like to remove, search for members to add using the search form below."
-msgstr "Desmarca las que deseas eliminar, busca participantes para agregar usando el formulario de búsqueda a continuación."
+msgstr ""
+"Desmarca las que deseas eliminar, busca participantes para añadir usando el "
+"formulario de búsqueda a continuación."
 
 #: ../browser/import_export.pt:78
 msgid "Undo"
@@ -751,7 +755,10 @@ msgstr "Usted está recibiendo este mensaje porque usted ha seleccionado para re
 
 #: ../interfaces/mailinglist.py:180
 msgid "You can choose whether to allow list non-members to view the list's archives, or restrict the archives to logged-in subscribers."
-msgstr "Puede elegir si desea permitir que los no participantes de la lista vean los archivos de la lista, o restringir los archivos a los suscriptores registrados."
+msgstr ""
+"Puede elegir si desea permitir que los no participantes de la lista vean los "
+"archivos de la lista, o restringir los archivos a los suscriptores "
+"registrados."
 
 #. Default: "You can view and respond to this message thread here: ${digest_template_fmt_msg_archive_url}"
 #: ../content/digest_template.pt:47
@@ -1484,4 +1491,3 @@ msgstr "ver archivo."
 #: ../content/send_mail.py:195
 msgid "welcome_to_list"
 msgstr "Bienvenidos a ${title}"
-
